@@ -157,23 +157,23 @@
         const col2Buttons = document.querySelectorAll('.products-grid .col-2 .menu-btn');
         const accordionHeaders = document.querySelectorAll('.accordion .acc-header');
 
-        // Column 1 navigation
+        // Column 1 navigation - HOVER ACTIVATION
         col1Buttons.forEach(btn => {
-            btn.addEventListener('click', () => {
+            btn.addEventListener('mouseenter', () => {
                 const category = btn.dataset.sub;
                 activateProductCategory(category);
             });
         });
 
-        // Column 2 crypto type navigation
+        // Column 2 crypto type navigation - HOVER ACTIVATION
         col2Buttons.forEach(btn => {
-            btn.addEventListener('click', () => {
+            btn.addEventListener('mouseenter', () => {
                 const cryptoType = btn.dataset.crypto;
                 activateCryptoType(cryptoType);
             });
         });
 
-        // Accordion toggles
+        // Accordion toggles - keep as click
         accordionHeaders.forEach(header => {
             header.addEventListener('click', () => {
                 toggleAccordion(header.closest('.accordion'));
@@ -275,7 +275,8 @@
             const tabButtons = panel.querySelectorAll('.sidebar .menu-btn');
             
             tabButtons.forEach(btn => {
-                btn.addEventListener('click', () => {
+                // HOVER ACTIVATION for Insights and Company
+                btn.addEventListener('mouseenter', () => {
                     const tabName = btn.dataset.tab;
                     
                     // Update buttons

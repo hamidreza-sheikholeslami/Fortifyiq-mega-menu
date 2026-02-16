@@ -42,20 +42,24 @@ body {
 
 .logo-section {
     flex-shrink: 0;
+    padding-right: 60px;
 }
 
 .site-logo {
-    font-size: 24px;
-    font-weight: 700;
-    color: var(--text-primary);
-    text-decoration: none;
+    display: block;
+    line-height: 0;
+}
+
+.site-logo img {
+    width: 124px;
+    height: auto;
     display: block;
 }
 
 .desktop-nav {
+    flex: 1;
     display: flex;
     align-items: center;
-    gap: 40px;
 }
 
 .nav-primary {
@@ -88,6 +92,32 @@ body {
     cursor: pointer;
     color: var(--text-primary);
     transition: color var(--transition-speed) var(--ease);
+}
+
+.search-btn:hover {
+    color: #0066cc;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.contact-btn {
+    padding: 10px 24px;
+    background: #0066cc;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background var(--transition-speed) var(--ease);
+    white-space: nowrap;
+}
+
+.contact-btn:hover {
+    background: #0052a3;
 }
 
 .hamburger {
@@ -335,6 +365,10 @@ body {
 .card-grid {
     display: grid;
     gap: 20px;
+}
+
+.card-grid.grid-2-cols {
+    grid-template-columns: repeat(2, 1fr);
 }
 
 .info-card {
@@ -620,7 +654,8 @@ body {
 }
 
 @media (max-width: 1024px) {
-    .desktop-nav {
+    .desktop-nav,
+    .header-actions {
         display: none;
     }
     

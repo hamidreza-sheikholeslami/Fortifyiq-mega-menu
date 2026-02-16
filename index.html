@@ -3,14 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FortifyIQ Mega Menu System</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>FortifyIQ Mega Menu</title>
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
     <header class="site-header" role="banner">
         <div class="header-inner">
             <div class="logo-section">
-                <a href="/" class="site-logo" aria-label="FortifyIQ Home">FortifyIQ</a>
+                <a href="/" class="site-logo" aria-label="FortifyIQ Home">
+                    <img src="https://fortifyiq.com/wp-content/uploads/2025/01/fortifyiq-logo.svg" alt="FortifyIQ" width="124">
+                </a>
             </div>
             
             <!-- Desktop Navigation -->
@@ -22,10 +24,14 @@
                     <li class="nav-item"><button class="nav-trigger" data-menu="newsroom" aria-expanded="false">Newsroom</button></li>
                     <li class="nav-item"><button class="nav-trigger" data-menu="company" aria-expanded="false">Company</button></li>
                 </ul>
+            </nav>
+            
+            <div class="header-actions">
                 <button class="search-btn" aria-label="Search">
                     <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="9" r="7"/><path d="m14 14 5 5"/></svg>
                 </button>
-            </nav>
+                <a href="/contact" class="contact-btn">Contact Us</a>
+            </div>
             
             <!-- Mobile/Tablet Hamburger -->
             <button class="hamburger" aria-label="Menu" aria-expanded="false">
@@ -180,7 +186,7 @@
                                 </div>
                             </div>
                             <div class="sub-panel" data-content="software">
-                                <div class="card-grid">
+                                <div class="card-grid grid-2-cols">
                                     <div class="info-card"><h3>PQC Cryptographic Libraries</h3><p>Provide high-assurance cryptographic protection, engineered for AVA_VAN.5 compliance and designed for high-security certification</p></div>
                                     <div class="info-card"><h3>AES Cryptographic Libraries</h3><p>Secures both new and already-deployed devices, including those without hardware countermeasures, and is proven in millions of systems</p></div>
                                     <div class="info-card"><h3>HMAC SHA2 Cryptographic Library</h3><p>Provides ultra-strong protection against SCA, FIA, and cache attacks</p></div>
@@ -188,7 +194,7 @@
                                 </div>
                             </div>
                             <div class="sub-panel" data-content="pqc-main">
-                                <div class="card-grid">
+                                <div class="card-grid grid-2-cols">
                                     <div class="info-card"><h3>PQC Hardware Solutions</h3><p>Provides a comprehensive suite of post-quantum cryptography hardware, including CryptoBoxes, IP cores, and Root-of-Trust modules</p></div>
                                     <div class="info-card"><h3>PQC Software Libraries</h3><p>Provide high-assurance cryptographic protection, engineered for AVA_VAN.5 compliance and designed for high-security certification</p></div>
                                     <div class="info-card"><h3>PQC Hybrid + Classical</h3><p>CryptoBoxes and Roots of Trust (RoTs) integrate post-quantum and classical cryptography in a unified, high-assurance architecture</p></div>
@@ -196,14 +202,14 @@
                                 </div>
                             </div>
                             <div class="sub-panel" data-content="forti">
-                                <div class="card-grid">
+                                <div class="card-grid grid-2-cols">
                                     <div class="info-card"><h3>Fault Injection Studio</h3><p>Enables engineers to evaluate and strengthen hardware designs against fault injection attacks, e.g., DFA, SIFA, and AFA</p></div>
                                     <div class="info-card"><h3>Side‑Channel Studio</h3><p>Pre-silicon EDA tool suite designed to identify, analyze, and mitigate side-channel vulnerabilities in hardware designs from RTL</p></div>
                                     <div class="info-card"><h3>Security Assessment & Verification</h3><p>Mathematically sound and practically validated patented/patent-pending countermeasures, ensuring resistance to the most advanced physical attacks</p></div>
                                 </div>
                             </div>
                             <div class="sub-panel" data-content="security">
-                                <div class="card-grid">
+                                <div class="card-grid grid-2-cols">
                                     <div class="info-card"><h3>Security Validation & Cryptographic Assurance</h3><p>Mathematically sound and practically validated patented/patent-pending countermeasures, ensuring resistance to the most advanced physical attacks</p></div>
                                     <div class="info-card"><h3>FAQ: Security Validation & Compliance Assurance</h3><p>How does FortifyIQ validate resistance to side-channel and fault-injection attacks</p></div>
                                 </div>
@@ -340,6 +346,6 @@
         </div>
     </div>
 
-    <script src="mega-menu.js"></script>
+    <script src="js/mega-menu.js"></script>
 </body>
 </html>
