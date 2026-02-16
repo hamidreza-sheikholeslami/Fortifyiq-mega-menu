@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FortifyIQ Mega Menu System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="site-header" role="banner">
+        <div class="header-inner">
+            <div class="logo-section">
+                <a href="/" class="site-logo" aria-label="FortifyIQ Home">FortifyIQ</a>
+            </div>
+            
+            <!-- Desktop Navigation -->
+            <nav class="desktop-nav" role="navigation" aria-label="Main Navigation">
+                <ul class="nav-primary">
+                    <li class="nav-item"><button class="nav-trigger" data-menu="products" aria-expanded="false">Products</button></li>
+                    <li class="nav-item"><button class="nav-trigger" data-menu="applications" aria-expanded="false">Applications</button></li>
+                    <li class="nav-item"><button class="nav-trigger" data-menu="insights" aria-expanded="false">Insights</button></li>
+                    <li class="nav-item"><button class="nav-trigger" data-menu="newsroom" aria-expanded="false">Newsroom</button></li>
+                    <li class="nav-item"><button class="nav-trigger" data-menu="company" aria-expanded="false">Company</button></li>
+                </ul>
+                <button class="search-btn" aria-label="Search">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="9" r="7"/><path d="m14 14 5 5"/></svg>
+                </button>
+            </nav>
+            
+            <!-- Mobile/Tablet Hamburger -->
+            <button class="hamburger" aria-label="Menu" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Desktop Mega Menu Container -->
+    <div class="mega-menu-overlay" aria-hidden="true"></div>
+    <div class="mega-menu" role="dialog" aria-modal="true" aria-hidden="true">
+        <div class="mega-content" style="max-width: 1046px; margin: 0 auto;">
+            <!-- Products Panel -->
+            <div class="mega-panel" data-panel="products">
+                <div class="products-grid">
+                    <div class="col-1">
+                        <ul class="menu-list" role="menu">
+                            <li><button class="menu-btn active" data-sub="overview" role="menuitem">Product Overview</button></li>
+                            <li><button class="menu-btn" data-sub="hardware" role="menuitem">Cryptographic Hardware IP Cores</button></li>
+                            <li><button class="menu-btn" data-sub="software" role="menuitem">Cryptographic Software Libraries</button></li>
+                            <li><button class="menu-btn" data-sub="pqc-main" role="menuitem">PQC – Post-Quantum Cryptography</button></li>
+                            <li><button class="menu-btn" data-sub="forti" role="menuitem">Forti EDA Validation Studios</button></li>
+                            <li><button class="menu-btn" data-sub="security" role="menuitem">Security Assurance</button></li>
+                        </ul>
+                    </div>
+                    <div class="col-2" data-for="hardware">
+                        <ul class="menu-list crypto-types" role="menu">
+                            <li><button class="menu-btn active" data-crypto="pqc" role="menuitem">PQC</button></li>
+                            <li><button class="menu-btn" data-crypto="aes" role="menuitem">AES</button></li>
+                            <li><button class="menu-btn" data-crypto="hmac" role="menuitem">HMAC SHA2</button></li>
+                            <li><button class="menu-btn" data-crypto="ecc" role="menuitem">ECC/RSA</button></li>
+                            <li><button class="menu-btn" data-crypto="cryptoboxes" role="menuitem">CryptoBoxes</button></li>
+                            <li><button class="menu-btn" data-crypto="roots" role="menuitem">Roots of Trust</button></li>
+                        </ul>
+                    </div>
+                    <div class="col-3">
+                        <div class="content-area">
+                            <div class="sub-panel active" data-content="overview">
+                                <p class="desc-text">High-assurance cryptographic implementations of AES, HMAC, PKA, PQC, CryptoBox, and Root-of-Trust families, plus software libraries, all exceptionally efficient (PPA-optimized).</p>
+                            </div>
+                            <div class="sub-panel" data-content="hardware">
+                                <div class="accordion-wrap">
+                                    <div class="crypto-section active" data-crypto-section="pqc">
+                                        <div class="accordion active">
+                                            <button class="acc-header" aria-expanded="true"><span>Post-Quantum Cryptography Solutions</span><svg width="12" height="12" class="acc-icon"><path d="M2 4l4 4 4-4" stroke="currentColor" fill="none" stroke-width="2"/></svg></button>
+                                            <div class="acc-body">
+                                                <ul class="link-list">
+                                                    <li><a href="#">PQC-ML-KEM (Kyber) – Compact</a></li>
+                                                    <li><a href="#">PQC-ML-DSA (Dilithium) – Compact</a></li>
+                                                    <li><a href="#">ML-KEM & -DSA + support of SPHINCS+, XMSS, LMS – Balanced</a></li>
+                                                    <li><a href="#">Hybrid: PQC + Classical RSA/ECC - Balanced</a></li>
+                                                    <li><a href="#">Hybrid: PQC + Classical RSA/ECC - Fast</a></li>
+                                                    <li><a href="#">ML-KEM Hardened Post-Quantum Key Encapsulation SW Library</a></li>
+                                                    <li><a href="#">ML-DSA Hardened Post-Quantum Signature SW Library</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="crypto-section" data-crypto-section="aes">
+                                        <div class="accordion active">
+                                            <button class="acc-header" aria-expanded="true"><span>AES-SX Family (Standard, GCM/XTS, DFA-protected)</span><svg width="12" height="12" class="acc-icon"><path d="M2 4l4 4 4-4" stroke="currentColor" fill="none" stroke-width="2"/></svg></button>
+                                            <div class="acc-body">
+                                                <ul class="link-list">
+                                                    <li><a href="#">AES-SX | ECB-only – Compact</a></li>
+                                                    <li><a href="#">AES-SX | all modes of operation supported – Balanced</a></li>
+                                                    <li><a href="#">AES-SX | all modes of operation supported – Fast</a></li>
+                                                    <li><a href="#">AES-SX-full | encryption + decryption – Fast</a></li>
+                                                    <li><a href="#">AES-SX-GCM-XTS | pipelined high-throughput – Fast</a></li>
+                                                    <li><a href="#">AES-SX-GCM-XTS-up | pipelined high-throughput – Fast</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="accordion">
+                                            <button class="acc-header" aria-expanded="false"><span>AES-STORM Ultra-Low Power (ULP) Family</span><svg width="12" height="12" class="acc-icon"><path d="M2 4l4 4 4-4" stroke="currentColor" fill="none" stroke-width="2"/></svg></button>
+                                            <div class="acc-body">
+                                                <ul class="link-list">
+                                                    <li><a href="#">AES-SX-ulp-full (STORM) – Compact</a></li>
+                                                    <li><a href="#">AES-SX-ulp-full (STORM) – Balanced</a></li>
+                                                    <li><a href="#">AES-SX-ulp-full (STORM) – Fast</a></li>
+                                                    <li><a href="#">AES-SX-ulp-full-up (STORM) – Fast</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="accordion">
+                                            <button class="acc-header" aria-expanded="false"><span>AES-XP Turbo Family (High-throughput, GCM/XTS)</span><svg width="12" height="12" class="acc-icon"><path d="M2 4l4 4 4-4" stroke="currentColor" fill="none" stroke-width="2"/></svg></button>
+                                            <div class="acc-body">
+                                                <ul class="link-list">
+                                                    <li><a href="#">AES-XP-GCM / encryption + decryption – Turbo</a></li>
+                                                    <li><a href="#">AES-XP-XTS / encryption + decryption – Turbo</a></li>
+                                                    <li><a href="#">AES-XP-GCM-XTS / encryption + decryption – Turbo</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="crypto-section" data-crypto-section="hmac">
+                                        <div class="accordion active">
+                                            <button class="acc-header" aria-expanded="true"><span>Fast-Efficient FortiMAC Family</span><svg width="12" height="12" class="acc-icon"><path d="M2 4l4 4 4-4" stroke="currentColor" fill="none" stroke-width="2"/></svg></button>
+                                            <div class="acc-body">
+                                                <ul class="link-list">
+                                                    <li><a href="#">HMAC-SHA-256 – Fast</a></li>
+                                                    <li><a href="#">HMAC-SHA-512 – Fast</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="accordion">
+                                            <button class="acc-header" aria-expanded="false"><span>FortiMAC Family</span><svg width="12" height="12" class="acc-icon"><path d="M2 4l4 4 4-4" stroke="currentColor" fill="none" stroke-width="2"/></svg></button>
+                                            <div class="acc-body">
+                                                <ul class="link-list">
+                                                    <li><a href="#">Zero-leakage HMAC-SHA-256 – Balanced</a></li>
+                                                    <li><a href="#">Zero-leakage HMAC-SHA-512 – Balanced</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="crypto-section" data-crypto-section="ecc">
+                                        <div class="accordion active">
+                                            <button class="acc-header" aria-expanded="true"><span>ECC/RSA Solutions</span><svg width="12" height="12" class="acc-icon"><path d="M2 4l4 4 4-4" stroke="currentColor" fill="none" stroke-width="2"/></svg></button>
+                                            <div class="acc-body">
+                                                <ul class="link-list">
+                                                    <li><a href="#">ECC-ECDH-ECDSA (1-mul16 to 2-mul32) – Compact</a></li>
+                                                    <li><a href="#">ECC-ECDH-ECDSA (1-mul16 to 2-mul32) – Balanced</a></li>
+                                                    <li><a href="#">ECC Curve25519 – Balanced</a></li>
+                                                    <li><a href="#">RSA Signature – Compact</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="crypto-section" data-crypto-section="cryptoboxes">
+                                        <div class="accordion active">
+                                            <button class="acc-header" aria-expanded="true"><span>CryptoBox Solutions</span><svg width="12" height="12" class="acc-icon"><path d="M2 4l4 4 4-4" stroke="currentColor" fill="none" stroke-width="2"/></svg></button>
+                                            <div class="acc-body">
+                                                <ul class="link-list">
+                                                    <li><a href="#">CryptoBox Classical – Compact</a></li>
+                                                    <li><a href="#">CryptoBox Classical Plus – Balanced</a></li>
+                                                    <li><a href="#">PQ-CryptoBox Hybrid – Balanced</a></li>
+                                                    <li><a href="#">PQ-CryptoBox Hybrid – Fast</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="crypto-section" data-crypto-section="roots">
+                                        <div class="accordion active">
+                                            <button class="acc-header" aria-expanded="true"><span>Roots of Trust</span><svg width="12" height="12" class="acc-icon"><path d="M2 4l4 4 4-4" stroke="currentColor" fill="none" stroke-width="2"/></svg></button>
+                                            <div class="acc-body">
+                                                <ul class="link-list">
+                                                    <li><a href="#">Cloud – Fast</a></li>
+                                                    <li><a href="#">Chiplet – Balanced</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="sub-panel" data-content="software">
+                                <div class="card-grid">
+                                    <div class="info-card"><h3>PQC Cryptographic Libraries</h3><p>Provide high-assurance cryptographic protection, engineered for AVA_VAN.5 compliance and designed for high-security certification</p></div>
+                                    <div class="info-card"><h3>AES Cryptographic Libraries</h3><p>Secures both new and already-deployed devices, including those without hardware countermeasures, and is proven in millions of systems</p></div>
+                                    <div class="info-card"><h3>HMAC SHA2 Cryptographic Library</h3><p>Provides ultra-strong protection against SCA, FIA, and cache attacks</p></div>
+                                    <div class="info-card"><h3>FAQ: Cryptographic Libraries</h3><p>What are side-channel and fault-injection attacks, and why would your device need protection against them</p></div>
+                                </div>
+                            </div>
+                            <div class="sub-panel" data-content="pqc-main">
+                                <div class="card-grid">
+                                    <div class="info-card"><h3>PQC Hardware Solutions</h3><p>Provides a comprehensive suite of post-quantum cryptography hardware, including CryptoBoxes, IP cores, and Root-of-Trust modules</p></div>
+                                    <div class="info-card"><h3>PQC Software Libraries</h3><p>Provide high-assurance cryptographic protection, engineered for AVA_VAN.5 compliance and designed for high-security certification</p></div>
+                                    <div class="info-card"><h3>PQC Hybrid + Classical</h3><p>CryptoBoxes and Roots of Trust (RoTs) integrate post-quantum and classical cryptography in a unified, high-assurance architecture</p></div>
+                                    <div class="info-card"><h3>FAQ: Our Post Quantum Cryptography</h3><p>Why post-quantum cryptography matters</p></div>
+                                </div>
+                            </div>
+                            <div class="sub-panel" data-content="forti">
+                                <div class="card-grid">
+                                    <div class="info-card"><h3>Fault Injection Studio</h3><p>Enables engineers to evaluate and strengthen hardware designs against fault injection attacks, e.g., DFA, SIFA, and AFA</p></div>
+                                    <div class="info-card"><h3>Side‑Channel Studio</h3><p>Pre-silicon EDA tool suite designed to identify, analyze, and mitigate side-channel vulnerabilities in hardware designs from RTL</p></div>
+                                    <div class="info-card"><h3>Security Assessment & Verification</h3><p>Mathematically sound and practically validated patented/patent-pending countermeasures, ensuring resistance to the most advanced physical attacks</p></div>
+                                </div>
+                            </div>
+                            <div class="sub-panel" data-content="security">
+                                <div class="card-grid">
+                                    <div class="info-card"><h3>Security Validation & Cryptographic Assurance</h3><p>Mathematically sound and practically validated patented/patent-pending countermeasures, ensuring resistance to the most advanced physical attacks</p></div>
+                                    <div class="info-card"><h3>FAQ: Security Validation & Compliance Assurance</h3><p>How does FortifyIQ validate resistance to side-channel and fault-injection attacks</p></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Applications Panel -->
+            <div class="mega-panel" data-panel="applications">
+                <div class="apps-grid">
+                    <a href="#" class="app-card"><h4>Finance and Banking</h4><p>Resilient cryptographic protection for payment systems, digital banking, and secure financial infrastructure</p></a>
+                    <a href="#" class="app-card"><h4>Industrial Automation</h4><p>Robust, certifiable security solutions for next-generation industrial automation and control systems</p></a>
+                    <a href="#" class="app-card"><h4>Edge Devices</h4><p>Safeguarding energy, water, and transportation systems with certifiable hardware and software security</p></a>
+                    <a href="#" class="app-card"><h4>Government and Public Sector</h4><p>Secure cryptographic foundations for identity systems, defense infrastructure, and digital government platforms</p></a>
+                    <a href="#" class="app-card"><h4>Smart Grid & Energy</h4><p>Cryptographic security tailored to the needs of energy systems: robust protection against side-channel and fault injection attacks</p></a>
+                    <a href="#" class="app-card"><h4>Internet of Things (IoT)</h4><p>Cryptographic protection for IoT systems, with unmatched resistance to side-channel analysis and fault injection attacks</p></a>
+                    <a href="#" class="app-card"><h4>Digital Identity & Smart Cards</h4><p>From payment cards to e-passports, SIMs, and digital ID tokens, smart cards and digital identity solutions power critical transactions</p></a>
+                    <a href="#" class="app-card"><h4>Critical Infrastructure</h4><p>Safeguarding energy, water, and transportation systems with certifiable hardware and software security</p></a>
+                    <a href="#" class="app-card"><h4>Medical Devices and Implants</h4><p>Secure cryptography and OTA updates for ultra-constrained, mission-critical medical electronics</p></a>
+                    <a href="#" class="app-card"><h4>Telecommunications</h4><p>Securing network infrastructure, subscriber identity, and cloud-native telecommunication systems</p></a>
+                    <a href="#" class="app-card"><h4>Transportation</h4><p>Cryptographic protection engineered for the longevity, safety, and regulatory demands of rail and transportation systems</p></a>
+                    <a href="#" class="app-card"><h4>Pay TV & Media</h4><p>Robust, efficient cryptographic protections for media platforms that resist real-world physical attacks with minimal performance tradeoffs</p></a>
+                    <a href="#" class="app-card"><h4>Automotive</h4><p>Automotive Cybersecurity IPs and Tools for ECUs, ADAS, AV and In-Vehicle-Infotainment (IVI) Systems</p></a>
+                    <a href="#" class="app-card"><h4>Data Centers</h4><p>Ultra-high-throughput, physically secure cryptographic IP for cloud and data center silicon</p></a>
+                    <a href="#" class="app-card"><h4>IP Security & Anti‑Cloning</h4><p>Cryptographic solutions purpose-built for silicon IP protection, licensing enforcement, and clone detection</p></a>
+                </div>
+            </div>
+
+            <!-- Insights Panel -->
+            <div class="mega-panel" data-panel="insights">
+                <div class="sidebar-layout" style="--sidebar-width: 242px;">
+                    <div class="sidebar">
+                        <ul class="menu-list" role="menu">
+                            <li><button class="menu-btn active" data-tab="academic" role="menuitem">Academic Papers</button></li>
+                            <li><button class="menu-btn" data-tab="white" role="menuitem">White Papers</button></li>
+                            <li><button class="menu-btn" data-tab="videos" role="menuitem">Explanatory Videos</button></li>
+                        </ul>
+                    </div>
+                    <div class="content-panel">
+                        <div class="tab-content active" data-tab-content="academic">
+                            <div class="text-content">
+                                <p>This section features FortifyIQ's academic publications, presenting AES protection techniques against side-channel and fault injection attacks and side-channel attacks on SHA-2-based HMAC.</p>
+                                <a href="#" class="learn-more-btn">Learn More</a>
+                            </div>
+                        </div>
+                        <div class="tab-content" data-tab-content="white">
+                            <div class="text-content">
+                                <p>This section demonstrates how FortifyIQ validates cryptographic solutions, compares ours against other secure cores, and showcases FortiEDA for evaluating and developing secure designs.</p>
+                                <a href="#" class="learn-more-btn">Learn More</a>
+                            </div>
+                        </div>
+                        <div class="tab-content" data-tab-content="videos">
+                            <div class="text-content">
+                                <p>Our explanatory videos break down complex hardware security concepts into clear, visual stories, showcasing how FortifyIQ's technologies detect and prevent side-channel and fault-injection attacks.</p>
+                                <a href="#" class="learn-more-btn">Learn More</a>
+                            </div>
+                        </div>
+                        <div class="bg-image"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Newsroom Panel -->
+            <div class="mega-panel" data-panel="newsroom">
+                <div class="sidebar-layout simple" style="--sidebar-width: 200px;">
+                    <div class="sidebar">
+                        <ul class="menu-list" role="menu">
+                            <li><a href="#" class="menu-link">News</a></li>
+                            <li><a href="#" class="menu-link">Press Releases</a></li>
+                            <li><a href="#" class="menu-link">Webinars</a></li>
+                            <li><a href="#" class="menu-link">Events</a></li>
+                        </ul>
+                    </div>
+                    <div class="content-panel">
+                        <div class="bg-image"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Company Panel -->
+            <div class="mega-panel" data-panel="company">
+                <div class="sidebar-layout" style="--sidebar-width: 306px;">
+                    <div class="sidebar">
+                        <ul class="menu-list" role="menu">
+                            <li><button class="menu-btn active" data-tab="about" role="menuitem">About Us</button></li>
+                            <li><button class="menu-btn" data-tab="services" role="menuitem">Services</button></li>
+                            <li><button class="menu-btn" data-tab="team" role="menuitem">Our Team</button></li>
+                            <li><button class="menu-btn" data-tab="careers" role="menuitem">Careers</button></li>
+                        </ul>
+                    </div>
+                    <div class="content-panel">
+                        <div class="tab-content active" data-tab-content="about">
+                            <div class="text-content">
+                                <p>This section features FortifyIQ's academic publications, presenting AES protection techniques against side-channel and fault injection attacks and side-channel attacks on SHA-2-based HMAC.</p>
+                                <a href="#" class="learn-more-btn">Learn More</a>
+                            </div>
+                        </div>
+                        <div class="tab-content" data-tab-content="services">
+                            <div class="text-content">
+                                <p>This section demonstrates how FortifyIQ validates cryptographic solutions, compares ours against other secure cores, and showcases FortiEDA for evaluating and developing secure designs.</p>
+                                <a href="#" class="learn-more-btn">Learn More</a>
+                            </div>
+                        </div>
+                        <div class="tab-content" data-tab-content="team">
+                            <div class="text-content">
+                                <p>Our explanatory videos break down complex hardware security concepts into clear, visual stories, showcasing how FortifyIQ's technologies detect and prevent side-channel and fault-injection attacks.</p>
+                                <a href="#" class="learn-more-btn">Learn More</a>
+                            </div>
+                        </div>
+                        <div class="tab-content" data-tab-content="careers">
+                            <div class="text-content">
+                                <p>Our explanatory videos break down complex hardware security concepts into clear, visual stories, showcasing how FortifyIQ's technologies detect and prevent side-channel and fault-injection attacks.</p>
+                                <a href="#" class="learn-more-btn">Learn More</a>
+                            </div>
+                        </div>
+                        <div class="bg-image"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile/Tablet Panel -->
+    <div class="mobile-menu" aria-hidden="true">
+        <div class="mobile-header">
+            <button class="mobile-close" aria-label="Close menu">&times;</button>
+        </div>
+        <div class="mobile-breadcrumb"></div>
+        <div class="mobile-content">
+            <div class="mobile-nav-col"></div>
+            <div class="mobile-detail-col"></div>
+        </div>
+    </div>
+
+    <script src="mega-menu.js"></script>
+</body>
+</html>
