@@ -451,6 +451,18 @@
     }
 
     function navigateDeeper(itemId, itemLabel, parentContext) {
+        // Push parent context first if stack is empty
+        if (state.mobileNavStack.length === 0 && parentContext) {
+            const labels = {
+                products: 'Products', applications: 'Applications',
+                insights: 'Insights', newsroom: 'Newsroom', company: 'Company'
+            };
+            state.mobileNavStack.push({
+                id: parentContext,
+                label: labels[parentContext] || parentContext
+            });
+        }
+
         state.mobileNavStack.push({ id: itemId, label: itemLabel, context: parentContext });
 
         if (itemId === 'hardware') {
@@ -694,8 +706,15 @@
 
         let html = '';
         state.mobileNavStack.forEach((item, index) => {
-            if (index > 0) html += ' &lt; ';
-            html += `<button data-level="${index}">${item.label}</button>`;
+            if (index > 0) {
+                html += '<svg class="breadcrumb-chevron" width="7" height="12" viewBox="0 0 7 12"><path d="M1 1l5 5-5 5" stroke="currentColor" fill="none" stroke-width="1.5"/></svg>';
+            }
+            const isLast = index === state.mobileNavStack.length - 1;
+            if (isLast) {
+                html += `<span class="breadcrumb-current">${item.label}</span>`;
+            } else {
+                html += `<button data-level="${index}">${item.label}</button>`;
+            }
         });
 
         elements.mobileBreadcrumb.innerHTML = html;
@@ -711,13 +730,38 @@
     }
 
     function navigateToLevel(level) {
-        // Remove items after this level
-        state.mobileNavStack = state.mobileNavStack.slice(0, level + 1);
+        const targetItem = state.mobileNavStack[level];
 
-        // Re-render appropriate view
-        const currentItem = state.mobileNavStack[level];
-        if (currentItem.id === 'hardware') {
-            renderMobileCryptoTypes();
+        // Check if target is a top-level menu
+        const topLevelIds = ['products', 'applications', 'insights', 'newsroom', 'company'];
+
+        if (topLevelIds.includes(targetItem.id)) {
+            // Going back to top level — clear the stack and re-render level 1
+            state.mobileNavStack = [];
+            renderMobileLevel1();
+
+            // Activate the correct nav item if not products (which is default)
+            if (targetItem.id !== 'products') {
+                const navButtons = elements.mobileNavCol.querySelectorAll('.menu-btn');
+                navButtons.forEach(b => b.classList.remove('active'));
+                const targetBtn = elements.mobileNavCol.querySelector(`[data-nav="${targetItem.id}"]`);
+                if (targetBtn) targetBtn.classList.add('active');
+
+                const renderers = {
+                    applications: renderMobileApplications,
+                    insights: renderMobileInsights,
+                    newsroom: renderMobileNewsroom,
+                    company: renderMobileCompany
+                };
+                if (renderers[targetItem.id]) renderers[targetItem.id]();
+            }
+        } else {
+            // Navigate to a sub-level — keep stack up to this point
+            state.mobileNavStack = state.mobileNavStack.slice(0, level + 1);
+
+            if (targetItem.id === 'hardware') {
+                renderMobileCryptoTypes();
+            }
         }
 
         updateBreadcrumb();

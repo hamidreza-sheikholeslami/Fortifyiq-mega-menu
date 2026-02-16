@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
 :root {
     --primary-bg: #ffffff;
     --text-primary: #1a1a1a;
@@ -16,7 +18,7 @@
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     line-height: 1.6;
     color: var(--text-primary);
     background: var(--primary-bg);
@@ -72,12 +74,13 @@ body {
 .nav-trigger {
     background: none;
     border: none;
-    font-size: 15px;
+    font-size: 18px;
     font-weight: 500;
     color: var(--text-primary);
     cursor: pointer;
     padding: 8px 12px;
     transition: color var(--transition-speed) var(--ease);
+    letter-spacing: 0.031em;
 }
 
 .nav-trigger:hover,
@@ -374,7 +377,7 @@ body {
 .info-card {
     border: 1px solid var(--border-color);
     border-radius: 8px;
-    padding: 24px;
+    padding: 1rem;
     transition: all var(--transition-speed) var(--ease);
     cursor: pointer;
 }
@@ -385,13 +388,13 @@ body {
 }
 
 .info-card h3 {
-    font-size: 16px;
+    font-size: 18px;
     margin-bottom: 8px;
     color: var(--text-primary);
 }
 
 .info-card p {
-    font-size: 13px;
+    font-size: 12px;
     color: var(--text-secondary);
     line-height: 1.6;
 }
@@ -406,10 +409,11 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 16px 20px;
+    padding: 12px;
     text-decoration: none;
     transition: background var(--transition-speed) var(--ease);
     border: 1px solid transparent;
+    border-radius: 16px;
 }
 
 .app-card:hover {
@@ -578,10 +582,12 @@ body {
     color: var(--text-secondary);
     border-bottom: 1px solid var(--border-color);
     display: none;
+    align-items: center;
+    gap: 8px;
 }
 
 .mobile-breadcrumb.active {
-    display: block;
+    display: flex;
 }
 
 .mobile-breadcrumb button {
@@ -591,6 +597,16 @@ body {
     cursor: pointer;
     padding: 0;
     font-size: 14px;
+}
+
+.mobile-breadcrumb .breadcrumb-chevron {
+    flex-shrink: 0;
+    color: var(--text-secondary);
+}
+
+.mobile-breadcrumb .breadcrumb-current {
+    color: var(--text-primary);
+    font-weight: 500;
 }
 
 .mobile-content {
