@@ -466,10 +466,6 @@ body {
     padding: 0 20px 20px;
 }
 
-.link-list li {
-    /* margin: 8px 0; */
-}
-
 .link-list a {
     color: var(--text-secondary);
     text-decoration: none;
@@ -551,6 +547,7 @@ body {
     line-height: 1.5;
     color: var(--text-secondary);
     display: -webkit-box;
+    line-clamp: 3;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
@@ -623,18 +620,23 @@ body {
 
 .learn-more-btn {
     display: inline-block;
-    padding: 10px 24px;
-    background: #0066cc;
+    background: #F16D24;
     color: white;
     text-decoration: none;
-    border-radius: 6px;
+    border-radius: 50px;
     font-size: 14px;
     font-weight: 500;
-    transition: background var(--transition-speed) var(--ease);
+    transition: background var(--transition-speed) var(--ease), color var(--transition-speed) var(--ease);
+    border: 2px solid #F16D24;
+    white-space: nowrap;
+    text-align: center;
+    line-height: 1;
+    padding: 12px 24px;
 }
 
 .learn-more-btn:hover {
-    background: #0052a3;
+    background: white;
+    color: #F16D24;
 }
 
 .bg-image {
