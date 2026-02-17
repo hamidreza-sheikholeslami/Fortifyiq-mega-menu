@@ -6,7 +6,7 @@
         currentMenu: null,
         currentCategory: null,
         currentCrypto: null,
-        mobileNavStack: [],
+        viewStack: [],
         leaveTimeout: null,
         isTablet: window.matchMedia('(min-width: 768px) and (max-width: 1024px)').matches,
         isMobile: window.matchMedia('(max-width: 767px)').matches
@@ -305,24 +305,25 @@
     // ===================================
     // MOBILE/TABLET MENU
     // ===================================
+    //
+    // View Stack Navigation Model:
+    // state.viewStack = [{ type, label, data }, ...]
+    //   - Tablet: shows stack[N-2] in left col, stack[N-1] in right col
+    //   - Mobile: shows stack[N-1] in single col
+    //   - Breadcrumb (tablet): stack[1] to stack[N-2]
+    //   - Breadcrumb (mobile): stack[1] to stack[N-1]
 
     function setupMobileMenu() {
         if (elements.hamburger) {
             elements.hamburger.addEventListener('click', toggleMobileMenu);
         }
-
         if (elements.mobileClose) {
             elements.mobileClose.addEventListener('click', closeMobileMenu);
         }
-
-        // Initialize mobile nav
-        renderMobileLevel1();
     }
 
     function toggleMobileMenu() {
-        const isOpen = elements.mobileMenu.classList.contains('active');
-        
-        if (isOpen) {
+        if (elements.mobileMenu.classList.contains('active')) {
             closeMobileMenu();
         } else {
             openMobileMenu();
@@ -334,10 +335,12 @@
         elements.mobileMenu.setAttribute('aria-hidden', 'false');
         elements.hamburger.setAttribute('aria-expanded', 'true');
         document.body.classList.add('no-scroll');
-        
-        // Reset to level 1
-        state.mobileNavStack = [];
-        renderMobileLevel1();
+
+        state.viewStack = [{ type: 'main-nav', label: null }];
+        if (state.isTablet) {
+            state.viewStack.push({ type: 'products', label: 'Products' });
+        }
+        renderCurrentViews();
     }
 
     function closeMobileMenu() {
@@ -345,134 +348,147 @@
         elements.mobileMenu.setAttribute('aria-hidden', 'true');
         elements.hamburger.setAttribute('aria-expanded', 'false');
         document.body.classList.remove('no-scroll');
-        
-        // Reset state
-        state.mobileNavStack = [];
+
+        state.viewStack = [];
         elements.mobileBreadcrumb.classList.remove('active');
         elements.mobileBreadcrumb.innerHTML = '';
     }
 
-    function renderMobileLevel1() {
-        const navItems = [
-            { id: 'products', label: 'Products', hasChildren: true },
-            { id: 'applications', label: 'Applications', hasChildren: false },
-            { id: 'insights', label: 'Insights', hasChildren: true },
-            { id: 'newsroom', label: 'Newsroom', hasChildren: false },
-            { id: 'company', label: 'Company', hasChildren: true }
-        ];
+    function navigateToStackIndex(index) {
+        state.viewStack = state.viewStack.slice(0, index + 1);
+        if (state.isTablet && state.viewStack.length < 2) {
+            state.viewStack.push({ type: 'products', label: 'Products' });
+        }
+        renderCurrentViews();
+    }
 
-        let html = '<ul class="menu-list">';
-        navItems.forEach(item => {
-            html += `<li><button class="menu-btn${item.id === 'products' ? ' active' : ''}" data-nav="${item.id}" ${item.hasChildren ? 'data-has-children="true"' : ''}>${item.label}</button></li>`;
-        });
-        html += '</ul>';
+    function renderCurrentViews() {
+        const stack = state.viewStack;
 
-        elements.mobileNavCol.innerHTML = html;
+        if (state.isTablet) {
+            if (stack.length < 2) {
+                stack.push({ type: 'products', label: 'Products' });
+            }
+            renderView(stack[stack.length - 2], elements.mobileNavCol, 'left');
+            renderView(stack[stack.length - 1], elements.mobileDetailCol, 'right');
+        } else {
+            // Mobile: show last view
+            if (stack.length <= 1) {
+                renderView(stack[stack.length - 1], elements.mobileNavCol, 'single');
+                elements.mobileNavCol.classList.remove('hidden');
+                elements.mobileDetailCol.classList.remove('active');
+            } else {
+                renderView(stack[stack.length - 1], elements.mobileDetailCol, 'single');
+                elements.mobileNavCol.classList.add('hidden');
+                elements.mobileDetailCol.classList.add('active');
+            }
+        }
 
-        // Render products in detail col by default
-        renderMobileProducts();
+        updateBreadcrumb();
+    }
 
-        // Add event listeners
-        const navButtons = elements.mobileNavCol.querySelectorAll('.menu-btn');
-        navButtons.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const navId = btn.dataset.nav;
-                
-                // Update active state
-                navButtons.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-
-                // Render appropriate content
-                if (navId === 'products') {
-                    renderMobileProducts();
-                } else if (navId === 'applications') {
-                    renderMobileApplications();
-                } else if (navId === 'insights') {
-                    renderMobileInsights();
-                } else if (navId === 'newsroom') {
-                    renderMobileNewsroom();
-                } else if (navId === 'company') {
-                    renderMobileCompany();
-                }
-            });
-        });
-
-        // Show nav col, hide detail col on mobile
-        if (state.isMobile) {
-            elements.mobileNavCol.classList.remove('hidden');
-            elements.mobileDetailCol.classList.remove('active');
+    function renderView(entry, container, position) {
+        switch (entry.type) {
+            case 'main-nav': renderMainNavView(container, position); break;
+            case 'products': renderProductsSubView(container, position); break;
+            case 'applications': renderSimpleContentView(container, 'Applications grid would be rendered here as a list of links.'); break;
+            case 'insights': renderInsightsSubView(container, position); break;
+            case 'newsroom': renderSimpleContentView(container, 'Newsroom links would be rendered here.'); break;
+            case 'company': renderCompanySubView(container, position); break;
+            case 'crypto-types': renderCryptoTypesView(container, position); break;
+            case 'crypto-detail': renderCryptoDetailView(container, entry.data.cryptoId); break;
         }
     }
 
-    function renderMobileProducts() {
+    // --- Main Nav View ---
+    function renderMainNavView(container, position) {
         const items = [
-            { id: 'overview', label: 'Product Overview', type: 'text' },
-            { id: 'hardware', label: 'Cryptographic Hardware IP Cores', hasChildren: true },
-            { id: 'software', label: 'Cryptographic Software Libraries', type: 'cards' },
-            { id: 'pqc-main', label: 'PQC – Post-Quantum Cryptography', type: 'cards' },
-            { id: 'forti', label: 'Forti EDA Validation Studios', type: 'cards' },
-            { id: 'security', label: 'Security Assurance', type: 'cards' }
+            { id: 'products', label: 'Products' },
+            { id: 'applications', label: 'Applications' },
+            { id: 'insights', label: 'Insights' },
+            { id: 'newsroom', label: 'Newsroom' },
+            { id: 'company', label: 'Company' }
         ];
 
-        renderMobileDetailList(items, 'products');
-    }
+        // On tablet, highlight the item matching the right column
+        let activeId = 'products';
+        if (state.isTablet && state.viewStack.length >= 2) {
+            activeId = state.viewStack[state.viewStack.length - 1].type;
+        }
 
-    function renderMobileDetailList(items, context) {
         let html = '<ul class="menu-list">';
         items.forEach(item => {
-            html += `<li><button class="menu-btn" data-item="${item.id}" ${item.hasChildren ? 'data-has-children="true"' : ''} data-type="${item.type || 'text'}" data-context="${context}">${item.label}</button></li>`;
+            html += `<li><button class="menu-btn${item.id === activeId ? ' active' : ''}" data-nav="${item.id}">${item.label}</button></li>`;
         });
         html += '</ul>';
+        container.innerHTML = html;
 
-        elements.mobileDetailCol.innerHTML = html;
-
-        // Add event listeners
-        const detailButtons = elements.mobileDetailCol.querySelectorAll('.menu-btn');
-        detailButtons.forEach(btn => {
+        container.querySelectorAll('.menu-btn').forEach(btn => {
             btn.addEventListener('click', () => {
-                if (btn.dataset.hasChildren) {
-                    // Navigate deeper
-                    navigateDeeper(btn.dataset.item, btn.textContent, context);
+                const navId = btn.dataset.nav;
+                const label = btn.textContent;
+
+                if (position === 'left') {
+                    // Tablet: reset to [main-nav, selected]
+                    state.viewStack = [state.viewStack[0], { type: navId, label }];
                 } else {
-                    // Show content (for text/cards types)
-                    // This would typically link to a page
+                    // Mobile: push
+                    state.viewStack.push({ type: navId, label });
                 }
+                renderCurrentViews();
             });
         });
-
-        // On mobile, show detail col
-        if (state.isMobile) {
-            elements.mobileNavCol.classList.add('hidden');
-            elements.mobileDetailCol.classList.add('active');
-        }
-
-        // Update breadcrumb
-        updateBreadcrumb();
     }
 
-    function navigateDeeper(itemId, itemLabel, parentContext) {
-        // Push parent context first if stack is empty
-        if (state.mobileNavStack.length === 0 && parentContext) {
-            const labels = {
-                products: 'Products', applications: 'Applications',
-                insights: 'Insights', newsroom: 'Newsroom', company: 'Company'
-            };
-            state.mobileNavStack.push({
-                id: parentContext,
-                label: labels[parentContext] || parentContext
+    // --- Products Sub View ---
+    function renderProductsSubView(container, position) {
+        const items = [
+            { id: 'overview', label: 'Product Overview' },
+            { id: 'hardware', label: 'Cryptographic Hardware IP Cores', hasChildren: true },
+            { id: 'software', label: 'Cryptographic Software Libraries' },
+            { id: 'pqc-main', label: 'PQC – Post-Quantum Cryptography' },
+            { id: 'forti', label: 'Forti EDA Validation Studios' },
+            { id: 'security', label: 'Security Assurance' }
+        ];
+
+        // On tablet left, highlight item matching right column
+        let activeId = null;
+        if (position === 'left') {
+            const rightView = state.viewStack[state.viewStack.length - 1];
+            if (rightView.type === 'crypto-types' || rightView.type === 'crypto-detail') {
+                activeId = 'hardware';
+            }
+        }
+
+        let html = '<ul class="menu-list">';
+        items.forEach(item => {
+            html += `<li><button class="menu-btn${item.id === activeId ? ' active' : ''}" data-item="${item.id}" ${item.hasChildren ? 'data-has-children="true"' : ''}>${item.label}</button></li>`;
+        });
+        html += '</ul>';
+        container.innerHTML = html;
+
+        container.querySelectorAll('.menu-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const itemId = btn.dataset.item;
+                const label = btn.textContent;
+
+                if (itemId === 'hardware') {
+                    if (position === 'left') {
+                        // Tablet left: replace right col
+                        state.viewStack[state.viewStack.length - 1] = { type: 'crypto-types', label };
+                    } else {
+                        // Right col or mobile: push
+                        state.viewStack.push({ type: 'crypto-types', label });
+                    }
+                    renderCurrentViews();
+                }
+                // Non-hardware items are page links — no navigation
             });
-        }
-
-        state.mobileNavStack.push({ id: itemId, label: itemLabel, context: parentContext });
-
-        if (itemId === 'hardware') {
-            renderMobileCryptoTypes();
-        }
-
-        updateBreadcrumb();
+        });
     }
 
-    function renderMobileCryptoTypes() {
+    // --- Crypto Types View ---
+    function renderCryptoTypesView(container, position) {
         const cryptoTypes = [
             { id: 'pqc', label: 'PQC', icon: 'mm-icon-pqc' },
             { id: 'aes', label: 'AES', icon: 'mm-icon-aes' },
@@ -482,40 +498,42 @@
             { id: 'roots', label: 'Roots of Trust', icon: 'mm-icon-root-of-trust' }
         ];
 
-        // Render as left column
-        let navHtml = '<ul class="menu-list crypto-types">';
-        cryptoTypes.forEach((type, index) => {
-            navHtml += `<li><button class="menu-btn${index === 0 ? ' active' : ''}" data-crypto="${type.id}"><img src="https://fortifyiq.com/wp-content/uploads/2026/02/${type.icon}.svg" width="28" height="28" alt="" class="crypto-icon">${type.label}</button></li>`;
+        // On tablet left, highlight item matching right column's crypto detail
+        let activeId = null;
+        if (position === 'left') {
+            const rightView = state.viewStack[state.viewStack.length - 1];
+            if (rightView.type === 'crypto-detail' && rightView.data) {
+                activeId = rightView.data.cryptoId;
+            }
+        }
+
+        let html = '<ul class="menu-list crypto-types">';
+        cryptoTypes.forEach(type => {
+            const isActive = type.id === activeId;
+            html += `<li><button class="menu-btn${isActive ? ' active' : ''}" data-crypto="${type.id}"><img src="https://fortifyiq.com/wp-content/uploads/2026/02/${type.icon}.svg" width="28" height="28" alt="" class="crypto-icon">${type.label}</button></li>`;
         });
-        navHtml += '</ul>';
+        html += '</ul>';
+        container.innerHTML = html;
 
-        elements.mobileNavCol.innerHTML = navHtml;
-
-        // Show detail for first crypto type
-        renderMobileCryptoDetail('pqc');
-
-        // Add event listeners
-        const cryptoButtons = elements.mobileNavCol.querySelectorAll('.menu-btn');
-        cryptoButtons.forEach(btn => {
+        container.querySelectorAll('.menu-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 const cryptoId = btn.dataset.crypto;
-                
-                cryptoButtons.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
+                const label = btn.textContent.trim();
 
-                renderMobileCryptoDetail(cryptoId);
+                if (position === 'left') {
+                    // Tablet left: replace right col
+                    state.viewStack[state.viewStack.length - 1] = { type: 'crypto-detail', label, data: { cryptoId } };
+                } else {
+                    // Right col or mobile: push
+                    state.viewStack.push({ type: 'crypto-detail', label, data: { cryptoId } });
+                }
+                renderCurrentViews();
             });
         });
-
-        // On mobile, show left col
-        if (state.isMobile) {
-            elements.mobileNavCol.classList.remove('hidden');
-            elements.mobileDetailCol.classList.remove('active');
-        }
     }
 
-    function renderMobileCryptoDetail(cryptoId) {
-        // Get accordion data for this crypto type
+    // --- Crypto Detail View (accordion) ---
+    function renderCryptoDetailView(container, cryptoId) {
         const cryptoData = getCryptoAccordionData(cryptoId);
 
         let html = '<div class="accordion-list">';
@@ -537,38 +555,65 @@
             `;
         });
         html += '</div>';
+        container.innerHTML = html;
 
-        elements.mobileDetailCol.innerHTML = html;
-
-        // Setup accordion handlers
-        const accHeaders = elements.mobileDetailCol.querySelectorAll('.acc-header');
-        accHeaders.forEach(header => {
+        // Accordion toggle handlers
+        container.querySelectorAll('.acc-header').forEach(header => {
             header.addEventListener('click', () => {
                 const accordion = header.closest('.accordion');
                 const isActive = accordion.classList.contains('active');
 
-                // Close all
-                const allAccordions = elements.mobileDetailCol.querySelectorAll('.accordion');
-                allAccordions.forEach(acc => {
+                container.querySelectorAll('.accordion').forEach(acc => {
                     acc.classList.remove('active');
                     acc.querySelector('.acc-header').setAttribute('aria-expanded', 'false');
                 });
 
-                // Open if wasn't active
                 if (!isActive) {
                     accordion.classList.add('active');
                     header.setAttribute('aria-expanded', 'true');
                 }
             });
         });
-
-        // On mobile, show detail col
-        if (state.isMobile) {
-            elements.mobileNavCol.classList.add('hidden');
-            elements.mobileDetailCol.classList.add('active');
-        }
     }
 
+    // --- Insights Sub View ---
+    function renderInsightsSubView(container) {
+        const items = [
+            { id: 'academic', label: 'Academic Papers' },
+            { id: 'white', label: 'White Papers' },
+            { id: 'videos', label: 'Explanatory Videos' }
+        ];
+        renderListView(container, items);
+    }
+
+    // --- Company Sub View ---
+    function renderCompanySubView(container) {
+        const items = [
+            { id: 'about', label: 'About Us' },
+            { id: 'services', label: 'Services' },
+            { id: 'team', label: 'Our Team' },
+            { id: 'careers', label: 'Careers' }
+        ];
+        renderListView(container, items);
+    }
+
+    // --- Shared: render a simple list of link items ---
+    function renderListView(container, items) {
+        let html = '<ul class="menu-list">';
+        items.forEach(item => {
+            html += `<li><button class="menu-btn" data-item="${item.id}">${item.label}</button></li>`;
+        });
+        html += '</ul>';
+        container.innerHTML = html;
+        // Items are page links — no drill-down navigation
+    }
+
+    // --- Shared: simple content placeholder ---
+    function renderSimpleContentView(container, text) {
+        container.innerHTML = `<p style="padding: 20px;">${text}</p>`;
+    }
+
+    // --- Crypto Accordion Data ---
     function getCryptoAccordionData(cryptoId) {
         const data = {
             pqc: [
@@ -667,36 +712,13 @@
         return data[cryptoId] || [];
     }
 
-    function renderMobileApplications() {
-        // Applications are simple links
-        elements.mobileDetailCol.innerHTML = '<p style="padding: 20px;">Applications grid would be rendered here as a list of links.</p>';
-    }
-
-    function renderMobileInsights() {
-        const items = [
-            { id: 'academic', label: 'Academic Papers' },
-            { id: 'white', label: 'White Papers' },
-            { id: 'videos', label: 'Explanatory Videos' }
-        ];
-        renderMobileDetailList(items, 'insights');
-    }
-
-    function renderMobileNewsroom() {
-        elements.mobileDetailCol.innerHTML = '<p style="padding: 20px;">Newsroom links would be rendered here.</p>';
-    }
-
-    function renderMobileCompany() {
-        const items = [
-            { id: 'about', label: 'About Us' },
-            { id: 'services', label: 'Services' },
-            { id: 'team', label: 'Our Team' },
-            { id: 'careers', label: 'Careers' }
-        ];
-        renderMobileDetailList(items, 'company');
-    }
-
+    // --- Breadcrumb ---
     function updateBreadcrumb() {
-        if (state.mobileNavStack.length === 0) {
+        const stack = state.viewStack;
+        const visibleCount = state.isTablet ? 2 : 1;
+        const breadcrumbEnd = stack.length - visibleCount;
+
+        if (breadcrumbEnd <= 0) {
             elements.mobileBreadcrumb.classList.remove('active');
             elements.mobileBreadcrumb.innerHTML = '';
             return;
@@ -705,66 +727,24 @@
         elements.mobileBreadcrumb.classList.add('active');
 
         let html = '';
-        state.mobileNavStack.forEach((item, index) => {
-            if (index > 0) {
-                html += '<svg class="breadcrumb-chevron" width="7" height="12" viewBox="0 0 7 12"><path d="M1 1l5 5-5 5" stroke="currentColor" fill="none" stroke-width="1.5"/></svg>';
-            }
-            const isLast = index === state.mobileNavStack.length - 1;
-            if (isLast) {
-                html += `<span class="breadcrumb-current">${item.label}</span>`;
-            } else {
-                html += `<button data-level="${index}">${item.label}</button>`;
-            }
-        });
+        for (let i = 1; i <= breadcrumbEnd; i++) {
+            html += `<button class="breadcrumb-item" data-stack-index="${i}"><svg class="breadcrumb-chevron" width="7" height="12" viewBox="0 0 7 12"><path d="M6 1l-5 5 5 5" stroke="currentColor" fill="none" stroke-width="1.5"/></svg><span>${stack[i].label}</span></button>`;
+        }
 
         elements.mobileBreadcrumb.innerHTML = html;
 
-        // Add click handlers for breadcrumb navigation
-        const breadcrumbBtns = elements.mobileBreadcrumb.querySelectorAll('button');
-        breadcrumbBtns.forEach(btn => {
+        elements.mobileBreadcrumb.querySelectorAll('.breadcrumb-item').forEach(btn => {
             btn.addEventListener('click', () => {
-                const level = parseInt(btn.dataset.level);
-                navigateToLevel(level);
+                const idx = parseInt(btn.dataset.stackIndex);
+                if (state.isTablet) {
+                    // Tablet: navigate so this item's view appears in the right col
+                    navigateToStackIndex(idx);
+                } else {
+                    // Mobile: navigate to the level before this item
+                    navigateToStackIndex(idx - 1);
+                }
             });
         });
-    }
-
-    function navigateToLevel(level) {
-        const targetItem = state.mobileNavStack[level];
-
-        // Check if target is a top-level menu
-        const topLevelIds = ['products', 'applications', 'insights', 'newsroom', 'company'];
-
-        if (topLevelIds.includes(targetItem.id)) {
-            // Going back to top level — clear the stack and re-render level 1
-            state.mobileNavStack = [];
-            renderMobileLevel1();
-
-            // Activate the correct nav item if not products (which is default)
-            if (targetItem.id !== 'products') {
-                const navButtons = elements.mobileNavCol.querySelectorAll('.menu-btn');
-                navButtons.forEach(b => b.classList.remove('active'));
-                const targetBtn = elements.mobileNavCol.querySelector(`[data-nav="${targetItem.id}"]`);
-                if (targetBtn) targetBtn.classList.add('active');
-
-                const renderers = {
-                    applications: renderMobileApplications,
-                    insights: renderMobileInsights,
-                    newsroom: renderMobileNewsroom,
-                    company: renderMobileCompany
-                };
-                if (renderers[targetItem.id]) renderers[targetItem.id]();
-            }
-        } else {
-            // Navigate to a sub-level — keep stack up to this point
-            state.mobileNavStack = state.mobileNavStack.slice(0, level + 1);
-
-            if (targetItem.id === 'hardware') {
-                renderMobileCryptoTypes();
-            }
-        }
-
-        updateBreadcrumb();
     }
 
     // ===================================
@@ -810,15 +790,17 @@
 
         tabletQuery.addEventListener('change', (e) => {
             state.isTablet = e.matches;
-            if (e.matches) {
-                closeMegaMenu();
+            closeMegaMenu();
+            if (elements.mobileMenu.classList.contains('active')) {
+                renderCurrentViews();
             }
         });
 
         mobileQuery.addEventListener('change', (e) => {
             state.isMobile = e.matches;
-            if (e.matches) {
-                closeMegaMenu();
+            closeMegaMenu();
+            if (elements.mobileMenu.classList.contains('active')) {
+                renderCurrentViews();
             }
         });
 

@@ -694,37 +694,42 @@ body {
 }
 
 .mobile-breadcrumb {
-    padding: 12px 20px;
+    padding: 8px 12px;
     background: #f8f8f8;
     font-size: 14px;
     color: var(--text-secondary);
     border-bottom: 1px solid var(--border-color);
     display: none;
     align-items: center;
-    gap: 8px;
+    gap: 0;
+    flex-wrap: wrap;
 }
 
 .mobile-breadcrumb.active {
     display: flex;
 }
 
-.mobile-breadcrumb button {
+.breadcrumb-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
     background: none;
     border: none;
-    color: #0066cc;
+    color: var(--text-primary);
     cursor: pointer;
-    padding: 0;
+    padding: 6px 8px;
     font-size: 14px;
+    border-radius: 6px;
+    transition: background var(--transition-speed) var(--ease);
 }
 
-.mobile-breadcrumb .breadcrumb-chevron {
+.breadcrumb-item:hover {
+    background: var(--hover-bg);
+}
+
+.breadcrumb-item .breadcrumb-chevron {
     flex-shrink: 0;
     color: var(--text-secondary);
-}
-
-.mobile-breadcrumb .breadcrumb-current {
-    color: var(--text-primary);
-    font-weight: 500;
 }
 
 .mobile-content {
