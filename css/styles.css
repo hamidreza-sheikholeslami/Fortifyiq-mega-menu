@@ -50,7 +50,7 @@ body {
 .header-inner {
     max-width: 1240px;
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 0 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -78,14 +78,41 @@ body {
 .desktop-nav {
     flex: 1;
     display: flex;
-    align-items: center;
+    align-items: stretch;
+    height: 70px;
 }
 
 .nav-primary {
     display: flex;
     list-style: none;
-    gap: 32px;
-    align-items: center;
+    gap: 0;
+    align-items: stretch;
+}
+
+.nav-item {
+    display: flex;
+    align-items: stretch;
+    position: relative;
+}
+
+.nav-item + .nav-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 1.2em;
+    background: rgba(255, 255, 255, 0.5);
+    z-index: 1;
+    transition: opacity var(--transition-speed) var(--ease);
+}
+
+.nav-item:hover::before,
+.nav-item:has(.nav-trigger[aria-expanded="true"])::before,
+.nav-item:hover + .nav-item::before,
+.nav-item:has(.nav-trigger[aria-expanded="true"]) + .nav-item::before {
+    opacity: 0;
 }
 
 .nav-trigger {
@@ -95,14 +122,17 @@ body {
     font-weight: 500;
     color: white;
     cursor: pointer;
-    padding: 8px 12px;
-    transition: color var(--transition-speed) var(--ease);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    transition: color var(--transition-speed) var(--ease), background var(--transition-speed) var(--ease);
     letter-spacing: 0.031em;
 }
 
 .nav-trigger:hover,
 .nav-trigger[aria-expanded="true"] {
-    color: #F16D24;
+    color: var(--text-primary);
+    background: white;
 }
 
 .search-btn {
