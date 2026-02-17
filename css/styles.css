@@ -233,14 +233,22 @@ body {
     max-height: calc(100vh - 200px);
     overflow-y: auto;
     background-color: var(--content-bg);
-    border-radius: 0 16px 16px 0;
+    border-radius: 16px;
     padding: 12px;
-    padding-left: 0;
     display: flex;
     flex-direction: column;
 }
 
+.col-2[data-active="true"] ~ .col-3 {
+    border-radius: 0 16px 16px 0;
+    padding-left: 0;
+}
+
 .sub-panel {
+    border-radius: 12px;
+}
+
+.col-2[data-active="true"] ~ .col-3 .sub-panel {
     border-radius: 0 12px 12px 0;
 }
 
@@ -297,11 +305,11 @@ body {
 
 .content-area {
     position: relative;
-    border-radius: 0 12px 12px 0;
+    border-radius: 12px;
     flex: 1;
 }
 
-.col-3 .content-area {
+.col-2[data-active="true"] ~ .col-3 .content-area {
     background-color: var(--hover-bg-secondary);
     border-radius: 0 12px 12px 0;
 }
