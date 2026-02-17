@@ -180,15 +180,13 @@ body {
     top: 70px;
     left: 0;
     right: 0;
-    background: var(--primary-bg);
-    max-height: 100vh;
-    overflow: hidden;
+    max-height: calc(100vh - 70px);
+    overflow: visible;
     transform: translateY(-20px);
     opacity: 0;
     pointer-events: none;
     transition: transform var(--transition-speed) var(--ease), opacity var(--transition-speed) var(--ease);
     z-index: 999;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
 }
 
 .mega-menu.active {
@@ -198,7 +196,14 @@ body {
 }
 
 .mega-content {
+    margin-left: max(20px, calc((100vw - 1240px) / 2 + 204px));
+    margin-right: max(20px, calc((100vw - 1240px) / 2 + 20px));
+    background: var(--primary-bg);
+    border-radius: 0 0 30px 30px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
     padding: 12px;
+    max-height: calc(100vh - 70px);
+    overflow-y: auto;
 }
 
 .mega-panel {
