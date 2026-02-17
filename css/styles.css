@@ -32,8 +32,19 @@ body {
     position: sticky;
     top: 0;
     z-index: 1000;
-    background: var(--primary-bg);
-    border-bottom: 1px solid var(--border-color);
+    background: linear-gradient(90deg, #3B6EB6 20.19%, #92B4E2 100%);
+    overflow: hidden;
+}
+
+.site-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: calc(max(0px, (100vw - 1240px) / 2) + 204px);
+    background: linear-gradient(90deg, #E1ECFA 0%, #FFF 59.62%);
+    z-index: 0;
 }
 
 .header-inner {
@@ -44,6 +55,8 @@ body {
     align-items: center;
     justify-content: space-between;
     height: 70px;
+    position: relative;
+    z-index: 1;
 }
 
 .logo-section {
@@ -80,7 +93,7 @@ body {
     border: none;
     font-size: 18px;
     font-weight: 500;
-    color: var(--text-primary);
+    color: white;
     cursor: pointer;
     padding: 8px 12px;
     transition: color var(--transition-speed) var(--ease);
@@ -89,7 +102,7 @@ body {
 
 .nav-trigger:hover,
 .nav-trigger[aria-expanded="true"] {
-    color: #0066cc;
+    color: #F16D24;
 }
 
 .search-btn {
@@ -97,12 +110,12 @@ body {
     border: none;
     padding: 8px;
     cursor: pointer;
-    color: var(--text-primary);
+    color: white;
     transition: color var(--transition-speed) var(--ease);
 }
 
 .search-btn:hover {
-    color: #0066cc;
+    color: #F16D24;
 }
 
 .header-actions {
@@ -146,7 +159,7 @@ body {
     display: block;
     width: 24px;
     height: 2px;
-    background: var(--text-primary);
+    background: white;
     transition: all 0.3s var(--ease);
 }
 
