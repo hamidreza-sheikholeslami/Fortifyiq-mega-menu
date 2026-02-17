@@ -213,6 +213,7 @@ body {
     display: grid;
     grid-template-columns: 330px auto 1fr;
     align-items: stretch;
+    gap: 0;
 }
 
 .col-2 {
@@ -221,11 +222,11 @@ body {
 
 .col-2[data-active="true"] {
     display: block;
-    border-radius: 16px 0 0 16px;
     background-color: var(--content-bg);
     min-width: 202px;
-    border: solid 1px green;
-    padding: 12px 0 12px 12px;
+    padding: 12px;
+    padding-right: 0;
+    border-radius: 16px 0 0 16px;
 }
 
 .col-3 {
@@ -233,14 +234,14 @@ body {
     overflow-y: auto;
     background-color: var(--content-bg);
     border-radius: 0 16px 16px 0;
-    border: solid 1px red;
-    /* padding: 12px 12px 12px 0!important; */
+    padding: 12px;
+    padding-left: 0;
+    display: flex;
+    flex-direction: column;
 }
 
 .sub-panel {
-    /* padding: 30px!important; */
-    border: solid 1px blue!important;
-    border-radius: 16px;
+    border-radius: 0 12px 12px 0;
 }
 
 .col-3::-webkit-scrollbar {
@@ -273,13 +274,9 @@ body {
     border-radius: 16px 0 0 16px;
 }
 
-.crypto-types {
-    background-color: var(--content-bg);
-    border-radius: 16px;
-}
-
 .crypto-types .menu-btn {
     font-weight: 300;
+    border-radius: 12px 0 0 12px;
 }
 
 .menu-btn:hover {
@@ -295,29 +292,29 @@ body {
 .col-2 .menu-btn:hover,
 .col-2 .menu-btn.active {
     background: var(--hover-bg-secondary);
+    border-radius: 12px 0 0 12px;
 }
 
 .content-area {
     position: relative;
-    /* padding: 12px; */
-    border-radius: 16px;
+    border-radius: 0 12px 12px 0;
+    flex: 1;
 }
 
 .col-3 .content-area {
     background-color: var(--hover-bg-secondary);
+    border-radius: 0 12px 12px 0;
 }
-.col-3 .sub-panel[data-content="hardware"] {
-    background-color: yellow!important;
-    margin: 12px;
-    margin-left: 0;
-    border-radius: ;
-    padding: 0!important;
-}
-.crypto-section[data-crypto-section] {
-    background-color: pink!important;
-    padding: 12px;
-    border-radius: 16px;
 
+.col-3 .sub-panel[data-content="hardware"] {
+    padding: 0;
+    border-radius: 0;
+}
+
+.crypto-section[data-crypto-section] {
+    background-color: var(--hover-bg-secondary);
+    padding: 12px;
+    border-radius: 0 12px 12px 0;
 }
 
 .sub-panel {
@@ -326,6 +323,7 @@ body {
 
 .sub-panel.active {
     display: block;
+    flex: 1;
 }
 
 .desc-text {
