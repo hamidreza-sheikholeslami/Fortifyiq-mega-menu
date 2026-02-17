@@ -285,6 +285,15 @@ body {
 .crypto-types .menu-btn {
     font-weight: 300;
     border-radius: 12px 0 0 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.crypto-icon {
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
 }
 
 .menu-btn:hover {
@@ -301,6 +310,7 @@ body {
 .col-2 .menu-btn.active {
     background: var(--hover-bg-secondary);
     border-radius: 12px 0 0 12px;
+    color: #19CAE6;
 }
 
 .content-area {

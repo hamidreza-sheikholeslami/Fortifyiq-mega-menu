@@ -474,18 +474,18 @@
 
     function renderMobileCryptoTypes() {
         const cryptoTypes = [
-            { id: 'pqc', label: 'PQC' },
-            { id: 'aes', label: 'AES' },
-            { id: 'hmac', label: 'HMAC SHA2' },
-            { id: 'ecc', label: 'ECC/RSA' },
-            { id: 'cryptoboxes', label: 'CryptoBoxes' },
-            { id: 'roots', label: 'Roots of Trust' }
+            { id: 'pqc', label: 'PQC', icon: 'mm-icon-pqc' },
+            { id: 'aes', label: 'AES', icon: 'mm-icon-aes' },
+            { id: 'hmac', label: 'HMAC SHA2', icon: 'mm-icon-hmac' },
+            { id: 'ecc', label: 'ECC/RSA', icon: 'mm-icon-ecc' },
+            { id: 'cryptoboxes', label: 'CryptoBoxes', icon: 'mm-icon-cryptoboxes' },
+            { id: 'roots', label: 'Roots of Trust', icon: 'mm-icon-root-of-trust' }
         ];
 
         // Render as left column
-        let navHtml = '<ul class="menu-list">';
+        let navHtml = '<ul class="menu-list crypto-types">';
         cryptoTypes.forEach((type, index) => {
-            navHtml += `<li><button class="menu-btn${index === 0 ? ' active' : ''}" data-crypto="${type.id}">${type.label}</button></li>`;
+            navHtml += `<li><button class="menu-btn${index === 0 ? ' active' : ''}" data-crypto="${type.id}"><img src="https://fortifyiq.com/wp-content/uploads/2026/02/${type.icon}.svg" width="28" height="28" alt="" class="crypto-icon">${type.label}</button></li>`;
         });
         navHtml += '</ul>';
 
