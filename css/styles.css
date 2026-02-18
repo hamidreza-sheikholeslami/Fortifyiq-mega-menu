@@ -19,6 +19,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
 body {
@@ -334,7 +335,7 @@ body {
     transition: all var(--transition-speed) var(--ease);
     border-radius: 16px 0 0 16px;
 }
-.mega-panel[data-panel="products"] .menu-btn {
+.mega-panel[data-panel="products"] .col-1 .menu-btn {
     padding: 12px;
 }
 
@@ -344,6 +345,7 @@ body {
     display: flex;
     align-items: center;
     gap: 8px;
+    padding: 8px 12px;
 }
 
 .crypto-icon {
@@ -369,6 +371,10 @@ body {
     border-right-color: #19CAE6;
     background: var(--hover-bg-secondary);
     color: #19CAE6;
+}
+
+.col-2 .menu-btn {
+    font-weight: 300;
 }
 
 .content-area {
@@ -405,6 +411,7 @@ body {
 .desc-text {
     font-size: 15px;
     line-height: 1.7;
+    margin-bottom: 16px;
     color: var(--text-secondary);
 }
 
@@ -437,14 +444,15 @@ body {
     background: none;
     border: none;
     cursor: pointer;
-    font-size: 15px;
-    font-weight: 500;
+    font-size: 12px;
+    font-weight: 300;
     text-align: left;
+    color: var(--text-primary);
     transition: background var(--transition-speed) var(--ease);
 }
 
 .acc-header:hover {
-    background: var(--hover-bg);
+    background: var(--hover-bg-primary);
 }
 
 .acc-icon {
@@ -472,7 +480,7 @@ body {
 }
 
 .link-list a {
-    color: var(--text-secondary);
+    color: var(--text-primary);
     text-decoration: none;
     font-size: 12px;
     display: block;
@@ -512,7 +520,6 @@ body {
     font-size: 18px;
     font-weight: 300;
     line-height: 1.16;
-    margin-bottom: 8px;
     color: var(--text-primary);
 }
 
@@ -663,7 +670,7 @@ body {
     font-size: 15px;
     line-height: 1.7;
     color: var(--text-secondary);
-    margin-bottom: 20px;
+    margin-bottom: 16px;
     max-width: 60%;
 }
 
@@ -679,8 +686,8 @@ body {
     border: 2px solid #F16D24;
     white-space: nowrap;
     text-align: center;
-    line-height: 1;
-    padding: 12px 24px;
+    line-height: 1.16;
+    padding: 6px 24px;
 }
 
 .learn-more-btn:hover {
