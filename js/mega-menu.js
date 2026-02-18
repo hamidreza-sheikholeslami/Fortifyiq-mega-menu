@@ -8,6 +8,7 @@
         currentCrypto: null,
         viewStack: [],
         leaveTimeout: null,
+        navDirection: null, // 'forward', 'back', or null (no animation)
         isTablet: window.matchMedia('(min-width: 768px) and (max-width: 1024px)').matches,
         isMobile: window.matchMedia('(max-width: 767px)').matches
     };
@@ -352,6 +353,7 @@
     }
 
     function navigateToStackIndex(index) {
+        state.navDirection = 'back';
         state.viewStack = state.viewStack.slice(0, index + 1);
         if (state.isTablet && state.viewStack.length < 2) {
             state.viewStack.push({ type: 'products', label: 'Products' });
@@ -359,28 +361,68 @@
         renderCurrentViews();
     }
 
+    function animateSlide(container, renderFn) {
+        const direction = state.navDirection;
+        const enterClass = direction === 'forward' ? 'slide-in-right' : 'slide-in-left';
+
+        container.classList.remove('slide-in-right', 'slide-in-left');
+        renderFn();
+        // Force reflow to restart animation
+        void container.offsetWidth;
+        container.classList.add(enterClass);
+
+        container.addEventListener('animationend', function handler() {
+            container.classList.remove('slide-in-right', 'slide-in-left');
+            container.removeEventListener('animationend', handler);
+        });
+    }
+
     function renderCurrentViews() {
         const stack = state.viewStack;
+        const shouldAnimate = state.navDirection !== null;
 
         if (state.isTablet) {
             if (stack.length < 2) {
                 stack.push({ type: 'products', label: 'Products' });
             }
-            renderView(stack[stack.length - 2], elements.mobileNavCol, 'left');
-            renderView(stack[stack.length - 1], elements.mobileDetailCol, 'right');
+
+            if (shouldAnimate) {
+                animateSlide(elements.mobileNavCol, () => {
+                    renderView(stack[stack.length - 2], elements.mobileNavCol, 'left');
+                });
+                animateSlide(elements.mobileDetailCol, () => {
+                    renderView(stack[stack.length - 1], elements.mobileDetailCol, 'right');
+                });
+            } else {
+                renderView(stack[stack.length - 2], elements.mobileNavCol, 'left');
+                renderView(stack[stack.length - 1], elements.mobileDetailCol, 'right');
+            }
         } else {
             // Mobile: show last view
             if (stack.length <= 1) {
-                renderView(stack[stack.length - 1], elements.mobileNavCol, 'single');
+                if (shouldAnimate) {
+                    animateSlide(elements.mobileNavCol, () => {
+                        renderView(stack[stack.length - 1], elements.mobileNavCol, 'single');
+                    });
+                } else {
+                    renderView(stack[stack.length - 1], elements.mobileNavCol, 'single');
+                }
                 elements.mobileNavCol.classList.remove('hidden');
                 elements.mobileDetailCol.classList.remove('active');
             } else {
-                renderView(stack[stack.length - 1], elements.mobileDetailCol, 'single');
+                if (shouldAnimate) {
+                    animateSlide(elements.mobileDetailCol, () => {
+                        renderView(stack[stack.length - 1], elements.mobileDetailCol, 'single');
+                    });
+                } else {
+                    renderView(stack[stack.length - 1], elements.mobileDetailCol, 'single');
+                }
                 elements.mobileNavCol.classList.add('hidden');
                 elements.mobileDetailCol.classList.add('active');
             }
         }
 
+        state.navDirection = null; // Reset - no animation for initial renders
         updateBreadcrumb();
     }
 
@@ -425,6 +467,7 @@
             btn.addEventListener('click', () => {
                 const navId = btn.dataset.nav;
                 const label = btn.textContent;
+                state.navDirection = 'forward';
 
                 if (position === 'left') {
                     // Tablet: reset to [main-nav, selected]
@@ -474,6 +517,7 @@
                 const navigableItems = ['hardware', 'software', 'pqc-main', 'forti', 'security'];
 
                 if (!navigableItems.includes(itemId)) return;
+                state.navDirection = 'forward';
 
                 const viewEntry = itemId === 'hardware'
                     ? { type: 'crypto-types', label }
@@ -521,6 +565,7 @@
             btn.addEventListener('click', () => {
                 const cryptoId = btn.dataset.crypto;
                 const label = btn.textContent.trim();
+                state.navDirection = 'forward';
 
                 if (position === 'left') {
                     // Tablet left: replace right col

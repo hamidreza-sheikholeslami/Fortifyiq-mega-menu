@@ -827,6 +827,25 @@ body {
     overflow: hidden;
 }
 
+/* iOS-style slide animations for navigation */
+@keyframes slideInRight {
+    from { transform: translateX(30%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideInLeft {
+    from { transform: translateX(-30%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+.slide-in-right {
+    animation: slideInRight 0.3s cubic-bezier(0.25, 0.1, 0.25, 1) both;
+}
+
+.slide-in-left {
+    animation: slideInLeft 0.3s cubic-bezier(0.25, 0.1, 0.25, 1) both;
+}
+
 .mobile-nav-col,
 .mobile-detail-col {
     height: 100%;
@@ -1045,6 +1064,7 @@ body {
         padding: 0;
         background-color: var(--content-bg);
         border-radius: 16px;
+        overflow: hidden;
     }
 
     .mobile-nav-col .menu-btn,
