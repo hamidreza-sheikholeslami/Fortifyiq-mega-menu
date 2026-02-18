@@ -499,6 +499,7 @@ body {
     flex-direction: column;
     gap: 4px;
     padding: 0.75rem;
+    text-decoration: none;
     transition: all var(--transition-speed) var(--ease);
     cursor: pointer;
 }
