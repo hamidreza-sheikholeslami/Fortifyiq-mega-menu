@@ -54,11 +54,8 @@
         // Setup Products menu
         setupProductsMenu();
         
-        // Setup Insights/Company tabs
+        // Setup Insights/Company/Newsroom tabs
         setupTabbedMenus();
-
-        // Setup Newsroom hover bg switching
-        setupNewsroomBg();
 
         // Close delay on menu leave
         elements.megaMenu.addEventListener('mouseleave', () => {
@@ -272,7 +269,7 @@
     // ===================================
 
     function setupTabbedMenus() {
-        const tabbedPanels = document.querySelectorAll('[data-panel="insights"], [data-panel="company"]');
+        const tabbedPanels = document.querySelectorAll('[data-panel="insights"], [data-panel="newsroom"], [data-panel="company"]');
         
         tabbedPanels.forEach(panel => {
             const tabButtons = panel.querySelectorAll('.sidebar .menu-btn');
@@ -297,23 +294,6 @@
                     bgImages.forEach(bg => {
                         bg.classList.toggle('active', bg.dataset.bg === tabName);
                     });
-                });
-            });
-        });
-    }
-
-    function setupNewsroomBg() {
-        const panel = document.querySelector('[data-panel="newsroom"]');
-        if (!panel) return;
-
-        const links = panel.querySelectorAll('.menu-link[data-bg-target]');
-        const bgImages = panel.querySelectorAll('.bg-image');
-
-        links.forEach(link => {
-            link.addEventListener('mouseenter', () => {
-                const target = link.dataset.bgTarget;
-                bgImages.forEach(bg => {
-                    bg.classList.toggle('active', bg.dataset.bg === target);
                 });
             });
         });
