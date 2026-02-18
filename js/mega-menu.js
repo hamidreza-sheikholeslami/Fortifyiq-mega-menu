@@ -57,6 +57,9 @@
         // Setup Insights/Company tabs
         setupTabbedMenus();
 
+        // Setup Newsroom hover bg switching
+        setupNewsroomBg();
+
         // Close delay on menu leave
         elements.megaMenu.addEventListener('mouseleave', () => {
             state.leaveTimeout = setTimeout(closeMegaMenu, 175);
@@ -294,6 +297,23 @@
                     bgImages.forEach(bg => {
                         bg.classList.toggle('active', bg.dataset.bg === tabName);
                     });
+                });
+            });
+        });
+    }
+
+    function setupNewsroomBg() {
+        const panel = document.querySelector('[data-panel="newsroom"]');
+        if (!panel) return;
+
+        const links = panel.querySelectorAll('.menu-link[data-bg-target]');
+        const bgImages = panel.querySelectorAll('.bg-image');
+
+        links.forEach(link => {
+            link.addEventListener('mouseenter', () => {
+                const target = link.dataset.bgTarget;
+                bgImages.forEach(bg => {
+                    bg.classList.toggle('active', bg.dataset.bg === target);
                 });
             });
         });
