@@ -289,14 +289,11 @@
                         content.classList.toggle('active', content.dataset.tabContent === tabName);
                     });
 
-                    // Fade background image
-                    const bgImage = panel.querySelector('.bg-image');
-                    if (bgImage) {
-                        bgImage.style.opacity = '0';
-                        setTimeout(() => {
-                            bgImage.style.opacity = '0.3';
-                        }, 50);
-                    }
+                    // Switch background image
+                    const bgImages = panel.querySelectorAll('.bg-image');
+                    bgImages.forEach(bg => {
+                        bg.classList.toggle('active', bg.dataset.bg === tabName);
+                    });
                 });
             });
         });
