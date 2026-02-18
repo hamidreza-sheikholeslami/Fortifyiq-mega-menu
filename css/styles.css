@@ -327,12 +327,15 @@ body {
     text-align: left;
     background: none;
     border: none;
-    padding: 12px;
+    padding: 8px 12px;
     font-size: 18px;
     color: var(--text-primary);
     cursor: pointer;
     transition: all var(--transition-speed) var(--ease);
     border-radius: 16px 0 0 16px;
+}
+.mega-panel[data-panel="products"] .menu-btn {
+    padding: 12px;
 }
 
 .crypto-types .menu-btn {
@@ -363,8 +366,8 @@ body {
 
 .col-2 .menu-btn:hover,
 .col-2 .menu-btn.active {
+    border-right-color: #19CAE6;
     background: var(--hover-bg-secondary);
-    border-radius: 12px 0 0 12px;
     color: #19CAE6;
 }
 
@@ -491,28 +494,35 @@ body {
 }
 
 .info-card {
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    padding: 1rem;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 0.75rem;
     transition: all var(--transition-speed) var(--ease);
     cursor: pointer;
 }
 
 .info-card:hover {
-    border-color: #0066cc;
-    box-shadow: 0 4px 12px rgba(0, 102, 204, 0.1);
+    background-color: var(--hover-bg-secondary);
 }
 
 .info-card h3 {
     font-size: 18px;
+    font-weight: 300;
+    line-height: 1.16;
     margin-bottom: 8px;
     color: var(--text-primary);
+}
+
+.info-card:hover h3 {
+    font-weight: 400;
 }
 
 .info-card p {
     font-size: 12px;
     color: var(--text-secondary);
-    line-height: 1.6;
+    line-height: 1.16;
 }
 
 .apps-grid {
@@ -617,6 +627,9 @@ body {
 
 .content-panel {
     position: relative;
+    padding: 12px;
+    background-color: var(--content-bg);
+    border-radius: 0 16px 16px 0;
 }
 
 .tab-content {
@@ -650,6 +663,7 @@ body {
     line-height: 1.7;
     color: var(--text-secondary);
     margin-bottom: 20px;
+    max-width: 60%;
 }
 
 .learn-more-btn {
@@ -686,6 +700,7 @@ body {
     transition: opacity 0.4s var(--ease);
     pointer-events: none;
     z-index: 1;
+    border-radius: 0 16px 16px 0;
 }
 
 .bg-image.active {
