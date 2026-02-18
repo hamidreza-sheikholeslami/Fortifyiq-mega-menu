@@ -857,6 +857,109 @@ body {
     margin-bottom: 16px;
 }
 
+/* Tablet/Mobile card grids (base styles) */
+.tablet-card-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    padding: 8px;
+}
+
+.tablet-card-grid--single {
+    grid-template-columns: 1fr;
+}
+
+.tablet-app-card {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    text-decoration: none;
+    color: var(--text-primary);
+    border-radius: 12px;
+    transition: all var(--transition-speed) var(--ease);
+}
+
+.tablet-app-card:hover {
+    background: var(--hover-bg-secondary);
+    color: var(--hover-color);
+}
+
+.tablet-app-card--detail {
+    align-items: flex-start;
+}
+
+.tablet-card-icon {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+}
+
+.tablet-card-icon svg {
+    width: 24px;
+    height: 24px;
+}
+
+.tablet-card-title {
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.tablet-card-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.tablet-card-desc {
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 1.4;
+    color: var(--text-secondary);
+    display: -webkit-box;
+    line-clamp: 2;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.tablet-info-card {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 10px 12px;
+    text-decoration: none;
+    border-radius: 12px;
+    transition: all var(--transition-speed) var(--ease);
+}
+
+.tablet-info-card:hover {
+    background: var(--hover-bg-secondary);
+}
+
+.tablet-info-card h3 {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-primary);
+    transition: color var(--transition-speed) var(--ease);
+}
+
+.tablet-info-card:hover h3 {
+    color: var(--hover-color);
+}
+
+.tablet-info-card p {
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 1.4;
+    color: var(--text-secondary);
+    display: -webkit-box;
+    line-clamp: 2;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
 .mobile-menu-footer {
     display: none;
     padding: 16px 20px;
@@ -968,108 +1071,9 @@ body {
         padding: 12px;
     }
 
-    /* Tablet card grids */
-    .tablet-card-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 0;
-        padding: 8px;
-    }
-
-    .tablet-app-card {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        padding: 10px 12px;
-        text-decoration: none;
-        color: var(--text-primary);
-        border-radius: 12px;
-        transition: all var(--transition-speed) var(--ease);
-    }
-
-    .tablet-app-card:hover {
-        background: var(--hover-bg-secondary);
-        color: var(--hover-color);
-    }
-
-    .tablet-card-icon {
-        width: 24px;
-        height: 24px;
-        flex-shrink: 0;
-    }
-
-    .tablet-card-icon svg {
-        width: 24px;
-        height: 24px;
-    }
-
-    .tablet-card-title {
-        font-size: 14px;
-        font-weight: 400;
-    }
-
-    .tablet-info-card {
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-        padding: 10px 12px;
-        text-decoration: none;
-        border-radius: 12px;
-        transition: all var(--transition-speed) var(--ease);
-    }
-
-    .tablet-info-card:hover {
-        background: var(--hover-bg-secondary);
-    }
-
-    .tablet-info-card h3 {
-        font-size: 14px;
-        font-weight: 500;
-        color: var(--text-primary);
-        transition: color var(--transition-speed) var(--ease);
-    }
-
-    .tablet-info-card:hover h3 {
-        color: var(--hover-color);
-    }
-
-    .tablet-info-card p {
-        font-size: 12px;
-        font-weight: 300;
-        line-height: 1.4;
-        color: var(--text-secondary);
-        display: -webkit-box;
-        line-clamp: 2;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-    }
-
-    /* Single-column card grid for Insights/Newsroom/Company */
+    /* Tablet: Insights/Newsroom/Company card grid in 2 columns */
     .tablet-card-grid--single {
         grid-template-columns: 1fr 1fr;
-    }
-
-    .tablet-app-card--detail {
-        align-items: flex-start;
-    }
-
-    .tablet-card-text {
-        display: flex;
-        flex-direction: column;
-        gap: 2px;
-    }
-
-    .tablet-card-desc {
-        font-size: 12px;
-        font-weight: 300;
-        line-height: 1.4;
-        color: var(--text-secondary);
-        display: -webkit-box;
-        line-clamp: 2;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
     }
 }
 
@@ -1084,7 +1088,7 @@ body {
     .mobile-content {
         position: relative;
     }
-    
+
     .mobile-nav-col,
     .mobile-detail-col {
         position: absolute;
@@ -1092,25 +1096,106 @@ body {
         left: 0;
         right: 0;
         bottom: 0;
-        background: var(--primary-bg);
+        background: white;
         transition: transform 0.3s var(--ease);
     }
-    
+
     .mobile-nav-col {
         transform: translateX(0);
     }
-    
+
     .mobile-nav-col.hidden {
         transform: translateX(-100%);
     }
-    
+
     .mobile-detail-col {
         transform: translateX(100%);
     }
-    
+
     .mobile-detail-col.active {
         transform: translateX(0);
     }
+
+    /* White background, no colored backgrounds */
+    .mobile-nav-col,
+    .mobile-detail-col {
+        background: white;
+    }
+
+    .mobile-nav-col .menu-btn,
+    .mobile-detail-col .menu-btn {
+        background: none;
+        border-bottom: 1px solid #EBF1F8;
+    }
+
+    .mobile-nav-col .menu-btn.active {
+        background: none;
+    }
+
+    /* Single-column card grids on mobile */
+    .tablet-card-grid {
+        grid-template-columns: 1fr;
+        padding: 0;
+    }
+
+    .tablet-app-card,
+    .tablet-app-card--detail {
+        background: none;
+        border-bottom: 1px solid #EBF1F8;
+        border-radius: 0;
+        padding: 14px 20px;
+    }
+
+    .tablet-app-card:hover,
+    .tablet-app-card--detail:hover {
+        background: none;
+    }
+
+    .tablet-info-card {
+        background: none;
+        border-bottom: 1px solid #EBF1F8;
+        border-radius: 0;
+        padding: 14px 20px;
+    }
+
+    .tablet-info-card:hover {
+        background: none;
+    }
+
+    /* Link item dividers */
+    .mobile-detail-col .link-item {
+        border-bottom: 1px solid #EBF1F8;
+    }
+
+    /* Accordion link-list dividers */
+    .mobile-detail-col .link-list li {
+        border-bottom: 1px solid #EBF1F8;
+    }
+
+    .mobile-detail-col .link-list li:last-child {
+        border-bottom: none;
+    }
+
+    .mobile-detail-col .link-list a {
+        padding: 10px 0;
+    }
+
+    /* Accordion items dividers */
+    .mobile-detail-col .accordion {
+        border-bottom: 1px solid #EBF1F8;
+        margin-bottom: 0;
+    }
+
+    .mobile-detail-col .accordion:last-child {
+        border-bottom: none;
+    }
+
+    .mobile-detail-col .accordion-list {
+        background: none;
+        border-radius: 0;
+        padding: 0;
+    }
+
 }
 
 button:focus-visible,
