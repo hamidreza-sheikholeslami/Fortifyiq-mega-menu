@@ -9,6 +9,9 @@
         viewStack: [],
         leaveTimeout: null,
         navDirection: null, // 'forward', 'back', or null (no animation)
+        prevLeftType: null,  // Track previous left column view type
+        prevRightType: null, // Track previous right column view type
+        prevRightData: null, // Track previous right column data (for same-type comparisons)
         isTablet: window.matchMedia('(min-width: 768px) and (max-width: 1024px)').matches,
         isMobile: window.matchMedia('(max-width: 767px)').matches
     };
@@ -348,6 +351,9 @@
         document.body.classList.remove('no-scroll');
 
         state.viewStack = [];
+        state.prevLeftType = null;
+        state.prevRightType = null;
+        state.prevRightData = null;
         elements.mobileBreadcrumb.classList.remove('active');
         elements.mobileBreadcrumb.innerHTML = '';
     }
@@ -386,17 +392,31 @@
                 stack.push({ type: 'products', label: 'Products' });
             }
 
-            if (shouldAnimate) {
+            const newLeftEntry = stack[stack.length - 2];
+            const newRightEntry = stack[stack.length - 1];
+            const leftChanged = newLeftEntry.type !== state.prevLeftType;
+            const rightChanged = newRightEntry.type !== state.prevRightType
+                || JSON.stringify(newRightEntry.data) !== JSON.stringify(state.prevRightData);
+
+            if (shouldAnimate && leftChanged) {
                 animateSlide(elements.mobileNavCol, () => {
-                    renderView(stack[stack.length - 2], elements.mobileNavCol, 'left');
-                });
-                animateSlide(elements.mobileDetailCol, () => {
-                    renderView(stack[stack.length - 1], elements.mobileDetailCol, 'right');
+                    renderView(newLeftEntry, elements.mobileNavCol, 'left');
                 });
             } else {
-                renderView(stack[stack.length - 2], elements.mobileNavCol, 'left');
-                renderView(stack[stack.length - 1], elements.mobileDetailCol, 'right');
+                renderView(newLeftEntry, elements.mobileNavCol, 'left');
             }
+
+            if (shouldAnimate && rightChanged) {
+                animateSlide(elements.mobileDetailCol, () => {
+                    renderView(newRightEntry, elements.mobileDetailCol, 'right');
+                });
+            } else {
+                renderView(newRightEntry, elements.mobileDetailCol, 'right');
+            }
+
+            state.prevLeftType = newLeftEntry.type;
+            state.prevRightType = newRightEntry.type;
+            state.prevRightData = newRightEntry.data || null;
         } else {
             // Mobile: show last view
             if (stack.length <= 1) {
