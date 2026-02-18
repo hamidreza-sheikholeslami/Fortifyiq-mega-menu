@@ -723,12 +723,12 @@ body {
 
 .mobile-menu {
     position: fixed;
-    top: 0;
+    top: 70px;
     left: 0;
     right: 0;
     bottom: 0;
-    background: var(--primary-bg);
-    z-index: 1001;
+    background: white;
+    z-index: 999;
     transform: translateX(100%);
     transition: transform 0.3s var(--ease);
     display: flex;
@@ -740,12 +740,7 @@ body {
 }
 
 .mobile-header {
-    height: 70px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    padding: 0 20px;
-    border-bottom: 1px solid var(--border-color);
+    display: none;
 }
 
 .mobile-close {
