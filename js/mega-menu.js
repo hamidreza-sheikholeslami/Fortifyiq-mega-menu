@@ -321,6 +321,26 @@
         if (elements.mobileClose) {
             elements.mobileClose.addEventListener('click', closeMobileMenu);
         }
+
+        // Close menu with animation when any link is clicked
+        if (elements.mobileMenu) {
+            elements.mobileMenu.addEventListener('click', (e) => {
+                const link = e.target.closest('a[href]');
+                if (!link || link.getAttribute('href') === '#') return;
+
+                e.preventDefault();
+                const href = link.getAttribute('href');
+                closeMobileMenu();
+
+                // Navigate after the slide-out animation completes
+                elements.mobileMenu.addEventListener('transitionend', function handler(te) {
+                    if (te.propertyName === 'transform') {
+                        elements.mobileMenu.removeEventListener('transitionend', handler);
+                        window.location.href = href;
+                    }
+                });
+            });
+        }
     }
 
     function toggleMobileMenu() {
