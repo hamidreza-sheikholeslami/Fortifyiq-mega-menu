@@ -178,24 +178,53 @@ body {
 
 .hamburger {
     display: none;
-    flex-direction: column;
-    gap: 5px;
+    justify-content: center;
+    align-items: center;
+    width: 70px;
+    height: 70px;
     background: none;
     border: none;
-    padding: 8px;
+    padding: 0;
     cursor: pointer;
+    position: relative;
+    border-radius: 0;
+    margin-right: -20px;
+    transition: background 0.3s var(--ease);
 }
 
 .hamburger span {
     display: block;
-    width: 24px;
+    width: 22px;
     height: 2px;
     background: white;
+    position: absolute;
+    left: 24px;
     transition: all 0.3s var(--ease);
 }
 
+.hamburger span:nth-child(1) {
+    top: 27px;
+}
+
+.hamburger span:nth-child(2) {
+    top: 34px;
+}
+
+.hamburger span:nth-child(3) {
+    top: 41px;
+}
+
+.hamburger[aria-expanded="true"] {
+    background: white;
+}
+
+.hamburger[aria-expanded="true"] span {
+    background: #3B6EB6;
+}
+
 .hamburger[aria-expanded="true"] span:nth-child(1) {
-    transform: rotate(45deg) translate(6px, 6px);
+    top: 34px;
+    transform: rotate(45deg);
 }
 
 .hamburger[aria-expanded="true"] span:nth-child(2) {
@@ -203,7 +232,8 @@ body {
 }
 
 .hamburger[aria-expanded="true"] span:nth-child(3) {
-    transform: rotate(-45deg) translate(6px, -6px);
+    top: 34px;
+    transform: rotate(-45deg);
 }
 
 .mega-menu-overlay {
