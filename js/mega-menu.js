@@ -8,6 +8,9 @@
         currentCrypto: null,
         viewStack: [],
         leaveTimeout: null,
+        col1HoverTimeout: null, // Hover-intent delay for Column 1
+        col2HoverTimeout: null, // Hover-intent delay for Column 2
+        tabHoverTimeout: null,  // Hover-intent delay for tabbed menus
         navDirection: null, // 'forward', 'back', or null (no animation)
         prevLeftType: null,  // Track previous left column view type
         prevRightType: null, // Track previous right column view type
@@ -150,6 +153,18 @@
             clearTimeout(state.leaveTimeout);
             state.leaveTimeout = null;
         }
+        if (state.col1HoverTimeout) {
+            clearTimeout(state.col1HoverTimeout);
+            state.col1HoverTimeout = null;
+        }
+        if (state.col2HoverTimeout) {
+            clearTimeout(state.col2HoverTimeout);
+            state.col2HoverTimeout = null;
+        }
+        if (state.tabHoverTimeout) {
+            clearTimeout(state.tabHoverTimeout);
+            state.tabHoverTimeout = null;
+        }
     }
 
     // ===================================
@@ -161,19 +176,47 @@
         const col2Buttons = document.querySelectorAll('.products-grid .col-2 .menu-btn');
         const accordionHeaders = document.querySelectorAll('.accordion .acc-header');
 
-        // Column 1 navigation - HOVER ACTIVATION
+        // Column 1 navigation - HOVER with intent delay
         col1Buttons.forEach(btn => {
             btn.addEventListener('mouseenter', () => {
+                if (state.col1HoverTimeout) {
+                    clearTimeout(state.col1HoverTimeout);
+                }
                 const category = btn.dataset.sub;
-                activateProductCategory(category);
+                if (category === state.currentCategory) return;
+                state.col1HoverTimeout = setTimeout(() => {
+                    activateProductCategory(category);
+                    state.col1HoverTimeout = null;
+                }, 120);
+            });
+            btn.addEventListener('mouseleave', () => {
+                if (state.col1HoverTimeout) {
+                    clearTimeout(state.col1HoverTimeout);
+                    state.col1HoverTimeout = null;
+                }
             });
         });
 
-        // Column 2 crypto type navigation - HOVER ACTIVATION
+        // Column 2 crypto type navigation - HOVER with intent delay
+        // Prevents flickering when mouse moves diagonally from Col 1 to Col 3
         col2Buttons.forEach(btn => {
             btn.addEventListener('mouseenter', () => {
+                if (state.col2HoverTimeout) {
+                    clearTimeout(state.col2HoverTimeout);
+                }
                 const cryptoType = btn.dataset.crypto;
-                activateCryptoType(cryptoType);
+                // Skip delay if this item is already active
+                if (cryptoType === state.currentCrypto) return;
+                state.col2HoverTimeout = setTimeout(() => {
+                    activateCryptoType(cryptoType);
+                    state.col2HoverTimeout = null;
+                }, 120);
+            });
+            btn.addEventListener('mouseleave', () => {
+                if (state.col2HoverTimeout) {
+                    clearTimeout(state.col2HoverTimeout);
+                    state.col2HoverTimeout = null;
+                }
             });
         });
 
@@ -279,25 +322,38 @@
             const tabButtons = panel.querySelectorAll('.sidebar .menu-btn');
             
             tabButtons.forEach(btn => {
-                // HOVER ACTIVATION for Insights and Company
+                // HOVER with intent delay for Insights, Newsroom, Company
                 btn.addEventListener('mouseenter', () => {
+                    if (state.tabHoverTimeout) {
+                        clearTimeout(state.tabHoverTimeout);
+                    }
                     const tabName = btn.dataset.tab;
-                    
-                    // Update buttons
-                    tabButtons.forEach(b => b.classList.remove('active'));
-                    btn.classList.add('active');
+                    // Skip if already active
+                    if (btn.classList.contains('active')) return;
+                    state.tabHoverTimeout = setTimeout(() => {
+                        // Update buttons
+                        tabButtons.forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
 
-                    // Show correct tab content
-                    const tabContents = panel.querySelectorAll('.tab-content');
-                    tabContents.forEach(content => {
-                        content.classList.toggle('active', content.dataset.tabContent === tabName);
-                    });
+                        // Show correct tab content
+                        const tabContents = panel.querySelectorAll('.tab-content');
+                        tabContents.forEach(content => {
+                            content.classList.toggle('active', content.dataset.tabContent === tabName);
+                        });
 
-                    // Switch background image
-                    const bgImages = panel.querySelectorAll('.bg-image');
-                    bgImages.forEach(bg => {
-                        bg.classList.toggle('active', bg.dataset.bg === tabName);
-                    });
+                        // Switch background image
+                        const bgImages = panel.querySelectorAll('.bg-image');
+                        bgImages.forEach(bg => {
+                            bg.classList.toggle('active', bg.dataset.bg === tabName);
+                        });
+                        state.tabHoverTimeout = null;
+                    }, 120);
+                });
+                btn.addEventListener('mouseleave', () => {
+                    if (state.tabHoverTimeout) {
+                        clearTimeout(state.tabHoverTimeout);
+                        state.tabHoverTimeout = null;
+                    }
                 });
             });
         });
