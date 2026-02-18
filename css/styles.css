@@ -565,6 +565,24 @@ body {
     gap: 4px;
 }
 
+.sidebar .menu-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.sidebar .menu-btn .sidebar-icon {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+}
+
+.sidebar .menu-btn .sidebar-icon svg {
+    width: 32px;
+    height: 32px;
+    color: inherit;
+}
+
 .content-panel {
     position: relative;
 }
