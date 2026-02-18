@@ -609,12 +609,12 @@
     // --- Newsroom Sub View ---
     function renderNewsroomSubView(container) {
         const items = [
-            { id: 'news', label: 'News' },
-            { id: 'press', label: 'Press Releases' },
-            { id: 'webinars', label: 'Webinars' },
-            { id: 'events', label: 'Events' }
+            { id: 'news', label: 'News', desc: 'Stay up to date with the latest company updates', icon: '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="5" width="24" height="22" rx="2"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="24" y2="14"/><line x1="8" y1="18" x2="24" y2="18"/><line x1="8" y1="22" x2="20" y2="22"/></svg>' },
+            { id: 'press', label: 'Press Releases', desc: 'Access our official statements, media announcements, and company news', icon: '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="5" width="24" height="22" rx="2"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="24" y2="14"/><line x1="8" y1="18" x2="24" y2="18"/><line x1="8" y1="22" x2="20" y2="22"/></svg>' },
+            { id: 'webinars', label: 'Webinars', desc: 'Explore upcoming and on-demand online sessions', icon: '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="5" width="24" height="22" rx="2"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="24" y2="14"/><line x1="8" y1="18" x2="24" y2="18"/><line x1="8" y1="22" x2="20" y2="22"/></svg>' },
+            { id: 'events', label: 'Events', desc: 'Discover details about upcoming and past events', icon: '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="5" width="24" height="22" rx="2"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="24" y2="14"/><line x1="8" y1="18" x2="24" y2="18"/><line x1="8" y1="22" x2="20" y2="22"/></svg>' }
         ];
-        renderListView(container, items);
+        renderCardListView(container, items);
     }
 
     // --- Product Cards View (info-cards for sub-categories) ---
@@ -655,33 +655,35 @@
     // --- Insights Sub View ---
     function renderInsightsSubView(container) {
         const items = [
-            { id: 'academic', label: 'Academic Papers' },
-            { id: 'white', label: 'White Papers' },
-            { id: 'videos', label: 'Explanatory Videos' }
+            { id: 'academic', label: 'Academic Papers', desc: 'This section features our academic publications', icon: '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="6" y="4" width="20" height="24" rx="2"/><line x1="10" y1="10" x2="22" y2="10"/><line x1="10" y1="14" x2="22" y2="14"/><line x1="10" y1="18" x2="18" y2="18"/></svg>' },
+            { id: 'white', label: 'White Papers', desc: 'This section demonstrates how we validate cryptographic solutions', icon: '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="6" y="4" width="20" height="24" rx="2"/><line x1="10" y1="10" x2="22" y2="10"/><line x1="10" y1="14" x2="22" y2="14"/><line x1="10" y1="18" x2="18" y2="18"/></svg>' },
+            { id: 'videos', label: 'Explanatory Videos', desc: 'Our explanatory videos break down complex hardware security concepts', icon: '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="6" width="24" height="16" rx="2"/><polygon points="13,10 13,18 20,14"/><line x1="8" y1="26" x2="24" y2="26"/></svg>' }
         ];
-        renderListView(container, items);
+        renderCardListView(container, items);
     }
 
     // --- Company Sub View ---
     function renderCompanySubView(container) {
         const items = [
-            { id: 'about', label: 'About Us' },
-            { id: 'services', label: 'Services' },
-            { id: 'team', label: 'Our Team' },
-            { id: 'careers', label: 'Careers' }
+            { id: 'about', label: 'About Us', desc: 'Pioneers in hardware-based security innovation', icon: '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="16" cy="12" r="5"/><path d="M6 28c0-5.5 4.5-10 10-10s10 4.5 10 10"/></svg>' },
+            { id: 'services', label: 'Security & Crypto Boutique', desc: 'Leverage the industry\'s best-practice expertise', icon: '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="16" cy="16" r="6"/><path d="M16 4v4M16 24v4M4 16h4M24 16h4M7.8 7.8l2.8 2.8M21.4 21.4l2.8 2.8M7.8 24.2l2.8-2.8M21.4 10.6l2.8-2.8"/></svg>' },
+            { id: 'team', label: 'Our Team', desc: 'A unique blend of industry veterans with deep expertise', icon: '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="4"/><circle cx="22" cy="13" r="3"/><path d="M2 26c0-4.4 3.6-8 8-8h2c4.4 0 8 3.6 8 8"/><path d="M20 18c3.3 0 6 2.7 6 6"/></svg>' },
+            { id: 'careers', label: 'Careers', desc: 'We seek exceptional, passionate individuals', icon: '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="10" width="24" height="16" rx="2"/><path d="M12 10V8a4 4 0 018 0v2"/><line x1="16" y1="16" x2="16" y2="20"/></svg>' }
         ];
-        renderListView(container, items);
+        renderCardListView(container, items);
     }
 
-    // --- Shared: render a simple list of link items ---
-    function renderListView(container, items) {
-        let html = '<ul class="menu-list">';
+    // --- Shared: render card list with icon + title + description ---
+    function renderCardListView(container, items) {
+        let html = '<div class="tablet-card-grid tablet-card-grid--single">';
         items.forEach(item => {
-            html += `<li><button class="menu-btn" data-item="${item.id}">${item.label}</button></li>`;
+            html += `<a href="#" class="tablet-app-card tablet-app-card--detail">
+                <span class="tablet-card-icon">${item.icon}</span>
+                <span class="tablet-card-text"><span class="tablet-card-title">${item.label}</span><span class="tablet-card-desc">${item.desc}</span></span>
+            </a>`;
         });
-        html += '</ul>';
+        html += '</div>';
         container.innerHTML = html;
-        // Items are page links — no drill-down navigation
     }
 
     // --- Crypto Accordion Data ---
