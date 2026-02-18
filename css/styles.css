@@ -351,11 +351,13 @@ body {
 
 .menu-btn:hover {
     background: var(--hover-bg-primary);
+    border-right: solid 2px var(--hover-color);
     color: var(--hover-color);
 }
 
 .menu-btn.active {
     background: var(--hover-bg-primary);
+    border-right: solid 2px var(--hover-color);
     color: var(--hover-color);
 }
 
