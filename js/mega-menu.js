@@ -388,9 +388,10 @@
         switch (entry.type) {
             case 'main-nav': renderMainNavView(container, position); break;
             case 'products': renderProductsSubView(container, position); break;
-            case 'applications': renderSimpleContentView(container, 'Applications grid would be rendered here as a list of links.'); break;
+            case 'applications': renderApplicationsView(container); break;
             case 'insights': renderInsightsSubView(container, position); break;
-            case 'newsroom': renderSimpleContentView(container, 'Newsroom links would be rendered here.'); break;
+            case 'newsroom': renderNewsroomSubView(container); break;
+            case 'product-cards': renderProductCardsView(container, entry.data); break;
             case 'company': renderCompanySubView(container, position); break;
             case 'crypto-types': renderCryptoTypesView(container, position); break;
             case 'crypto-detail': renderCryptoDetailView(container, entry.data.cryptoId); break;
@@ -442,10 +443,10 @@
         const items = [
             { id: 'overview', label: 'Product Overview' },
             { id: 'hardware', label: 'Cryptographic Hardware IP Cores', hasChildren: true },
-            { id: 'software', label: 'Cryptographic Software Libraries' },
-            { id: 'pqc-main', label: 'PQC – Post-Quantum Cryptography' },
-            { id: 'forti', label: 'Forti EDA Validation Studios' },
-            { id: 'security', label: 'Security Assurance' }
+            { id: 'software', label: 'Cryptographic Software Libraries', hasChildren: true },
+            { id: 'pqc-main', label: 'PQC – Post-Quantum Cryptography', hasChildren: true },
+            { id: 'forti', label: 'Forti EDA Validation Studios', hasChildren: true },
+            { id: 'security', label: 'Security Assurance', hasChildren: true }
         ];
 
         // On tablet left, highlight item matching right column
@@ -454,6 +455,8 @@
             const rightView = state.viewStack[state.viewStack.length - 1];
             if (rightView.type === 'crypto-types' || rightView.type === 'crypto-detail') {
                 activeId = 'hardware';
+            } else if (rightView.type === 'product-cards' && rightView.data) {
+                activeId = rightView.data.categoryId;
             }
         }
 
@@ -468,18 +471,20 @@
             btn.addEventListener('click', () => {
                 const itemId = btn.dataset.item;
                 const label = btn.textContent;
+                const navigableItems = ['hardware', 'software', 'pqc-main', 'forti', 'security'];
 
-                if (itemId === 'hardware') {
-                    if (position === 'left') {
-                        // Tablet left: replace right col
-                        state.viewStack[state.viewStack.length - 1] = { type: 'crypto-types', label };
-                    } else {
-                        // Right col or mobile: push
-                        state.viewStack.push({ type: 'crypto-types', label });
-                    }
-                    renderCurrentViews();
+                if (!navigableItems.includes(itemId)) return;
+
+                const viewEntry = itemId === 'hardware'
+                    ? { type: 'crypto-types', label }
+                    : { type: 'product-cards', label, data: { categoryId: itemId } };
+
+                if (position === 'left') {
+                    state.viewStack[state.viewStack.length - 1] = viewEntry;
+                } else {
+                    state.viewStack.push(viewEntry);
                 }
-                // Non-hardware items are page links — no navigation
+                renderCurrentViews();
             });
         });
     }
@@ -573,6 +578,80 @@
         });
     }
 
+    // --- Applications View (card grid) ---
+    function renderApplicationsView(container) {
+        const apps = [
+            { title: 'Finance and Banking', icon: '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="6" width="24" height="20" rx="2"/><line x1="4" y1="12" x2="28" y2="12"/><circle cx="9" cy="20" r="2"/></svg>' },
+            { title: 'Industrial Automation', icon: '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="6" y="14" width="8" height="12"/><rect x="18" y="8" width="8" height="18"/><path d="M4 26h24"/><circle cx="10" cy="10" r="4"/></svg>' },
+            { title: 'Edge Devices', icon: '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="8" y="4" width="16" height="24" rx="2"/><line x1="14" y1="24" x2="18" y2="24"/><circle cx="16" cy="14" r="3"/></svg>' },
+            { title: 'Government and Public Sector', icon: '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="24" height="24" rx="2"/><path d="M4 10h24"/><line x1="10" y1="16" x2="22" y2="16"/><line x1="10" y1="20" x2="18" y2="20"/></svg>' },
+            { title: 'Smart Grid &amp; Energy', icon: '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="16" cy="16" r="10"/><path d="M12 8l4 8-4 8"/><path d="M20 8l-4 8 4 8"/><line x1="6" y1="16" x2="26" y2="16"/></svg>' },
+            { title: 'Internet of Things (IoT)', icon: '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="16" cy="14" r="6"/><path d="M16 20v6"/><path d="M10 28h12"/><path d="M8 10l-4-2"/><path d="M24 10l4-2"/></svg>' },
+            { title: 'Digital Identity &amp; Smart Cards', icon: '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="6" y="4" width="20" height="24" rx="3"/><circle cx="16" cy="16" r="4"/><line x1="12" y1="24" x2="20" y2="24"/></svg>' },
+            { title: 'Critical Infrastructure', icon: '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 4l10 6v12l-10 6-10-6V10z"/><line x1="16" y1="16" x2="16" y2="28"/><line x1="16" y1="16" x2="26" y2="10"/><line x1="16" y1="16" x2="6" y2="10"/></svg>' },
+            { title: 'Medical Devices and Implants', icon: '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 16h8"/><path d="M16 12v8"/><rect x="6" y="6" width="20" height="20" rx="4"/><path d="M10 4v4"/><path d="M22 4v4"/></svg>' },
+            { title: 'Telecommunications', icon: '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="16" cy="16" r="10"/><path d="M16 6v4"/><path d="M16 22v4"/><path d="M6 16h4"/><path d="M22 16h4"/><circle cx="16" cy="16" r="3"/></svg>' },
+            { title: 'Transportation', icon: '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 26l6-8 5 4 4-6 5 6"/><rect x="4" y="6" width="24" height="20" rx="2"/></svg>' },
+            { title: 'Pay TV &amp; Media', icon: '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="6" width="24" height="16" rx="2"/><polygon points="13,10 13,18 20,14"/><line x1="8" y1="26" x2="24" y2="26"/></svg>' },
+            { title: 'Automotive', icon: '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="6" y="8" width="20" height="16" rx="2"/><circle cx="16" cy="16" r="4"/><path d="M6 12h20"/></svg>' },
+            { title: 'Data Centers', icon: '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="8" width="24" height="18" rx="2"/><path d="M4 14h24"/><rect x="8" y="18" width="6" height="4"/><rect x="18" y="18" width="6" height="4"/></svg>' },
+            { title: 'IP Security &amp; Anti\u2011Cloning', icon: '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="6" y="4" width="20" height="24" rx="2"/><path d="M16 14v6"/><path d="M13 17h6"/><circle cx="16" cy="10" r="2"/></svg>' }
+        ];
+
+        let html = '<div class="tablet-card-grid">';
+        apps.forEach(app => {
+            html += `<a href="#" class="tablet-app-card"><span class="tablet-card-icon">${app.icon}</span><span class="tablet-card-title">${app.title}</span></a>`;
+        });
+        html += '</div>';
+        container.innerHTML = html;
+    }
+
+    // --- Newsroom Sub View ---
+    function renderNewsroomSubView(container) {
+        const items = [
+            { id: 'news', label: 'News' },
+            { id: 'press', label: 'Press Releases' },
+            { id: 'webinars', label: 'Webinars' },
+            { id: 'events', label: 'Events' }
+        ];
+        renderListView(container, items);
+    }
+
+    // --- Product Cards View (info-cards for sub-categories) ---
+    function renderProductCardsView(container, data) {
+        const cardsData = {
+            software: [
+                { title: 'PQC Cryptographic Libraries', desc: 'Provide high-assurance cryptographic protection, engineered for AVA_VAN.5 compliance and designed for high-security certification' },
+                { title: 'AES Cryptographic Libraries', desc: 'Secures both new and already-deployed devices, including those without hardware countermeasures, and is proven in millions of systems' },
+                { title: 'HMAC SHA2 Cryptographic Library', desc: 'Provides ultra-strong protection against SCA, FIA, and cache attacks' },
+                { title: 'FAQ: Cryptographic Libraries', desc: 'What are side-channel and fault-injection attacks, and why would your device need protection against them' }
+            ],
+            'pqc-main': [
+                { title: 'PQC Hardware Solutions', desc: 'Provides a comprehensive suite of post-quantum cryptography hardware, including CryptoBoxes, IP cores, and Root-of-Trust modules' },
+                { title: 'PQC Software Libraries', desc: 'Provide high-assurance cryptographic protection, engineered for AVA_VAN.5 compliance and designed for high-security certification' },
+                { title: 'PQC Hybrid + Classical', desc: 'CryptoBoxes and Roots of Trust (RoTs) integrate post-quantum and classical cryptography in a unified, high-assurance architecture' },
+                { title: 'FAQ: Our Post Quantum Cryptography', desc: 'Why post-quantum cryptography matters' }
+            ],
+            forti: [
+                { title: 'Fault Injection Studio', desc: 'Enables engineers to evaluate and strengthen hardware designs against fault injection attacks, e.g., DFA, SIFA, and AFA' },
+                { title: 'Side\u2011Channel Studio', desc: 'Pre-silicon EDA tool suite designed to identify, analyze, and mitigate side-channel vulnerabilities in hardware designs from RTL' },
+                { title: 'Security Assessment & Verification', desc: 'Mathematically sound and practically validated patented/patent-pending countermeasures, ensuring resistance to the most advanced physical attacks' }
+            ],
+            security: [
+                { title: 'Security Validation & Cryptographic Assurance', desc: 'Mathematically sound and practically validated patented/patent-pending countermeasures, ensuring resistance to the most advanced physical attacks' },
+                { title: 'FAQ: Security Validation & Compliance Assurance', desc: 'How does FortifyIQ validate resistance to side-channel and fault-injection attacks' }
+            ]
+        };
+
+        const cards = cardsData[data.categoryId] || [];
+        let html = '<div class="tablet-card-grid">';
+        cards.forEach(card => {
+            html += `<a href="#" class="tablet-info-card"><h3>${card.title}</h3><p>${card.desc}</p></a>`;
+        });
+        html += '</div>';
+        container.innerHTML = html;
+    }
+
     // --- Insights Sub View ---
     function renderInsightsSubView(container) {
         const items = [
@@ -603,11 +682,6 @@
         html += '</ul>';
         container.innerHTML = html;
         // Items are page links — no drill-down navigation
-    }
-
-    // --- Shared: simple content placeholder ---
-    function renderSimpleContentView(container, text) {
-        container.innerHTML = `<p style="padding: 20px;">${text}</p>`;
     }
 
     // --- Crypto Accordion Data ---
