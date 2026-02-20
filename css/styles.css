@@ -428,10 +428,22 @@ body {
 
 .col-2 .menu-btn:hover,
 .col-2 .menu-btn.active {
-    border-right-color: #19CAE6;
     background: var(--hover-bg-secondary);
-    color: #19CAE6;
 }
+
+/* Per-crypto-type hover/active colors (desktop) */
+.col-2 .menu-btn[data-crypto="pqc"]:hover,
+.col-2 .menu-btn[data-crypto="pqc"].active         { color: #19CAE6; border-right-color: #19CAE6; }
+.col-2 .menu-btn[data-crypto="aes"]:hover,
+.col-2 .menu-btn[data-crypto="aes"].active         { color: #3F869B; border-right-color: #3F869B; }
+.col-2 .menu-btn[data-crypto="hmac"]:hover,
+.col-2 .menu-btn[data-crypto="hmac"].active        { color: #0799CB; border-right-color: #0799CB; }
+.col-2 .menu-btn[data-crypto="ecc"]:hover,
+.col-2 .menu-btn[data-crypto="ecc"].active         { color: #747CBC; border-right-color: #747CBC; }
+.col-2 .menu-btn[data-crypto="cryptoboxes"]:hover,
+.col-2 .menu-btn[data-crypto="cryptoboxes"].active { color: #1BA2B4; border-right-color: #1BA2B4; }
+.col-2 .menu-btn[data-crypto="roots"]:hover,
+.col-2 .menu-btn[data-crypto="roots"].active       { color: #864EA6; border-right-color: #864EA6; }
 
 .col-2 .menu-btn {
     font-weight: 300;
@@ -1202,10 +1214,22 @@ body {
      .mobile-nav-col .crypto-types .menu-btn.active,
      .mobile-nav-col .crypto-types .menu-btn:hover {
         background: var(--hover-bg-primary);
-        color: #19CAE6;
         font-weight: 400;
-        border-right-color: #19CAE6;
     }
+
+    /* Per-crypto-type hover/active colors (tablet nav-col) */
+    .mobile-nav-col .menu-btn[data-crypto="pqc"]:hover,
+    .mobile-nav-col .menu-btn[data-crypto="pqc"].active         { color: #19CAE6; border-right-color: #19CAE6; }
+    .mobile-nav-col .menu-btn[data-crypto="aes"]:hover,
+    .mobile-nav-col .menu-btn[data-crypto="aes"].active         { color: #3F869B; border-right-color: #3F869B; }
+    .mobile-nav-col .menu-btn[data-crypto="hmac"]:hover,
+    .mobile-nav-col .menu-btn[data-crypto="hmac"].active        { color: #0799CB; border-right-color: #0799CB; }
+    .mobile-nav-col .menu-btn[data-crypto="ecc"]:hover,
+    .mobile-nav-col .menu-btn[data-crypto="ecc"].active         { color: #747CBC; border-right-color: #747CBC; }
+    .mobile-nav-col .menu-btn[data-crypto="cryptoboxes"]:hover,
+    .mobile-nav-col .menu-btn[data-crypto="cryptoboxes"].active { color: #1BA2B4; border-right-color: #1BA2B4; }
+    .mobile-nav-col .menu-btn[data-crypto="roots"]:hover,
+    .mobile-nav-col .menu-btn[data-crypto="roots"].active       { color: #864EA6; border-right-color: #864EA6; }
 
     .mobile-nav-col .menu-btn.active {
         border-right: solid 2px var(--hover-color);
@@ -1224,9 +1248,22 @@ body {
     .mobile-detail-col .crypto-types .menu-btn:hover,
     .mobile-detail-col .crypto-types .menu-btn.active {
         background: var(--hover-bg-secondary);
-        color: #19CAE6;
         border-right-color: transparent;
     }
+
+    /* Per-crypto-type hover/active colors (tablet detail-col) */
+    .mobile-detail-col .menu-btn[data-crypto="pqc"]:hover,
+    .mobile-detail-col .menu-btn[data-crypto="pqc"].active         { color: #19CAE6; }
+    .mobile-detail-col .menu-btn[data-crypto="aes"]:hover,
+    .mobile-detail-col .menu-btn[data-crypto="aes"].active         { color: #3F869B; }
+    .mobile-detail-col .menu-btn[data-crypto="hmac"]:hover,
+    .mobile-detail-col .menu-btn[data-crypto="hmac"].active        { color: #0799CB; }
+    .mobile-detail-col .menu-btn[data-crypto="ecc"]:hover,
+    .mobile-detail-col .menu-btn[data-crypto="ecc"].active         { color: #747CBC; }
+    .mobile-detail-col .menu-btn[data-crypto="cryptoboxes"]:hover,
+    .mobile-detail-col .menu-btn[data-crypto="cryptoboxes"].active { color: #1BA2B4; }
+    .mobile-detail-col .menu-btn[data-crypto="roots"]:hover,
+    .mobile-detail-col .menu-btn[data-crypto="roots"].active       { color: #864EA6; }
 
     .mobile-detail-col .accordion-list {
         /* background-color: var(--hover-bg-secondary); */
@@ -1237,6 +1274,9 @@ body {
     /* Tablet: Insights/Newsroom/Company card grid in 2 columns */
     .tablet-card-grid--single {
         grid-template-columns: 1fr 1fr;
+    }
+    .link-list {
+        padding: 0 0 20px 32px;
     }
 }
 
@@ -1367,6 +1407,12 @@ body {
         background: none;
         border-radius: 0;
         padding: 0;
+    }
+    .acc-header {
+        padding: 12px;
+    }
+    .link-list {
+        padding: 0 0 12px 20px;
     }
 
 }
