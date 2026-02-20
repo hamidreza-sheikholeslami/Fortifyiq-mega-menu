@@ -898,7 +898,7 @@ body {
     text-align: left;
     background: none;
     border: none;
-    padding: 16px 20px;
+    padding: 16px 4px;
     font-size: 16px;
     color: var(--text-primary);
     cursor: pointer;
@@ -909,10 +909,11 @@ body {
 }
 
 .mobile-nav-col .menu-btn:after,
-.mobile-detail-col .menu-btn[data-has-children]:after {
+.mobile-detail-col .menu-btn[data-has-children]:after,
+.mobile-detail-col .crypto-types .menu-btn:after {
     content: '›';
     font-size: 24px;
-    color: var(--text-secondary);
+    color: inherit;
 }
 
 .mobile-nav-col .menu-btn.active {
@@ -929,10 +930,6 @@ body {
     color: var(--text-primary);
     text-decoration: none;
     display: block;
-}
-
-.mobile-detail-col .accordion {
-    /* margin-bottom: 16px; */
 }
 
 /* Tablet/Mobile card grids (base styles) */
@@ -1275,6 +1272,15 @@ body {
         background: none;
     }
 
+    /* Crypto-type items: icon + title grouped on the left, chevron on the far right */
+    .mobile-detail-col .crypto-types .menu-btn {
+        justify-content: flex-start;
+    }
+
+    .mobile-detail-col .crypto-types .menu-btn::after {
+        margin-left: auto;
+    }
+
     /* Single-column card grids on mobile */
     .tablet-card-grid {
         grid-template-columns: 1fr;
@@ -1330,7 +1336,7 @@ body {
     }
 
     .mobile-detail-col .accordion:last-child {
-        border-bottom: none;
+        /* border-bottom: none; */
     }
 
     .mobile-detail-col .accordion-list {
