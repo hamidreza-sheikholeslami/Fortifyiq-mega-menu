@@ -1079,6 +1079,21 @@ body {
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
+    /* Content-height menu like desktop — override full-height mobile defaults */
+    .mobile-menu {
+        bottom: auto;
+        transform: translateY(-20px);
+        opacity: 0;
+        transition: transform 0.3s var(--ease), opacity 0.3s var(--ease);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    }
+
+    .mobile-menu.active {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+
     .mobile-content {
         display: grid;
         grid-template-columns: auto 1fr;
