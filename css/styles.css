@@ -448,6 +448,22 @@ body {
     border-radius: 0 12px 12px 0;
 }
 
+/* Products: square the corner adjacent to the active first/last col-1 item */
+.products-grid:has(.col-1 li:first-child .menu-btn.active) .col-3 {
+    border-top-left-radius: 0;
+}
+.products-grid:has(.col-1 li:last-child .menu-btn.active) .col-3 {
+    border-bottom-left-radius: 0;
+}
+
+/* Insights / Newsroom / Company: same treatment on the content-panel */
+.sidebar-layout:has(.sidebar li:first-child .menu-btn.active) .content-panel {
+    border-top-left-radius: 0;
+}
+.sidebar-layout:has(.sidebar li:last-child .menu-btn.active) .content-panel {
+    border-bottom-left-radius: 0;
+}
+
 .col-3 .sub-panel[data-content="hardware"] {
     padding: 0;
     border-radius: 0;
@@ -697,7 +713,7 @@ body {
     position: relative;
     padding: 12px;
     background-color: var(--content-bg);
-    border-radius: 0 16px 16px 0;
+    border-radius: 16px;
 }
 
 .tab-content {
@@ -918,7 +934,6 @@ body {
 
 .mobile-nav-col .menu-btn.active {
     background: var(--hover-bg);
-    font-weight: 500;
 }
 
 .mobile-detail-col .link-item {
@@ -1111,6 +1126,14 @@ body {
         background-color: var(--content-bg);
         border-radius: 16px;
         overflow: hidden;
+    }
+
+    /* Square the corner adjacent to the active first/last nav item */
+    .mobile-content:has(.mobile-nav-col li:first-child .menu-btn.active) .mobile-detail-col {
+        border-top-left-radius: 0;
+    }
+    .mobile-content:has(.mobile-nav-col li:last-child .menu-btn.active) .mobile-detail-col {
+        border-bottom-left-radius: 0;
     }
 
     .mobile-nav-col .menu-btn,
