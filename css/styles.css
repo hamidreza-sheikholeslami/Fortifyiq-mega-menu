@@ -337,6 +337,7 @@ body {
 }
 
 .col-3 {
+    position: relative;
     max-height: calc(100vh - 200px);
     overflow-y: auto;
     background-color: var(--content-bg);
@@ -344,6 +345,16 @@ body {
     padding: 12px;
     display: flex;
     flex-direction: column;
+}
+
+/* Show overview background image only when overview sub-panel is active */
+.col-3:has(.sub-panel[data-content="overview"].active) .bg-image {
+    opacity: 1;
+}
+
+.col-3 .bg-image {
+    border-radius: 16px;
+    z-index: 0;
 }
 
 .col-2[data-active="true"] ~ .col-3 {
@@ -453,6 +464,7 @@ body {
     position: relative;
     border-radius: 12px;
     flex: 1;
+    z-index: 1;
 }
 
 .col-2[data-active="true"] ~ .col-3 .content-area {
@@ -501,6 +513,7 @@ body {
     line-height: 1.7;
     margin-bottom: 16px;
     color: var(--text-secondary);
+    max-width: 60%;
 }
 
 .accordion-wrap {
