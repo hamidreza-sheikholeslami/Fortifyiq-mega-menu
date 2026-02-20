@@ -672,7 +672,7 @@ body {
 .sidebar .menu-list {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 0;
 }
 
 .sidebar .menu-btn {
@@ -1107,9 +1107,36 @@ body {
         border-right: solid 2px white;
     }
 
-    .mobile-nav-col .menu-btn:after,
-    .mobile-detail-col .menu-btn[data-has-children]:after {
+    /* Suppress mobile › chevron in left nav col on tablet */
+    .mobile-nav-col .menu-btn:after {
         content: none;
+    }
+
+    /* Right-pointing chevron for second-column navigable items on tablet */
+    .mobile-detail-col .menu-btn[data-has-children]::after,
+    .mobile-detail-col .crypto-types .menu-btn::after {
+        content: '';
+        color: inherit; /* override global color:var(--text-secondary) so currentColor tracks the button */
+        display: block;
+        width: 12px;
+        height: 12px;
+        background-color: currentColor;
+        margin-left: auto;
+        flex-shrink: 0;
+        mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M4 2l4 4-4 4' stroke='black' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+        mask-repeat: no-repeat;
+        mask-position: center;
+        mask-size: contain;
+        -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M4 2l4 4-4 4' stroke='black' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+        -webkit-mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        -webkit-mask-size: contain;
+    }
+
+    /* Tighten right padding so chevron sits close to the border indicator */
+    .mobile-detail-col .menu-btn[data-has-children],
+    .mobile-detail-col .crypto-types .menu-btn {
+        padding-right: 16px;
     }
 
     .mobile-nav-col .menu-btn:hover,
