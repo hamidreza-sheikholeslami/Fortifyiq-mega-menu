@@ -401,6 +401,13 @@ body {
     padding: 8px 12px;
 }
 
+.mm-icon {
+    fill: currentColor;
+    display: inline-block;
+    flex-shrink: 0;
+    vertical-align: middle;
+}
+
 .crypto-icon {
     width: 28px;
     height: 28px;

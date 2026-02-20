@@ -652,7 +652,7 @@
         let html = '<ul class="menu-list crypto-types">';
         cryptoTypes.forEach(type => {
             const isActive = type.id === activeId;
-            html += `<li><button class="menu-btn${isActive ? ' active' : ''}" data-crypto="${type.id}"><img src="https://fortifyiq.com/wp-content/uploads/2026/02/${type.icon}.svg" width="28" height="28" alt="" class="crypto-icon">${type.label}</button></li>`;
+            html += `<li><button class="menu-btn${isActive ? ' active' : ''}" data-crypto="${type.id}"><svg class="mm-icon crypto-icon" width="28" height="28" aria-hidden="true"><use href="#${type.icon}"></use></svg>${type.label}</button></li>`;
         });
         html += '</ul>';
         container.innerHTML = html;
@@ -722,26 +722,26 @@
     // --- Applications View (card grid) ---
     function renderApplicationsView(container) {
         const apps = [
-            { title: 'Finance and Banking', icon: '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="6" width="24" height="20" rx="2"/><line x1="4" y1="12" x2="28" y2="12"/><circle cx="9" cy="20" r="2"/></svg>' },
-            { title: 'Industrial Automation', icon: '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="6" y="14" width="8" height="12"/><rect x="18" y="8" width="8" height="18"/><path d="M4 26h24"/><circle cx="10" cy="10" r="4"/></svg>' },
-            { title: 'Edge Devices', icon: '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="8" y="4" width="16" height="24" rx="2"/><line x1="14" y1="24" x2="18" y2="24"/><circle cx="16" cy="14" r="3"/></svg>' },
-            { title: 'Government and Public Sector', icon: '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="24" height="24" rx="2"/><path d="M4 10h24"/><line x1="10" y1="16" x2="22" y2="16"/><line x1="10" y1="20" x2="18" y2="20"/></svg>' },
-            { title: 'Smart Grid &amp; Energy', icon: '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="16" cy="16" r="10"/><path d="M12 8l4 8-4 8"/><path d="M20 8l-4 8 4 8"/><line x1="6" y1="16" x2="26" y2="16"/></svg>' },
-            { title: 'Internet of Things (IoT)', icon: '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="16" cy="14" r="6"/><path d="M16 20v6"/><path d="M10 28h12"/><path d="M8 10l-4-2"/><path d="M24 10l4-2"/></svg>' },
-            { title: 'Digital Identity &amp; Smart Cards', icon: '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="6" y="4" width="20" height="24" rx="3"/><circle cx="16" cy="16" r="4"/><line x1="12" y1="24" x2="20" y2="24"/></svg>' },
-            { title: 'Critical Infrastructure', icon: '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 4l10 6v12l-10 6-10-6V10z"/><line x1="16" y1="16" x2="16" y2="28"/><line x1="16" y1="16" x2="26" y2="10"/><line x1="16" y1="16" x2="6" y2="10"/></svg>' },
-            { title: 'Medical Devices and Implants', icon: '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 16h8"/><path d="M16 12v8"/><rect x="6" y="6" width="20" height="20" rx="4"/><path d="M10 4v4"/><path d="M22 4v4"/></svg>' },
-            { title: 'Telecommunications', icon: '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="16" cy="16" r="10"/><path d="M16 6v4"/><path d="M16 22v4"/><path d="M6 16h4"/><path d="M22 16h4"/><circle cx="16" cy="16" r="3"/></svg>' },
-            { title: 'Transportation', icon: '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 26l6-8 5 4 4-6 5 6"/><rect x="4" y="6" width="24" height="20" rx="2"/></svg>' },
-            { title: 'Pay TV &amp; Media', icon: '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="6" width="24" height="16" rx="2"/><polygon points="13,10 13,18 20,14"/><line x1="8" y1="26" x2="24" y2="26"/></svg>' },
-            { title: 'Automotive', icon: '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="6" y="8" width="20" height="16" rx="2"/><circle cx="16" cy="16" r="4"/><path d="M6 12h20"/></svg>' },
-            { title: 'Data Centers', icon: '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="8" width="24" height="18" rx="2"/><path d="M4 14h24"/><rect x="8" y="18" width="6" height="4"/><rect x="18" y="18" width="6" height="4"/></svg>' },
-            { title: 'IP Security &amp; Anti\u2011Cloning', icon: '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="6" y="4" width="20" height="24" rx="2"/><path d="M16 14v6"/><path d="M13 17h6"/><circle cx="16" cy="10" r="2"/></svg>' }
+            { title: 'Finance and Banking',            icon: 'mm-icon-app-finance' },
+            { title: 'Industrial Automation',           icon: 'mm-icon-app-industrial-automation' },
+            { title: 'Edge Devices',                    icon: 'mm-icon-app-edge-devices' },
+            { title: 'Government and Public Sector',    icon: 'mm-icon-app-government' },
+            { title: 'Smart Grid &amp; Energy',         icon: 'mm-icon-app-smart-gird' },
+            { title: 'Internet of Things (IoT)',        icon: 'mm-icon-app-iot' },
+            { title: 'Digital Identity &amp; Smart Cards', icon: 'mm-icon-app-digital-id' },
+            { title: 'Critical Infrastructure',        icon: 'mm-icon-app-critical-infra' },
+            { title: 'Medical Devices and Implants',   icon: 'mm-icon-app-medical' },
+            { title: 'Telecommunications',             icon: 'mm-icon-app-telecommunications' },
+            { title: 'Transportation',                 icon: 'mm-icon-app-transportation' },
+            { title: 'Pay TV &amp; Media',             icon: 'mm-icon-app-pay-tv' },
+            { title: 'Automotive',                     icon: 'mm-icon-app-automotive' },
+            { title: 'Data Centers',                   icon: 'mm-icon-app-data-centers' },
+            { title: 'IP Security &amp; Anti\u2011Cloning', icon: 'mm-icon-app-ip-security' }
         ];
 
         let html = '<div class="tablet-card-grid">';
         apps.forEach(app => {
-            html += `<a href="#" class="tablet-app-card"><span class="tablet-card-icon">${app.icon}</span><span class="tablet-card-title">${app.title}</span></a>`;
+            html += `<a href="#" class="tablet-app-card"><span class="tablet-card-icon"><svg class="mm-icon" width="32" height="32" aria-hidden="true"><use href="#${app.icon}"></use></svg></span><span class="tablet-card-title">${app.title}</span></a>`;
         });
         html += '</div>';
         container.innerHTML = html;
@@ -750,10 +750,10 @@
     // --- Newsroom Sub View ---
     function renderNewsroomSubView(container) {
         const items = [
-            { id: 'news', label: 'News', desc: 'Stay up to date with the latest company updates', icon: '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="5" width="24" height="22" rx="2"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="24" y2="14"/><line x1="8" y1="18" x2="24" y2="18"/><line x1="8" y1="22" x2="20" y2="22"/></svg>' },
-            { id: 'press', label: 'Press Releases', desc: 'Access our official statements, media announcements, and company news', icon: '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="5" width="24" height="22" rx="2"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="24" y2="14"/><line x1="8" y1="18" x2="24" y2="18"/><line x1="8" y1="22" x2="20" y2="22"/></svg>' },
-            { id: 'webinars', label: 'Webinars', desc: 'Explore upcoming and on-demand online sessions', icon: '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="5" width="24" height="22" rx="2"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="24" y2="14"/><line x1="8" y1="18" x2="24" y2="18"/><line x1="8" y1="22" x2="20" y2="22"/></svg>' },
-            { id: 'events', label: 'Events', desc: 'Discover details about upcoming and past events', icon: '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="5" width="24" height="22" rx="2"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="24" y2="14"/><line x1="8" y1="18" x2="24" y2="18"/><line x1="8" y1="22" x2="20" y2="22"/></svg>' }
+            { id: 'news',     label: 'News',            desc: 'Stay up to date with the latest company updates',                                  icon: 'mm-icon-newsroom-news' },
+            { id: 'press',    label: 'Press Releases',  desc: 'Access our official statements, media announcements, and company news',             icon: 'mm-icon-newsroom-press' },
+            { id: 'webinars', label: 'Webinars',        desc: 'Explore upcoming and on-demand online sessions',                                    icon: 'mm-icon-newsroom-webinar' },
+            { id: 'events',   label: 'Events',          desc: 'Discover details about upcoming and past events',                                   icon: 'mm-icon-newsroom-events' }
         ];
         renderCardListView(container, items);
     }
@@ -796,9 +796,9 @@
     // --- Insights Sub View ---
     function renderInsightsSubView(container) {
         const items = [
-            { id: 'academic', label: 'Academic Papers', desc: 'This section features our academic publications', icon: '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="6" y="4" width="20" height="24" rx="2"/><line x1="10" y1="10" x2="22" y2="10"/><line x1="10" y1="14" x2="22" y2="14"/><line x1="10" y1="18" x2="18" y2="18"/></svg>' },
-            { id: 'white', label: 'White Papers', desc: 'This section demonstrates how we validate cryptographic solutions', icon: '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="6" y="4" width="20" height="24" rx="2"/><line x1="10" y1="10" x2="22" y2="10"/><line x1="10" y1="14" x2="22" y2="14"/><line x1="10" y1="18" x2="18" y2="18"/></svg>' },
-            { id: 'videos', label: 'Explanatory Videos', desc: 'Our explanatory videos break down complex hardware security concepts', icon: '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="6" width="24" height="16" rx="2"/><polygon points="13,10 13,18 20,14"/><line x1="8" y1="26" x2="24" y2="26"/></svg>' }
+            { id: 'academic', label: 'Academic Papers',      desc: 'This section features our academic publications',                       icon: 'mm-icon-insight-academic' },
+            { id: 'white',    label: 'White Papers',         desc: 'This section demonstrates how we validate cryptographic solutions',     icon: 'mm-icon-insight-whitepapers' },
+            { id: 'videos',   label: 'Explanatory Videos',   desc: 'Our explanatory videos break down complex hardware security concepts',   icon: 'mm-icon-insight-videos' }
         ];
         renderCardListView(container, items);
     }
@@ -806,10 +806,10 @@
     // --- Company Sub View ---
     function renderCompanySubView(container) {
         const items = [
-            { id: 'about', label: 'About Us', desc: 'Pioneers in hardware-based security innovation', icon: '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="16" cy="12" r="5"/><path d="M6 28c0-5.5 4.5-10 10-10s10 4.5 10 10"/></svg>' },
-            { id: 'services', label: 'Security & Crypto Boutique', desc: 'Leverage the industry\'s best-practice expertise', icon: '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="16" cy="16" r="6"/><path d="M16 4v4M16 24v4M4 16h4M24 16h4M7.8 7.8l2.8 2.8M21.4 21.4l2.8 2.8M7.8 24.2l2.8-2.8M21.4 10.6l2.8-2.8"/></svg>' },
-            { id: 'team', label: 'Our Team', desc: 'A unique blend of industry veterans with deep expertise', icon: '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="4"/><circle cx="22" cy="13" r="3"/><path d="M2 26c0-4.4 3.6-8 8-8h2c4.4 0 8 3.6 8 8"/><path d="M20 18c3.3 0 6 2.7 6 6"/></svg>' },
-            { id: 'careers', label: 'Careers', desc: 'We seek exceptional, passionate individuals', icon: '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="10" width="24" height="16" rx="2"/><path d="M12 10V8a4 4 0 018 0v2"/><line x1="16" y1="16" x2="16" y2="20"/></svg>' }
+            { id: 'about',    label: 'About Us',                    desc: 'Pioneers in hardware-based security innovation',              icon: 'mm-icon-company-about' },
+            { id: 'services', label: 'Security & Crypto Boutique',  desc: 'Leverage the industry\'s best-practice expertise',           icon: 'mm-icon-company-security' },
+            { id: 'team',     label: 'Our Team',                    desc: 'A unique blend of industry veterans with deep expertise',     icon: 'mm-icon-company-team' },
+            { id: 'careers',  label: 'Careers',                     desc: 'We seek exceptional, passionate individuals',                icon: 'mm-icon-company-careers' }
         ];
         renderCardListView(container, items);
     }
@@ -819,7 +819,7 @@
         let html = '<div class="tablet-card-grid tablet-card-grid--single">';
         items.forEach(item => {
             html += `<a href="#" class="tablet-app-card tablet-app-card--detail">
-                <span class="tablet-card-icon">${item.icon}</span>
+                <span class="tablet-card-icon"><svg class="mm-icon" width="24" height="24" aria-hidden="true"><use href="#${item.icon}"></use></svg></span>
                 <span class="tablet-card-text"><span class="tablet-card-title">${item.label}</span><span class="tablet-card-desc">${item.desc}</span></span>
             </a>`;
         });
