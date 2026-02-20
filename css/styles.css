@@ -1142,16 +1142,30 @@ body {
     .mobile-nav-col .menu-btn:hover,
     .mobile-detail-col .menu-btn:hover {
         background: var(--hover-bg-primary);
-        border-right: solid 2px var(--hover-color);
         color: var(--hover-color);
+    }
+
+    .mobile-nav-col .menu-btn:hover {
+        border-right: solid 2px var(--hover-color);
+    }
+
+    .mobile-detail-col .menu-btn:hover {
+        border-right-color: transparent;
     }
 
     .mobile-nav-col .menu-btn.active,
     .mobile-detail-col .menu-btn.active {
         background: var(--hover-bg-primary);
-        border-right: solid 2px var(--hover-color);
         color: var(--hover-color);
         font-weight: 400;
+    }
+
+    .mobile-nav-col .menu-btn.active {
+        border-right: solid 2px var(--hover-color);
+    }
+
+    .mobile-detail-col .menu-btn.active {
+        border-right-color: transparent;
     }
 
     .mobile-detail-col .crypto-types .menu-btn {
@@ -1162,9 +1176,9 @@ body {
 
     .mobile-detail-col .crypto-types .menu-btn:hover,
     .mobile-detail-col .crypto-types .menu-btn.active {
-        border-right-color: #19CAE6;
         background: var(--hover-bg-secondary);
         color: #19CAE6;
+        border-right-color: transparent;
     }
 
     .mobile-detail-col .accordion-list {
