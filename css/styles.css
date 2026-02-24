@@ -451,7 +451,7 @@ body {
 
 .col-2[data-active="true"] ~ .col-3 .content-area {
     background-color: var(--hover-bg-secondary);
-    border-radius: 0 12px 12px 0;
+    border-radius: 12px;
 }
 
 /* Products: square the corner adjacent to the active first/last col-1 item */
@@ -478,11 +478,20 @@ body {
 .crypto-section[data-crypto-section] {
     background-color: var(--hover-bg-secondary);
     padding: 12px;
-    border-radius: 0 12px 12px 0;
+    border-radius: 12px;
+}
+
+/* Square the corner adjacent to the active first/last crypto-type item */
+.products-grid:has(.col-2 .menu-btn[data-crypto="pqc"].active) .crypto-section.active {
+    border-top-left-radius: 0;
+}
+.products-grid:has(.col-2 .menu-btn[data-crypto="roots"].active) .crypto-section.active {
+    border-bottom-left-radius: 0;
 }
 
 .sub-panel {
     display: none;
+    height: 100%;
 }
 
 .sub-panel.active {
@@ -502,10 +511,12 @@ body {
     display: flex;
     flex-direction: column;
     gap: 16px;
+    height: 100%;
 }
 
 .crypto-section {
     display: none;
+    height: 100%;
 }
 
 .crypto-section.active {
@@ -721,6 +732,7 @@ body {
     padding: 12px;
     background-color: var(--content-bg);
     border-radius: 16px;
+    overflow: hidden;
 }
 
 .tab-content {
