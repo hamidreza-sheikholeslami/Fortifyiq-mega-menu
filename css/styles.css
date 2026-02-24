@@ -550,11 +550,11 @@ body {
 .acc-body {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.3s var(--ease);
+    transition: max-height 0.25s ease-in-out;
 }
 
 .accordion.active .acc-body {
-    max-height: 1000px;
+    max-height: 1000px; /* fallback for initial render before JS measures actual height */
 }
 
 .link-list {

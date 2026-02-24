@@ -295,19 +295,27 @@
 
     function toggleAccordion(accordion) {
         const isActive = accordion.classList.contains('active');
-        
-        // Close all accordions in this crypto section
-        const section = accordion.closest('.crypto-section');
-        const accordions = section.querySelectorAll('.accordion');
-        accordions.forEach(acc => {
+        const scope = accordion.closest('.crypto-section') || accordion.closest('.accordion-list');
+
+        // Close any open accordion smoothly from its actual height to 0
+        scope.querySelectorAll('.accordion.active').forEach(acc => {
+            const body = acc.querySelector('.acc-body');
+            body.style.maxHeight = body.scrollHeight + 'px'; // pin to actual height
+            void body.offsetHeight;                          // force reflow
+            body.style.maxHeight = '0';                      // animate to closed
             acc.classList.remove('active');
             acc.querySelector('.acc-header').setAttribute('aria-expanded', 'false');
         });
 
-        // Open clicked accordion if it wasn't active
+        // Open clicked accordion if it was closed — animate to actual height
         if (!isActive) {
             accordion.classList.add('active');
             accordion.querySelector('.acc-header').setAttribute('aria-expanded', 'true');
+            const body = accordion.querySelector('.acc-body');
+            body.style.maxHeight = body.scrollHeight + 'px';
+            body.addEventListener('transitionend', () => {
+                if (accordion.classList.contains('active')) body.style.maxHeight = '';
+            }, { once: true });
         }
     }
 
@@ -703,18 +711,7 @@
         // Accordion toggle handlers
         container.querySelectorAll('.acc-header').forEach(header => {
             header.addEventListener('click', () => {
-                const accordion = header.closest('.accordion');
-                const isActive = accordion.classList.contains('active');
-
-                container.querySelectorAll('.accordion').forEach(acc => {
-                    acc.classList.remove('active');
-                    acc.querySelector('.acc-header').setAttribute('aria-expanded', 'false');
-                });
-
-                if (!isActive) {
-                    accordion.classList.add('active');
-                    header.setAttribute('aria-expanded', 'true');
-                }
+                toggleAccordion(header.closest('.accordion'));
             });
         });
     }
