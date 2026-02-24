@@ -96,25 +96,7 @@ body {
     position: relative;
 }
 
-.nav-item + .nav-item::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 1px;
-    height: 1.2em;
-    background: rgba(255, 255, 255, 0.5);
-    z-index: 1;
-    transition: opacity var(--transition-speed) var(--ease);
-}
 
-.nav-item:hover::before,
-.nav-item:has(.nav-trigger[aria-expanded="true"])::before,
-.nav-item:hover + .nav-item::before,
-.nav-item:has(.nav-trigger[aria-expanded="true"]) + .nav-item::before {
-    opacity: 0;
-}
 
 .nav-trigger {
     background: none;
@@ -123,7 +105,7 @@ body {
     font-weight: 500;
     color: white;
     cursor: pointer;
-    padding: 0 2rem;
+    padding: 0 1.5rem;
     display: flex;
     align-items: center;
     gap: 6px;
@@ -298,8 +280,8 @@ body {
 }
 
 .mega-content {
-    margin-left: max(20px, calc((100vw - 1240px) / 2 + 204px));
-    margin-right: max(20px, calc((100vw - 1240px) / 2 + 20px));
+    max-width: 1240px;
+    margin: 0 auto;
     background: var(--primary-bg);
     border-radius: 0 0 30px 30px;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
@@ -1087,6 +1069,7 @@ body {
     width: 100%;
     padding: 14px 24px;
 }
+
 
 @media (max-width: 1024px) {
     .desktop-nav {
