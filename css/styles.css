@@ -271,6 +271,9 @@ body {
     pointer-events: none;
     transition: transform var(--transition-speed) var(--ease), opacity var(--transition-speed) var(--ease);
     z-index: 999;
+    background: #FFF;
+    border-bottom: 0.5px solid #3B6EB6;
+    box-shadow: 0 5px 40px 0 rgba(106, 143, 197, 0.20);
 }
 
 .mega-menu.active {
@@ -282,9 +285,6 @@ body {
 .mega-content {
     max-width: 1240px;
     margin: 0 auto;
-    background: var(--primary-bg);
-    border-radius: 0 0 30px 30px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
     padding: 12px;
     max-height: calc(100vh - 70px);
     overflow-y: auto;
@@ -746,7 +746,6 @@ body {
 .text-content {
     position: relative;
     z-index: 2;
-    max-width: 600px;
 }
 
 .text-content p {
