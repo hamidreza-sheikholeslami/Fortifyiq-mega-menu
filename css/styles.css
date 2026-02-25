@@ -166,6 +166,10 @@ body {
     background: white;
 }
 
+.nav-trigger[data-menu="products"] {
+    border-left: solid 1px var(--text-primary);
+}
+
 .nav-trigger[aria-expanded="true"]::after {
     transform: rotate(180deg);
 }
