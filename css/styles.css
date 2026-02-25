@@ -57,10 +57,11 @@ body {
    SITE HEADER
    ============================================================ */
 .site-header {
+    --header-pad: 2rem;
     position: sticky;
     top: 0;
     z-index: 1000;
-    padding: 0 2rem;
+    padding: 0 var(--header-pad);
     background: linear-gradient(90deg, #3B6EB6 20.19%, #92B4E2 100%);
     overflow: hidden;
 }
@@ -71,7 +72,7 @@ body {
     top: 0;
     bottom: 0;
     left: 0;
-    width: calc(2rem + max(0px, (100vw - 4rem - 1240px) / 2) + 184px);
+    width: calc(var(--header-pad) + max(0px, (100vw - 2 * var(--header-pad) - 1240px) / 2) + 124px + clamp(1.5rem, calc(8.675vw - 4.058rem), 3.75rem));
     background: linear-gradient(90deg, #E1ECFA 0%, #FFF 59.62%);
     z-index: 0;
 }
@@ -89,7 +90,7 @@ body {
 
 .logo-section {
     flex-shrink: 0;
-    padding-right: 60px;
+    padding-right: clamp(1.5rem, calc(8.675vw - 4.058rem), 3.75rem);
 }
 
 .site-logo {
@@ -132,7 +133,7 @@ body {
     font-weight: 500;
     color: white;
     cursor: pointer;
-    padding: 0 1.5rem;
+    padding: 0 clamp(0.75rem, calc(2.892vw - 1.103rem), 1.5rem);
     display: flex;
     align-items: center;
     gap: 6px;
@@ -1149,10 +1150,10 @@ body {
     .link-list { padding: 0 0 20px 32px; }
 }
 
+
 /* — < 768px: mobile full-screen menu — */
 @media (max-width: 767px) {
-    .site-header { padding: 0 1rem; }
-    .site-header::before { width: calc(1rem + 184px); }
+    .site-header { --header-pad: 1rem; }
 
     .header-actions .contact-btn { display: none; }
 
