@@ -14,7 +14,7 @@
 3. Save
 
 ### Step 3: Add JavaScript
-Upload the JS file to your theme and enqueue it:
+Upload `js/mega-menu.js` to your theme and enqueue it:
 
 **Option A: Using functions.php**
 ```php
@@ -22,9 +22,9 @@ add_action('wp_enqueue_scripts', function() {
     wp_enqueue_script(
         'mega-menu',
         get_stylesheet_directory_uri() . '/js/mega-menu.js',
-        array(),
-        '1.0.0',
-        true
+        [],
+        '2.0.0',
+        true  // load in footer
     );
 });
 ```
@@ -32,107 +32,152 @@ add_action('wp_enqueue_scripts', function() {
 **Option B: Using Insert Headers and Footers plugin**
 1. Install "Insert Headers and Footers" plugin
 2. Go to Settings > Insert Headers and Footers
-3. Paste the contents of `js/mega-menu.js` wrapped in `<script>` tags in the footer section
+3. Paste `<script src="path/to/mega-menu.js"></script>` in the footer section
 
 ### Step 4: Test
 1. Visit your site
-2. Test desktop hover interactions
-3. Test mobile/tablet hamburger menu
+2. Test desktop hover interactions (Products, Applications, etc.)
+3. Test mobile/tablet hamburger menu and breadcrumb navigation
 4. Test keyboard navigation (Tab and ESC keys)
+
+---
 
 ## Key Measurements
 
-- **Container Width:** 1046px (adjust in CSS if needed)
-- **Header Height:** 70px
-- **Mega Menu Max Height:** 100vh
-- **Close Delay:** 175ms
-- **Transition Speed:** 200ms
+| Setting | Value |
+|---------|-------|
+| Container width | 1046px |
+| Header height | `--header-height: 70px` |
+| Mega menu max height | `calc(100dvh - 70px)` |
+| Hover-intent delay | 120ms |
+| Close delay | 175ms |
+| Transition speed | `--transition-speed: 200ms` |
+
+---
 
 ## Customization Quick Reference
 
-### Change Colors
-Edit these CSS variables:
+### Change Brand Colors
+Edit these CSS variables at the top of `styles.css`:
 ```css
 :root {
-    --primary-bg: #ffffff;        /* Background */
-    --text-primary: #1a1a1a;      /* Main text */
-    --text-secondary: #666666;    /* Secondary text */
-    --border-color: #e0e0e0;      /* Borders */
-    --hover-bg: #f5f5f5;          /* Hover state */
-    --active-bg: #e8e8e8;         /* Active state */
+    --hover-color:        #F16D24;  /* Accent — active borders, buttons */
+    --hover-bg-primary:   #FEF4EE;  /* Hover background (warm tint) */
+    --hover-bg-secondary: #E8EEF6;  /* Hover background (cool tint) */
+    --content-bg:         #F3F6FA;  /* Content area background */
+    --link-color:         #0066cc;  /* Link color */
+    --text-primary:       #1B293D;
+    --text-secondary:     #4A5568;
 }
 ```
 
 ### Change Link Colors
-Search for `#0066cc` in the CSS file and replace with your brand color.
+Replace `--link-color` variable value — it is referenced everywhere links are styled.
 
 ### Change Fonts
-Add your font to the `body` selector in CSS:
+Override the font-size tokens:
+```css
+:root {
+    --font-nav:  1.125rem;   /* 18px — nav buttons */
+    --font-body: 0.9375rem;  /* 15px — body text */
+    --font-sm:   0.875rem;   /* 14px */
+    --font-xs:   0.75rem;    /* 12px */
+}
+```
+
+Add your font family to the `body` selector:
 ```css
 body {
     font-family: 'Your Font', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 ```
 
+### Change Border Radii
+```css
+:root {
+    --radius-pill: 50px;
+    --radius-xl:   16px;
+    --radius-lg:   12px;
+    --radius-md:    8px;
+    --radius-sm:    6px;
+}
+```
+
 ### Adjust Timing
-**Close delay** (JavaScript, line ~202):
+**Close delay** — in `setupDesktopMenu()` inside `mega-menu.js`:
 ```javascript
-state.leaveTimeout = setTimeout(closeMegaMenu, 175);  // Change 175 to your value
+state.leaveTimeout = setTimeout(closeMegaMenu, 175);  // Change 175ms
+```
+
+**Hover-intent delay** — in `addHoverIntent()` calls:
+```javascript
+addHoverIntent(col1Buttons, 'col1HoverTimeout', 120, ...);  // Change 120ms
 ```
 
 **Transition speed** (CSS):
 ```css
---transition-speed: 200ms;  /* Change to 150ms, 250ms, etc. */
+--transition-speed: 200ms;
 ```
+
+### Change Header Height
+Update the CSS variable — it propagates to all `dvh` calculations automatically:
+```css
+--header-height: 70px;
+```
+
+---
 
 ## Troubleshooting
 
 ### Menu doesn't open on hover
-- Check that JavaScript is loaded (view browser console)
-- Ensure you're on desktop (>1024px width)
-- Check for JavaScript errors in console
+- Confirm JavaScript is loaded (check browser console)
+- Ensure viewport is >1024px wide (hamburger shows at ≤1024px)
+- Check for JS errors in the console
 
 ### Mobile menu doesn't work
-- Verify hamburger button exists in DOM
+- Verify `.hamburger` button is present in the DOM
 - Check console for errors
-- Ensure viewport meta tag is present
+- Confirm `<meta name="viewport">` tag is in `<head>`
 
 ### Accordion not animating
-- Check that CSS is properly loaded
+- Check CSS is loading correctly (inspect `.acc-body` for `max-height` styles)
 - Verify browser supports CSS transitions
-- Check for conflicting CSS
+
+### `:has()` selectors not working (corner radius)
+- `:has()` requires Chrome 105+, Firefox 121+, Safari 15.4+
+- Fallback: corners will remain rounded — no functional impact
 
 ### Styling conflicts
-- Check CSS specificity
-- Use browser DevTools to inspect elements
-- May need to add `!important` for certain properties
+- Inspect with browser DevTools for specificity issues
+- CSS variables allow targeted overrides without `!important`
+
+---
 
 ## Browser Testing Checklist
 
-- [ ] Chrome Desktop (hover, click, keyboard)
+- [ ] Chrome Desktop — hover, click, keyboard
 - [ ] Firefox Desktop
 - [ ] Safari Desktop
-- [ ] Chrome Mobile (hamburger, swipe, breadcrumb)
-- [ ] Safari iOS
-- [ ] Tablet landscape and portrait modes
+- [ ] Chrome Mobile — hamburger, breadcrumb
+- [ ] Safari iOS — floating toolbar with `dvh`
+- [ ] Tablet landscape and portrait
 
 ## Accessibility Checklist
 
-- [ ] Can navigate entire menu with keyboard (Tab key)
-- [ ] ESC key closes menu
-- [ ] Focus indicators are visible
-- [ ] Screen reader announces expanded/collapsed states
-- [ ] All interactive elements are keyboard accessible
-- [ ] Color contrast meets WCAG standards
+- [ ] Entire menu navigable with Tab key
+- [ ] ESC closes menu from any depth
+- [ ] Focus indicators visible at all levels
+- [ ] Screen reader announces aria-expanded/collapsed states
+- [ ] Both `.mega-menu` and `.mobile-menu` announced as dialogs
 
 ## Performance Checklist
 
 - [ ] No JavaScript errors in console
-- [ ] Smooth animations (60fps)
-- [ ] No layout shifts
-- [ ] Fast initial load
-- [ ] Works with slow 3G connection
+- [ ] Smooth animations (60fps) — check Performance tab
+- [ ] No layout shifts (check CLS in Lighthouse)
+- [ ] Logo loads with high priority (check Network tab — `fetchpriority: high`)
+- [ ] CDN preconnect resolves early (check Network waterfall)
 
-## Need Help?
+---
 
-Refer to the main README.md for detailed documentation, or check the inline comments in the source files.
+Refer to `README.md` for full documentation, or `CLAUDE.md` for architectural notes.
