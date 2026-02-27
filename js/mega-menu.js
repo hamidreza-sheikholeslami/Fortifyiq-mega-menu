@@ -451,7 +451,7 @@
     // --- Products Sub View ---
     function renderProductsSubView(container, position) {
         const items = [
-            { id: 'overview',  label: 'Product Overview' },
+            { id: 'overview',  label: 'Product Overview',                href: 'https://fortifyiq.com/products-overview/' },
             { id: 'hardware',  label: 'Cryptographic Hardware IP Cores',  hasChildren: true },
             { id: 'software',  label: 'Cryptographic Software Libraries', hasChildren: true },
             { id: 'pqc-main', label: 'PQC – Post-Quantum Cryptography',  hasChildren: true },
@@ -471,7 +471,9 @@
 
         container.innerHTML = `<ul class="menu-list">${
             items.map(item =>
-                `<li><button class="menu-btn${item.id === activeId ? ' active' : ''}" data-item="${item.id}"${item.hasChildren ? ' data-has-children="true"' : ''}>${item.label}</button></li>`
+                item.href
+                    ? `<li><a class="menu-btn" href="${item.href}">${item.label}</a></li>`
+                    : `<li><button class="menu-btn${item.id === activeId ? ' active' : ''}" data-item="${item.id}"${item.hasChildren ? ' data-has-children="true"' : ''}>${item.label}</button></li>`
             ).join('')
         }</ul>`;
 
@@ -500,12 +502,12 @@
     // --- Crypto Types View ---
     function renderCryptoTypesView(container, position) {
         const cryptoTypes = [
-            { id: 'pqc',         label: 'PQC',            icon: 'mm-icon-pqc' },
-            { id: 'aes',         label: 'AES',            icon: 'mm-icon-aes' },
-            { id: 'hmac',        label: 'HMAC SHA2',      icon: 'mm-icon-hmac' },
-            { id: 'ecc',         label: 'ECC/RSA',        icon: 'mm-icon-ecc' },
-            { id: 'cryptoboxes', label: 'CryptoBoxes',    icon: 'mm-icon-cryptoboxes' },
-            { id: 'roots',       label: 'Roots of Trust', icon: 'mm-icon-root-of-trust' },
+            { id: 'pqc',         label: 'PQC',            icon: 'mm-icon-pqc',            href: 'https://fortifyiq.com/ip-catalog/protecting-quantum-era-cryptography/' },
+            { id: 'aes',         label: 'AES',            icon: 'mm-icon-aes',            href: 'https://fortifyiq.com/ip-catalog/fortiaes/' },
+            { id: 'hmac',        label: 'HMAC SHA2',      icon: 'mm-icon-hmac',           href: 'https://fortifyiq.com/ip-catalog/fortimac-hmac-sha2/' },
+            { id: 'ecc',         label: 'ECC/RSA',        icon: 'mm-icon-ecc',            href: 'https://fortifyiq.com/ip-catalog/fortipka/' },
+            { id: 'cryptoboxes', label: 'CryptoBoxes',    icon: 'mm-icon-cryptoboxes',    href: 'https://fortifyiq.com/ip-catalog/forticryptobox/' },
+            { id: 'roots',       label: 'Roots of Trust', icon: 'mm-icon-root-of-trust',  href: 'https://fortifyiq.com/ip-catalog/fortitrust/' },
         ];
 
         let activeId = null;
@@ -516,12 +518,13 @@
 
         container.innerHTML = `<ul class="menu-list crypto-types">${
             cryptoTypes.map(type =>
-                `<li><button class="menu-btn${type.id === activeId ? ' active' : ''}" data-crypto="${type.id}"><svg class="mm-icon crypto-icon" width="28" height="28" aria-hidden="true"><use href="#${type.icon}"></use></svg>${type.label}</button></li>`
+                `<li><a class="menu-btn${type.id === activeId ? ' active' : ''}" href="${type.href}" data-crypto="${type.id}"><svg class="mm-icon crypto-icon" width="28" height="28" aria-hidden="true"><use href="#${type.icon}"></use></svg>${type.label}</a></li>`
             ).join('')
         }</ul>`;
 
         container.querySelectorAll('.menu-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
+            btn.addEventListener('click', e => {
+                e.preventDefault();
                 const cryptoId = btn.dataset.crypto;
                 state.navDirection = 'forward';
                 const viewEntry = { type: 'crypto-detail', label: btn.textContent.trim(), data: { cryptoId } };
@@ -547,7 +550,7 @@
                         </svg>
                     </button>
                     <div class="acc-body">
-                        <ul class="link-list">${acc.items.map(item => `<li><a href="#">${item}</a></li>`).join('')}</ul>
+                        <ul class="link-list">${acc.items.map(item => `<li><a href="${item.url}">${item.label}</a></li>`).join('')}</ul>
                     </div>
                 </div>`
             ).join('')
@@ -561,26 +564,26 @@
     // --- Applications View ---
     function renderApplicationsView(container) {
         const apps = [
-            { title: 'Finance and Banking',                 icon: 'mm-icon-app-finance' },
-            { title: 'Industrial Automation',               icon: 'mm-icon-app-industrial-automation' },
-            { title: 'Edge Devices',                        icon: 'mm-icon-app-edge-devices' },
-            { title: 'Government and Public Sector',        icon: 'mm-icon-app-government' },
-            { title: 'Smart Grid &amp; Energy',             icon: 'mm-icon-app-smart-gird' },
-            { title: 'Internet of Things (IoT)',            icon: 'mm-icon-app-iot' },
-            { title: 'Digital Identity &amp; Smart Cards',  icon: 'mm-icon-app-digital-id' },
-            { title: 'Critical Infrastructure',             icon: 'mm-icon-app-critical-infra' },
-            { title: 'Medical Devices and Implants',        icon: 'mm-icon-app-medical' },
-            { title: 'Telecommunications',                  icon: 'mm-icon-app-telecommunications' },
-            { title: 'Transportation',                      icon: 'mm-icon-app-transportation' },
-            { title: 'Pay TV &amp; Media',                  icon: 'mm-icon-app-pay-tv' },
-            { title: 'Automotive',                          icon: 'mm-icon-app-automotive' },
-            { title: 'Data Centers',                        icon: 'mm-icon-app-data-centers' },
-            { title: 'IP Security &amp; Anti\u2011Cloning', icon: 'mm-icon-app-ip-security' },
+            { title: 'Finance and Banking',                 icon: 'mm-icon-app-finance',           href: 'https://fortifyiq.com/applications/finance-and-banking/' },
+            { title: 'Industrial Automation',               icon: 'mm-icon-app-industrial-automation', href: 'https://fortifyiq.com/applications/automotive/' },
+            { title: 'Edge Devices',                        icon: 'mm-icon-app-edge-devices',      href: '#' },
+            { title: 'Government and Public Sector',        icon: 'mm-icon-app-government',        href: 'https://fortifyiq.com/applications/government-and-public-sector/' },
+            { title: 'Smart Grid &amp; Energy',             icon: 'mm-icon-app-smart-gird',        href: 'https://fortifyiq.com/applications/smart-grid-energy/' },
+            { title: 'Internet of Things (IoT)',            icon: 'mm-icon-app-iot',               href: 'https://fortifyiq.com/applications/internet-of-things/' },
+            { title: 'Digital Identity &amp; Smart Cards',  icon: 'mm-icon-app-digital-id',        href: 'https://fortifyiq.com/applications/digital-identity-smart-cards/' },
+            { title: 'Critical Infrastructure',             icon: 'mm-icon-app-critical-infra',    href: 'https://fortifyiq.com/applications/critical-infrastructure/' },
+            { title: 'Medical Devices and Implants',        icon: 'mm-icon-app-medical',           href: 'https://fortifyiq.com/applications/medical-devices-and-implants/' },
+            { title: 'Telecommunications',                  icon: 'mm-icon-app-telecommunications', href: 'https://fortifyiq.com/applications/telecommunications/' },
+            { title: 'Transportation',                      icon: 'mm-icon-app-transportation',    href: 'https://fortifyiq.com/applications/transportation/' },
+            { title: 'Pay TV &amp; Media',                  icon: 'mm-icon-app-pay-tv',            href: 'https://fortifyiq.com/applications/pay-tv-media/' },
+            { title: 'Automotive',                          icon: 'mm-icon-app-automotive',        href: 'https://fortifyiq.com/applications/automotive/' },
+            { title: 'Data Centers',                        icon: 'mm-icon-app-data-centers',      href: 'https://fortifyiq.com/applications/data-centers/' },
+            { title: 'IP Security &amp; Anti\u2011Cloning', icon: 'mm-icon-app-ip-security',       href: 'https://fortifyiq.com/applications/ip-security-anti-cloning/' },
         ];
 
         container.innerHTML = `<div class="tablet-card-grid tablet-card-grid--apps">${
             apps.map(app =>
-                `<a href="#" class="tablet-app-card"><span class="tablet-card-icon"><svg class="mm-icon" width="32" height="32" aria-hidden="true"><use href="#${app.icon}"></use></svg></span><span class="tablet-card-title">${app.title}</span></a>`
+                `<a href="${app.href}" class="tablet-app-card"><span class="tablet-card-icon"><svg class="mm-icon" width="32" height="32" aria-hidden="true"><use href="#${app.icon}"></use></svg></span><span class="tablet-card-title">${app.title}</span></a>`
             ).join('')
         }</div>`;
     }
@@ -588,10 +591,10 @@
     // --- Newsroom Sub View ---
     function renderNewsroomSubView(container) {
         renderCardListView(container, [
-            { id: 'news',     label: 'News',           desc: 'Stay up to date with the latest company updates',                              icon: 'mm-icon-newsroom-news' },
-            { id: 'press',    label: 'Press Releases', desc: 'Access our official statements, media announcements, and company news',       icon: 'mm-icon-newsroom-press' },
-            { id: 'webinars', label: 'Webinars',       desc: 'Explore upcoming and on-demand online sessions',                              icon: 'mm-icon-newsroom-webinar' },
-            { id: 'events',   label: 'Events',         desc: 'Discover details about upcoming and past events',                             icon: 'mm-icon-newsroom-events' },
+            { id: 'news',     label: 'News',           desc: 'Stay up to date with the latest company updates',                              icon: 'mm-icon-newsroom-news',    href: 'https://fortifyiq.com/newsroom/news/' },
+            { id: 'press',    label: 'Press Releases', desc: 'Access our official statements, media announcements, and company news',       icon: 'mm-icon-newsroom-press',   href: 'https://fortifyiq.com/newsroom/press-releases/' },
+            { id: 'webinars', label: 'Webinars',       desc: 'Explore upcoming and on-demand online sessions',                              icon: 'mm-icon-newsroom-webinar', href: 'https://fortifyiq.com/newsroom/webinars/' },
+            { id: 'events',   label: 'Events',         desc: 'Discover details about upcoming and past events',                             icon: 'mm-icon-newsroom-events',  href: 'https://fortifyiq.com/newsroom/events/' },
         ]);
     }
 
@@ -599,32 +602,32 @@
     function renderProductCardsView(container, data) {
         const cardsData = {
             software: [
-                { title: 'PQC Cryptographic Libraries',     desc: 'Provide high-assurance cryptographic protection, engineered for AVA_VAN.5 compliance and designed for high-security certification.' },
-                { title: 'AES Cryptographic Libraries',     desc: 'Secures both new and already-deployed devices, including those without hardware countermeasures, and is proven in millions of systems.' },
-                { title: 'HMAC SHA2 Cryptographic Library', desc: 'Provides ultra-strong protection against SCA, FIA, and cache attacks.' },
-                { title: 'FAQ: Cryptographic Libraries',    desc: 'What are side-channel and fault-injection attacks, and why would your device need protection against them? Etc.' },
+                { title: 'PQC Cryptographic Libraries',     desc: 'Provide high-assurance cryptographic protection, engineered for AVA_VAN.5 compliance and designed for high-security certification.',      href: 'https://fortifyiq.com/software-cryptography/fortipqc-software-libraries/' },
+                { title: 'AES Cryptographic Libraries',     desc: 'Secures both new and already-deployed devices, including those without hardware countermeasures, and is proven in millions of systems.',   href: 'https://fortifyiq.com/products/fiq-aes01-cl-fortiaes-high-assurance-cryptographic-library/' },
+                { title: 'HMAC SHA2 Cryptographic Library', desc: 'Provides ultra-strong protection against SCA, FIA, and cache attacks.',                                                                    href: 'https://fortifyiq.com/products/fortimac-library-advanced-hmac-sha2-dpa-and-fia-resistant-software-library/' },
+                { title: 'FAQ: Cryptographic Libraries',    desc: 'What are side-channel and fault-injection attacks, and why would your device need protection against them? Etc.',                         href: 'https://fortifyiq.com/software-cryptography/faq-software-crypto-libraries/' },
             ],
             'pqc-main': [
-                { title: 'PQC Hardware Solutions',             desc: 'Provides a comprehensive suite of post-quantum cryptography hardware, including CryptoBoxes, IP cores, and Root-of-Trust modules.' },
-                { title: 'PQC Software Libraries',             desc: 'Provide high-assurance cryptographic protection, engineered for AVA_VAN.5 compliance and designed for high-security certification.' },
-                { title: 'PQC Hybrid + Classical',             desc: 'CryptoBoxes and Roots of Trust (RoTs) integrate post-quantum and classical cryptography in a unified, high-assurance architecture.' },
-                { title: 'FAQ: Our Post Quantum Cryptography', desc: 'Why post-quantum cryptography matters? Etc.' },
-                { title: 'PQC: Myths vs Facts', desc: 'The most popular myths and facts about post-quantum cryptography.' },
+                { title: 'PQC Hardware Solutions',             desc: 'Provides a comprehensive suite of post-quantum cryptography hardware, including CryptoBoxes, IP cores, and Root-of-Trust modules.', href: 'https://fortifyiq.com/ip-catalog/protecting-quantum-era-cryptography/' },
+                { title: 'PQC Software Libraries',             desc: 'Provide high-assurance cryptographic protection, engineered for AVA_VAN.5 compliance and designed for high-security certification.', href: 'https://fortifyiq.com/software-cryptography/fortipqc-software-libraries/' },
+                { title: 'PQC Hybrid + Classical',             desc: 'CryptoBoxes and Roots of Trust (RoTs) integrate post-quantum and classical cryptography in a unified, high-assurance architecture.', href: 'https://fortifyiq.com/pqc/' },
+                { title: 'FAQ: Our Post Quantum Cryptography', desc: 'Why post-quantum cryptography matters? Etc.',                                                                                          href: '#' },
+                { title: 'PQC: Myths vs Facts',                desc: 'The most popular myths and facts about post-quantum cryptography.',                                                                    href: '#' },
             ],
             forti: [
-                { title: 'Fault Injection Studio',             desc: 'Enables engineers to evaluate and strengthen hardware designs against fault injection attacks, e.g., DFA, SIFA, and AFA.' },
-                { title: 'Side\u2011Channel Studio',            desc: 'Pre-silicon EDA tool suite designed to identify, analyze, and mitigate side-channel vulnerabilities in hardware designs from RTL.' },
-                { title: 'Security Assessment & Verification', desc: 'Mathematically sound and practically validated patented/patent-pending countermeasures, ensuring resistance to the most advanced physical attacks.' },
+                { title: 'Fault Injection Studio',             desc: 'Enables engineers to evaluate and strengthen hardware designs against fault injection attacks, e.g., DFA, SIFA, and AFA.',                                                              href: '#' },
+                { title: 'Side\u2011Channel Studio',            desc: 'Pre-silicon EDA tool suite designed to identify, analyze, and mitigate side-channel vulnerabilities in hardware designs from RTL.',                                                    href: 'https://fortifyiq.com/forti-eda-validation-studios/side-channel-studio/' },
+                { title: 'Security Assessment & Verification', desc: 'Mathematically sound and practically validated patented/patent-pending countermeasures, ensuring resistance to the most advanced physical attacks.',                                    href: 'https://fortifyiq.com/forti-eda-validation-studios/security-validation/' },
             ],
             security: [
-                { title: 'Security Validation & Cryptographic Assurance',   desc: 'Mathematically sound and practically validated patented/patent-pending countermeasures, ensuring resistance to the most advanced physical attacks.' },
-                { title: 'FAQ: Security Validation & Compliance Assurance', desc: 'How does FortifyIQ validate resistance to side-channel and fault-injection attacks? Etc.' },
+                { title: 'Security Validation & Cryptographic Assurance',   desc: 'Mathematically sound and practically validated patented/patent-pending countermeasures, ensuring resistance to the most advanced physical attacks.',  href: 'https://fortifyiq.com/fortifyiq-security-assurance/security-validation-cryptographic-assurance/' },
+                { title: 'FAQ: Security Validation & Compliance Assurance', desc: 'How does FortifyIQ validate resistance to side-channel and fault-injection attacks? Etc.',                                                            href: 'https://fortifyiq.com/fortifyiq-security-assurance/faq-security-validation-compliance-assurance/' },
             ],
         };
 
         container.innerHTML = `<div class="tablet-card-grid">${
             (cardsData[data.categoryId] ?? []).map(card =>
-                `<a href="#" class="tablet-info-card"><h3>${card.title}</h3><p>${card.desc}</p></a>`
+                `<a href="${card.href}" class="tablet-info-card"><h3>${card.title}</h3><p>${card.desc}</p></a>`
             ).join('')
         }</div>`;
     }
@@ -632,19 +635,19 @@
     // --- Insights Sub View ---
     function renderInsightsSubView(container) {
         renderCardListView(container, [
-            { id: 'academic', label: 'Academic Papers',    desc: 'This section features our academic publications',                     icon: 'mm-icon-insight-academic' },
-            { id: 'white',    label: 'White Papers',       desc: 'This section demonstrates how we validate cryptographic solutions',   icon: 'mm-icon-insight-whitepapers' },
-            { id: 'videos',   label: 'Explanatory Videos', desc: 'Our explanatory videos break down complex hardware security concepts', icon: 'mm-icon-insight-videos' },
+            { id: 'academic', label: 'Academic Papers',    desc: 'This section features our academic publications',                     icon: 'mm-icon-insight-academic',    href: 'https://fortifyiq.com/insights/academic-papers/' },
+            { id: 'white',    label: 'White Papers',       desc: 'This section demonstrates how we validate cryptographic solutions',   icon: 'mm-icon-insight-whitepapers', href: 'https://fortifyiq.com/insights/white-papers/' },
+            { id: 'videos',   label: 'Explanatory Videos', desc: 'Our explanatory videos break down complex hardware security concepts', icon: 'mm-icon-insight-videos',      href: 'https://fortifyiq.com/insights/explanatory-videos/' },
         ]);
     }
 
     // --- Company Sub View ---
     function renderCompanySubView(container) {
         renderCardListView(container, [
-            { id: 'about',    label: 'About Us',                   desc: 'Pioneers in hardware-based security innovation',             icon: 'mm-icon-company-about' },
-            { id: 'services', label: 'Security & Crypto Boutique', desc: "Leverage the industry's best-practice expertise",            icon: 'mm-icon-company-security' },
-            { id: 'team',     label: 'Our Team',                   desc: 'A unique blend of industry veterans with deep expertise',    icon: 'mm-icon-company-team' },
-            { id: 'careers',  label: 'Careers',                    desc: 'We seek exceptional, passionate individuals',               icon: 'mm-icon-company-careers' },
+            { id: 'about',    label: 'About Us',                   desc: 'Pioneers in hardware-based security innovation',             icon: 'mm-icon-company-about',    href: 'https://fortifyiq.com/company/about-us/' },
+            { id: 'services', label: 'Security & Crypto Boutique', desc: "Leverage the industry's best-practice expertise",            icon: 'mm-icon-company-security', href: 'https://fortifyiq.com/company/secure-systems-boutique/' },
+            { id: 'team',     label: 'Our Team',                   desc: 'A unique blend of industry veterans with deep expertise',    icon: 'mm-icon-company-team',     href: 'https://fortifyiq.com/company/our-team/' },
+            { id: 'careers',  label: 'Careers',                    desc: 'We seek exceptional, passionate individuals',               icon: 'mm-icon-company-careers',  href: 'https://fortifyiq.com/company/careers/' },
         ]);
     }
 
@@ -652,7 +655,7 @@
     function renderCardListView(container, items) {
         container.innerHTML = `<div class="tablet-card-grid tablet-card-grid--single">${
             items.map(item =>
-                `<a href="#" class="tablet-app-card tablet-app-card--detail">
+                `<a href="${item.href ?? '#'}" class="tablet-app-card tablet-app-card--detail">
                     <span class="tablet-card-icon"><svg class="mm-icon" width="24" height="24" aria-hidden="true"><use href="#${item.icon}"></use></svg></span>
                     <span class="tablet-card-text"><span class="tablet-card-title">${item.label}</span><span class="tablet-card-desc">${item.desc}</span></span>
                 </a>`
@@ -667,13 +670,13 @@
                 {
                     title: 'Post-Quantum Cryptography Solutions',
                     items: [
-                        'PQC-ML-KEM (Kyber) – Compact',
-                        'PQC-ML-DSA (Dilithium) – Compact',
-                        'ML-KEM & -DSA + support of SPHINCS+, XMSS, LMS – Balanced',
-                        'Hybrid: PQC + Classical RSA/ECC - Balanced',
-                        'Hybrid: PQC + Classical RSA/ECC - Fast',
-                        'ML-KEM Hardened Post-Quantum Key Encapsulation SW Library',
-                        'ML-DSA Hardened Post-Quantum Signature SW Library',
+                        { label: 'PQC-ML-KEM (Kyber) – Compact',                              url: 'https://fortifyiq.com/products/fiq-pqc-01-c-post-quantum-ml-kem-ip-core/' },
+                        { label: 'PQC-ML-DSA (Dilithium) – Compact',                          url: 'https://fortifyiq.com/products/fiq-pqc-02-c-post-quantum-ml-dsa-dilithium-accelerator/' },
+                        { label: 'ML-KEM & -DSA + support of SPHINCS+, XMSS, LMS – Balanced', url: 'https://fortifyiq.com/products/fiq-pqc-03-b-post-quantum-accelerator/' },
+                        { label: 'Hybrid: PQC + Classical RSA/ECC - Balanced',                 url: 'https://fortifyiq.com/products/fiq-pqc-04-b-hybrid-classical-and-post-quantum-cryptography/' },
+                        { label: 'Hybrid: PQC + Classical RSA/ECC - Fast',                     url: 'https://fortifyiq.com/products/fiq-pqc-05-f-high-performance-hybrid-classical-and-post-quantum-cryptography/' },
+                        { label: 'ML-KEM Hardened Post-Quantum Key Encapsulation SW Library',  url: 'https://fortifyiq.com/products/fiq-pqc-01-cl-ml-kem-cryptographic-library/' },
+                        { label: 'ML-DSA Hardened Post-Quantum Signature SW Library',          url: 'https://fortifyiq.com/products/fiq-pqc-02-cl-ml-dsa-cryptographic-library/' },
                     ],
                 },
             ],
@@ -681,29 +684,29 @@
                 {
                     title: 'AES-SX Family (Standard, GCM/XTS, DFA-protected)',
                     items: [
-                        'AES-SX | ECB-only – Compact',
-                        'AES-SX | all modes of operation supported – Balanced',
-                        'AES-SX | all modes of operation supported – Fast',
-                        'AES-SX-full | encryption + decryption – Fast',
-                        'AES-SX-GCM-XTS | pipelined high-throughput – Fast',
-                        'AES-SX-GCM-XTS-up | pipelined high-throughput – Fast',
+                        { label: 'AES-SX | ECB-only – Compact',                        url: 'https://fortifyiq.com/products/fiq-aes-01-c-aes-sx-secure-core/' },
+                        { label: 'AES-SX | all modes of operation supported – Balanced', url: 'https://fortifyiq.com/products/fiq-aes-02-b-es-sx-secure-core/' },
+                        { label: 'AES-SX | all modes of operation supported – Fast',     url: 'https://fortifyiq.com/products/fiq-aes-03-f-aes-sx-secure-core/' },
+                        { label: 'AES-SX-full | encryption + decryption – Fast',         url: 'https://fortifyiq.com/products/fiq-aes-04-f-aes-sx-full-secure-core/' },
+                        { label: 'AES-SX-GCM-XTS | pipelined high-throughput – Fast',   url: 'https://fortifyiq.com/products/fiq-aes-05-f-aes-sx-gcm-xts-secure-core/' },
+                        { label: 'AES-SX-GCM-XTS-up | pipelined high-throughput – Fast', url: 'https://fortifyiq.com/products/fiq-aes-06-f-aes-sx-gcm-xts-up-secure-core/' },
                     ],
                 },
                 {
                     title: 'AES-STORM Ultra-Low Power (ULP) Family',
                     items: [
-                        'AES-SX-ulp-full (STORM) – Compact',
-                        'AES-SX-ulp-full (STORM) – Balanced',
-                        'AES-SX-ulp-full (STORM) – Fast',
-                        'AES-SX-ulp-full-up (STORM) – Fast',
+                        { label: 'AES-SX-ulp-full (STORM) – Compact',    url: 'https://fortifyiq.com/products/fiq-aes-07-c-aes-sx-ulp-full-secure-core/' },
+                        { label: 'AES-SX-ulp-full (STORM) – Balanced',   url: 'https://fortifyiq.com/products/fiq-aes-08-b-aes-sx-ulp-full-secure-core/' },
+                        { label: 'AES-SX-ulp-full (STORM) – Fast',       url: 'https://fortifyiq.com/products/fiq-aes-09-f-aes-sx-ulp-full-secure-core/' },
+                        { label: 'AES-SX-ulp-full-up (STORM) – Fast',    url: 'https://fortifyiq.com/products/fiq-aes-10-f-aes-sx-ulp-full-secure-core/' },
                     ],
                 },
                 {
                     title: 'AES-XP Turbo Family (High-throughput, GCM/XTS)',
                     items: [
-                        'AES-XP-GCM / encryption + decryption – Turbo',
-                        'AES-XP-XTS / encryption + decryption – Turbo',
-                        'AES-XP-GCM-XTS / encryption + decryption – Turbo',
+                        { label: 'AES-XP-GCM / encryption + decryption – Turbo',     url: 'https://fortifyiq.com/products/fiq-aes-11-t-aes-xp-gcm-ultra-high-performance-secure-core/' },
+                        { label: 'AES-XP-XTS / encryption + decryption – Turbo',     url: 'https://fortifyiq.com/products/fiq-aes-12-t-aes-xp-xts-ultra-high-performance-secure-core/' },
+                        { label: 'AES-XP-GCM-XTS / encryption + decryption – Turbo', url: 'https://fortifyiq.com/products/fiq-aes-13-t-aes-xp-gcm-xts-ultra-high-performance-secure-core/' },
                     ],
                 },
             ],
@@ -711,15 +714,15 @@
                 {
                     title: 'Fast-Efficient FortiMAC Family',
                     items: [
-                        'HMAC-SHA-256 – Fast',
-                        'HMAC-SHA-512 – Fast',
+                        { label: 'HMAC-SHA-256 – Fast', url: 'https://fortifyiq.com/products/fiq-hmac-01-f-hmac-sha-256-secure-core/' },
+                        { label: 'HMAC-SHA-512 – Fast', url: 'https://fortifyiq.com/products/fiq-hmac-02-f-hmac-sha256-512-secure-core/' },
                     ],
                 },
                 {
                     title: 'FortiMAC Family',
                     items: [
-                        'Zero-leakage HMAC-SHA-256 – Balanced',
-                        'Zero-leakage HMAC-SHA-512 – Balanced',
+                        { label: 'Zero-leakage HMAC-SHA-256 – Balanced', url: 'https://fortifyiq.com/products/fiq-hmac-03-b-zero-leakage-hmac-sha256-secure-core/' },
+                        { label: 'Zero-leakage HMAC-SHA-512 – Balanced', url: 'https://fortifyiq.com/products/fiq-hmac-04-b-zero-leakage-hmac-sha256-512-secure-core/' },
                     ],
                 },
             ],
@@ -727,10 +730,10 @@
                 {
                     title: 'ECC/RSA Solutions',
                     items: [
-                        'ECC-ECDH-ECDSA (1-mul16 to 2-mul32) – Compact',
-                        'ECC-ECDH-ECDSA (1-mul16 to 2-mul32) – Balanced',
-                        'ECC Curve25519 – Balanced',
-                        'RSA Signature – Compact',
+                        { label: 'ECC-ECDH-ECDSA (1-mul16 to 2-mul32) – Compact',  url: 'https://fortifyiq.com/products/fiq-pka-01-c-ecc-secure-accelerator/' },
+                        { label: 'ECC-ECDH-ECDSA (1-mul16 to 2-mul32) – Balanced', url: 'https://fortifyiq.com/products/fiq-pka-02-b-ecc-secure-accelerator/' },
+                        { label: 'ECC Curve25519 – Balanced',                       url: 'https://fortifyiq.com/products/fiq-pka-03-b-rsa-accelerator/' },
+                        { label: 'RSA Signature – Compact',                          url: 'https://fortifyiq.com/products/fiq-pka-04-c-rsa-signature-verification-accelerator/' },
                     ],
                 },
             ],
@@ -738,10 +741,10 @@
                 {
                     title: 'CryptoBox Solutions',
                     items: [
-                        'CryptoBox Classical – Compact',
-                        'CryptoBox Classical Plus – Balanced',
-                        'PQ-CryptoBox Hybrid – Balanced',
-                        'PQ-CryptoBox Hybrid – Fast',
+                        { label: 'CryptoBox Classical – Compact',      url: 'https://fortifyiq.com/products/fiq-box-01-c-crypto-box-toolset-secure-accelerator/' },
+                        { label: 'CryptoBox Classical Plus – Balanced', url: 'https://fortifyiq.com/products/fiq-box-02-b-crypto-box-toolset-secure-accelerator/' },
+                        { label: 'PQ-CryptoBox Hybrid – Balanced',      url: 'https://fortifyiq.com/products/fiq-box-03-b-crypto-box-toolset-secure-accelerator/' },
+                        { label: 'PQ-CryptoBox Hybrid – Fast',          url: 'https://fortifyiq.com/products/fiq-box-04-f-crypto-box-toolset-secure-accelerator/' },
                     ],
                 },
             ],
@@ -749,8 +752,8 @@
                 {
                     title: 'Roots of Trust',
                     items: [
-                        'Cloud – Fast',
-                        'Chiplet – Balanced',
+                        { label: 'Cloud – Fast',      url: 'https://fortifyiq.com/products/fiq-rot-02-f-secure-rot-core-for-data-centers/' },
+                        { label: 'Chiplet – Balanced', url: 'https://fortifyiq.com/products/fiq-rot-04-f-chiplet-rot-secure-core/' },
                     ],
                 },
             ],

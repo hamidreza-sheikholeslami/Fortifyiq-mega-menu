@@ -422,6 +422,7 @@ body {
     padding: 8px 12px;
     font-size: var(--font-nav);
     color: var(--text-primary);
+    text-decoration: none;
     cursor: pointer;
     transition: all var(--transition-speed) var(--ease);
     border-radius: var(--radius-xl) 0 0 var(--radius-xl);
