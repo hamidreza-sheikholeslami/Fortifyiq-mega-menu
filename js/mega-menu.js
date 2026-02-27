@@ -518,16 +518,19 @@
 
         container.innerHTML = `<ul class="menu-list crypto-types">${
             cryptoTypes.map(type =>
-                `<li><a class="menu-btn${type.id === activeId ? ' active' : ''}" href="${type.href}" data-crypto="${type.id}"><svg class="mm-icon crypto-icon" width="28" height="28" aria-hidden="true"><use href="#${type.icon}"></use></svg>${type.label}</a></li>`
+                `<li class="crypto-type-item${type.id === activeId ? ' active' : ''}" data-crypto="${type.id}">` +
+                    `<a class="crypto-type-link" href="${type.href}"><svg class="mm-icon crypto-icon" width="28" height="28" aria-hidden="true"><use href="#${type.icon}"></use></svg>${type.label}</a>` +
+                    `<button class="crypto-type-chevron" data-crypto="${type.id}" data-label="${type.label}" aria-label="View ${type.label} products"></button>` +
+                `</li>`
             ).join('')
         }</ul>`;
 
-        container.querySelectorAll('.menu-btn').forEach(btn => {
-            btn.addEventListener('click', e => {
-                e.preventDefault();
+        container.querySelectorAll('.crypto-type-chevron').forEach(btn => {
+            btn.addEventListener('click', () => {
                 const cryptoId = btn.dataset.crypto;
+                const label    = btn.dataset.label;
                 state.navDirection = 'forward';
-                const viewEntry = { type: 'crypto-detail', label: btn.textContent.trim(), data: { cryptoId } };
+                const viewEntry = { type: 'crypto-detail', label, data: { cryptoId } };
                 if (position === 'left') {
                     state.viewStack[state.viewStack.length - 1] = viewEntry;
                 } else {
