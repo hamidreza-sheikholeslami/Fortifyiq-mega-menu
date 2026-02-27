@@ -338,7 +338,7 @@ body {
     overflow-y: auto;
     background-color: var(--content-bg);
     border-radius: var(--radius-xl);
-    padding: 0.75rem 1rem;
+    padding: 1.25rem 1rem;
     display: flex;
     flex-direction: column;
 }
@@ -359,6 +359,8 @@ body {
 .col-2[data-active="true"] ~ .col-3 {
     border-radius: 0 var(--radius-xl) var(--radius-xl) 0;
     padding-left: 0;
+    padding-top: 12px;
+    padding-bottom: 12px;
 }
 
 /* — Sub-panels — */
@@ -690,7 +692,7 @@ body {
 
 .content-panel {
     position: relative;
-    padding: 12px 2rem;
+    padding: 1.25rem 2rem;
     background-color: var(--content-bg);
     border-radius: var(--radius-xl);
     overflow: hidden;
@@ -897,7 +899,7 @@ body {
     display: grid;
     grid-template-columns: 1fr;
     gap: 0;
-    padding: 8px;
+    padding: 8px 20px;
 }
 
 .tablet-card-grid--single { grid-template-columns: 1fr; }
@@ -1244,6 +1246,7 @@ body {
     .mobile-detail-col .accordion {
         border-bottom: 1px solid #EBF1F8;
         margin-bottom: 0;
+        border-radius: 0;
     }
 
     .mobile-detail-col .accordion-list {
