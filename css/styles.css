@@ -424,12 +424,21 @@ body {
 
 .mega-panel[data-panel="products"] .col-1 .menu-btn { padding: 12px; }
 
-/* Combined :hover and .active — identical styles */
-.menu-btn:hover,
+/* Active state — always applied */
 .menu-btn.active {
     background: var(--hover-bg-primary);
     border-right: solid 2px var(--hover-color);
     color: var(--hover-color);
+}
+
+/* Hover state — only on devices with a real pointer (not touch).
+   Prevents sticky-hover artifacts on mobile after a tap. */
+@media (hover: hover) {
+    .menu-btn:hover {
+        background: var(--hover-bg-primary);
+        border-right: solid 2px var(--hover-color);
+        color: var(--hover-color);
+    }
 }
 
 /* — Crypto-type buttons (col-2) — */
