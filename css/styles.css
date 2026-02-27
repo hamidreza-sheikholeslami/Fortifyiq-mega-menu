@@ -911,11 +911,11 @@ body {
 
 .tablet-app-card--detail { align-items: flex-start; }
 
-.tablet-card-icon     { width: 24px; height: 24px; flex-shrink: 0; }
+.tablet-card-icon     { width: 24px; height: auto; flex-shrink: 0; }
 .tablet-card-icon svg { width: 24px; height: 24px; }
 
 .tablet-card-title {
-    font-size: var(--font-sm);
+    font-size: var(--font-body);
     font-weight: 400;
 }
 
@@ -1208,7 +1208,7 @@ body {
         background: none;
         border-bottom: 1px solid #EBF1F8;
         border-radius: 0;
-        padding: 14px 4px;
+        padding: 16px 4px;
     }
 
     .tablet-app-card:hover,
@@ -1226,7 +1226,7 @@ body {
     .mobile-detail-col .link-item            { border-bottom: 1px solid #EBF1F8; }
     .mobile-detail-col .link-list li         { border-bottom: 1px solid #EBF1F8; }
     .mobile-detail-col .link-list li:last-child { border-bottom: none; }
-    .mobile-detail-col .link-list a          { padding: 10px 0; }
+    .mobile-detail-col .link-list a          { padding: 16px 0; }
 
     .mobile-detail-col .accordion {
         border-bottom: 1px solid #EBF1F8;
