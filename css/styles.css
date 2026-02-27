@@ -1156,6 +1156,7 @@ body {
         padding: 12px;
     }
 
+    .tablet-card-grid--apps   { grid-template-columns: 1fr 1fr; }
     .tablet-card-grid--single { grid-template-columns: 1fr 1fr; }
     .acc-header { padding: 0.875rem 2rem; }
     .link-list a { padding: 10px 24px; }

@@ -570,7 +570,7 @@
             { title: 'IP Security &amp; Anti\u2011Cloning', icon: 'mm-icon-app-ip-security' },
         ];
 
-        container.innerHTML = `<div class="tablet-card-grid">${
+        container.innerHTML = `<div class="tablet-card-grid tablet-card-grid--apps">${
             apps.map(app =>
                 `<a href="#" class="tablet-app-card"><span class="tablet-card-icon"><svg class="mm-icon" width="32" height="32" aria-hidden="true"><use href="#${app.icon}"></use></svg></span><span class="tablet-card-title">${app.title}</span></a>`
             ).join('')
