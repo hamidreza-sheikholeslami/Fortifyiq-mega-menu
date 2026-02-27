@@ -51,7 +51,7 @@ body {
     line-height: 1.6;
     color: var(--text-primary);
     background: var(--primary-bg);
-    background-color: pink;
+    background-color: lightgreen;
 }
 
 /* ============================================================
@@ -913,9 +913,11 @@ body {
     transition: all var(--transition-speed) var(--ease);
 }
 
-.tablet-app-card:hover {
-    background: var(--hover-bg-secondary);
-    color: var(--hover-color);
+@media (hover: hover) {
+    .tablet-app-card:hover {
+        background: var(--hover-bg-secondary);
+        color: var(--hover-color);
+    }
 }
 
 .tablet-app-card--detail { align-items: flex-start; }
@@ -956,8 +958,10 @@ body {
     transition: all var(--transition-speed) var(--ease);
 }
 
-.tablet-info-card:hover    { background: var(--hover-bg-secondary); }
-.tablet-info-card:hover h3 { color: var(--hover-color); }
+@media (hover: hover) {
+    .tablet-info-card:hover    { background: var(--hover-bg-secondary); }
+    .tablet-info-card:hover h3 { color: var(--hover-color); }
+}
 
 .tablet-info-card h3 {
     font-size: var(--font-sm);
