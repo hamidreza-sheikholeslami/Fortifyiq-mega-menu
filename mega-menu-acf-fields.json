@@ -1,0 +1,566 @@
+[
+  {
+    "key": "group_mm_products",
+    "title": "Mega Menu \u2013 Products Panel",
+    "fields": [
+      {
+        "key": "field_mm_products_panel",
+        "label": "Products Panel",
+        "name": "products_panel",
+        "type": "repeater",
+        "instructions": "Add each top-level product category (col 1). Order here = order in the menu.",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": { "width": "", "class": "", "id": "" },
+        "layout": "block",
+        "button_label": "Add Category",
+        "min": 0,
+        "max": 0,
+        "sub_fields": [
+          {
+            "key": "field_mm_category_label",
+            "label": "Category Label",
+            "name": "category_label",
+            "type": "text",
+            "instructions": "Displayed as the col-1 button text.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": { "width": "50", "class": "", "id": "" },
+            "default_value": "",
+            "placeholder": "e.g. Cryptographic Hardware IPs",
+            "maxlength": "",
+            "prepend": "",
+            "append": ""
+          },
+          {
+            "key": "field_mm_category_slug",
+            "label": "Category Slug",
+            "name": "category_slug",
+            "type": "text",
+            "instructions": "Lowercase, no spaces. Used as the data-sub attribute (e.g. hardware, software).",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": { "width": "50", "class": "", "id": "" },
+            "default_value": "",
+            "placeholder": "e.g. hardware",
+            "maxlength": "",
+            "prepend": "",
+            "append": ""
+          },
+          {
+            "key": "field_mm_show_crypto_col",
+            "label": "Show Crypto Type Column (col 2)?",
+            "name": "show_crypto_col",
+            "type": "true_false",
+            "instructions": "Enable the middle column (crypto types) for this category. When off, card items are shown directly in col 3.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": { "width": "100", "class": "", "id": "" },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "Yes",
+            "ui_off_text": "No"
+          },
+          {
+            "key": "field_mm_crypto_types",
+            "label": "Crypto Types (col 2)",
+            "name": "crypto_types",
+            "type": "repeater",
+            "instructions": "Shown as col-2 buttons when \u2018Show Crypto Column\u2019 is enabled.",
+            "required": 0,
+            "conditional_logic": [
+              [
+                {
+                  "field": "field_mm_show_crypto_col",
+                  "operator": "==",
+                  "value": "1"
+                }
+              ]
+            ],
+            "wrapper": { "width": "", "class": "", "id": "" },
+            "layout": "block",
+            "button_label": "Add Crypto Type",
+            "min": 0,
+            "max": 0,
+            "sub_fields": [
+              {
+                "key": "field_mm_crypto_label",
+                "label": "Crypto Type Label",
+                "name": "crypto_label",
+                "type": "text",
+                "instructions": "Displayed as the col-2 button text.",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": { "width": "50", "class": "", "id": "" },
+                "default_value": "",
+                "placeholder": "e.g. Post-Quantum Cryptography",
+                "maxlength": "",
+                "prepend": "",
+                "append": ""
+              },
+              {
+                "key": "field_mm_crypto_slug",
+                "label": "Crypto Type Slug",
+                "name": "crypto_slug",
+                "type": "text",
+                "instructions": "Used as data-crypto attribute (e.g. pqc, roots, symmetric, asymmetric).",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": { "width": "50", "class": "", "id": "" },
+                "default_value": "",
+                "placeholder": "e.g. pqc",
+                "maxlength": "",
+                "prepend": "",
+                "append": ""
+              },
+              {
+                "key": "field_mm_accordion_items",
+                "label": "Accordion Items (col 3)",
+                "name": "accordion_items",
+                "type": "repeater",
+                "instructions": "Each row = one accordion panel shown in col 3 when this crypto type is active.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": { "width": "", "class": "", "id": "" },
+                "layout": "block",
+                "button_label": "Add Accordion Item",
+                "min": 0,
+                "max": 0,
+                "sub_fields": [
+                  {
+                    "key": "field_mm_acc_title",
+                    "label": "Accordion Title",
+                    "name": "acc_title",
+                    "type": "text",
+                    "instructions": "The clickable heading row.",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": { "width": "100", "class": "", "id": "" },
+                    "default_value": "",
+                    "placeholder": "",
+                    "maxlength": "",
+                    "prepend": "",
+                    "append": ""
+                  },
+                  {
+                    "key": "field_mm_acc_body",
+                    "label": "Accordion Body",
+                    "name": "acc_body",
+                    "type": "wysiwyg",
+                    "instructions": "HTML content revealed when the accordion is expanded. Use links, lists, or cards.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": { "width": "", "class": "", "id": "" },
+                    "default_value": "",
+                    "tabs": "all",
+                    "toolbar": "basic",
+                    "media_upload": 0,
+                    "delay": 0
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "key": "field_mm_card_items",
+            "label": "Card Items (col 3)",
+            "name": "card_items",
+            "type": "repeater",
+            "instructions": "Shown as a card grid in col 3 for categories that do NOT use the crypto column.",
+            "required": 0,
+            "conditional_logic": [
+              [
+                {
+                  "field": "field_mm_show_crypto_col",
+                  "operator": "!=",
+                  "value": "1"
+                }
+              ]
+            ],
+            "wrapper": { "width": "", "class": "", "id": "" },
+            "layout": "table",
+            "button_label": "Add Card",
+            "min": 0,
+            "max": 0,
+            "sub_fields": [
+              {
+                "key": "field_mm_card_title",
+                "label": "Card Title",
+                "name": "card_title",
+                "type": "text",
+                "instructions": "",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": { "width": "25", "class": "", "id": "" },
+                "default_value": "",
+                "placeholder": "",
+                "maxlength": "",
+                "prepend": "",
+                "append": ""
+              },
+              {
+                "key": "field_mm_card_desc",
+                "label": "Card Description",
+                "name": "card_desc",
+                "type": "textarea",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": { "width": "35", "class": "", "id": "" },
+                "default_value": "",
+                "placeholder": "",
+                "maxlength": "",
+                "rows": 2,
+                "new_lines": "br"
+              },
+              {
+                "key": "field_mm_card_url",
+                "label": "Card URL",
+                "name": "card_url",
+                "type": "url",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": { "width": "25", "class": "", "id": "" },
+                "default_value": "",
+                "placeholder": "https://"
+              },
+              {
+                "key": "field_mm_card_icon",
+                "label": "Card Icon",
+                "name": "card_icon",
+                "type": "image",
+                "instructions": "SVG or PNG icon displayed above the card title.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": { "width": "15", "class": "", "id": "" },
+                "return_format": "array",
+                "preview_size": "thumbnail",
+                "library": "all",
+                "min_width": "",
+                "min_height": "",
+                "min_size": "",
+                "max_width": "",
+                "max_height": "",
+                "max_size": "",
+                "mime_types": ""
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "location": [
+      [
+        {
+          "param": "options_page",
+          "operator": "==",
+          "value": "mega-menu-settings"
+        }
+      ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Controls the Products mega menu panel. Manages col-1 categories, col-2 crypto types, and col-3 accordion / card content.",
+    "show_in_rest": 0
+  },
+
+  {
+    "key": "group_mm_applications",
+    "title": "Mega Menu \u2013 Applications Panel",
+    "fields": [
+      {
+        "key": "field_mm_applications_panel",
+        "label": "Applications Panel",
+        "name": "applications_panel",
+        "type": "repeater",
+        "instructions": "Add each application card. Order here = order in the menu grid.",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": { "width": "", "class": "", "id": "" },
+        "layout": "table",
+        "button_label": "Add Application",
+        "min": 0,
+        "max": 0,
+        "sub_fields": [
+          {
+            "key": "field_mm_app_label",
+            "label": "Application Label",
+            "name": "app_label",
+            "type": "text",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": { "width": "20", "class": "", "id": "" },
+            "default_value": "",
+            "placeholder": "e.g. Automotive",
+            "maxlength": "",
+            "prepend": "",
+            "append": ""
+          },
+          {
+            "key": "field_mm_app_url",
+            "label": "URL",
+            "name": "app_url",
+            "type": "url",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": { "width": "25", "class": "", "id": "" },
+            "default_value": "",
+            "placeholder": "https://"
+          },
+          {
+            "key": "field_mm_app_description",
+            "label": "Description",
+            "name": "app_description",
+            "type": "textarea",
+            "instructions": "Short description shown below the label.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": { "width": "40", "class": "", "id": "" },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": 2,
+            "new_lines": "br"
+          },
+          {
+            "key": "field_mm_app_icon",
+            "label": "Icon",
+            "name": "app_icon",
+            "type": "image",
+            "instructions": "SVG or PNG icon.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": { "width": "15", "class": "", "id": "" },
+            "return_format": "array",
+            "preview_size": "thumbnail",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": ""
+          }
+        ]
+      }
+    ],
+    "location": [
+      [
+        {
+          "param": "options_page",
+          "operator": "==",
+          "value": "mega-menu-settings"
+        }
+      ]
+    ],
+    "menu_order": 1,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Controls the Applications mega menu panel card grid.",
+    "show_in_rest": 0
+  },
+
+  {
+    "key": "group_mm_tabbed_panels",
+    "title": "Mega Menu \u2013 Tabbed Panels (Insights \/ Newsroom \/ Company)",
+    "fields": [
+      {
+        "key": "field_mm_tab_panels",
+        "label": "Tab Panels",
+        "name": "tab_panels",
+        "type": "repeater",
+        "instructions": "One entry per tabbed panel. Keep tab_id values exact \u2014 they must match the data-menu attribute on the nav trigger buttons.",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": { "width": "", "class": "", "id": "" },
+        "layout": "block",
+        "button_label": "Add Panel",
+        "min": 0,
+        "max": 3,
+        "sub_fields": [
+          {
+            "key": "field_mm_tab_id",
+            "label": "Panel ID",
+            "name": "tab_id",
+            "type": "select",
+            "instructions": "Must match the data-menu value on the corresponding nav trigger button.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": { "width": "30", "class": "", "id": "" },
+            "choices": {
+              "insights": "Insights",
+              "newsroom": "Newsroom",
+              "company": "Company"
+            },
+            "default_value": "",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "ui": 1,
+            "ajax": 0,
+            "placeholder": ""
+          },
+          {
+            "key": "field_mm_sidebar_items",
+            "label": "Sidebar Items",
+            "name": "sidebar_items",
+            "type": "repeater",
+            "instructions": "Each row = one sidebar tab. First item is active by default. Hover activates its panel content and background image.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": { "width": "", "class": "", "id": "" },
+            "layout": "block",
+            "button_label": "Add Sidebar Item",
+            "min": 0,
+            "max": 0,
+            "sub_fields": [
+              {
+                "key": "field_mm_item_label",
+                "label": "Sidebar Label",
+                "name": "item_label",
+                "type": "text",
+                "instructions": "The hoverable tab label shown in the left sidebar column.",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": { "width": "50", "class": "", "id": "" },
+                "default_value": "",
+                "placeholder": "e.g. Blog",
+                "maxlength": "",
+                "prepend": "",
+                "append": ""
+              },
+              {
+                "key": "field_mm_item_url",
+                "label": "Label URL",
+                "name": "item_url",
+                "type": "url",
+                "instructions": "Optional \u2014 if set, the sidebar label is a clickable link.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": { "width": "50", "class": "", "id": "" },
+                "default_value": "",
+                "placeholder": "https://"
+              },
+              {
+                "key": "field_mm_item_content",
+                "label": "Panel Content",
+                "name": "item_content",
+                "type": "wysiwyg",
+                "instructions": "HTML rendered in the right content column when this sidebar item is active. Supports cards, links, and lists.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": { "width": "", "class": "", "id": "" },
+                "default_value": "",
+                "tabs": "all",
+                "toolbar": "basic",
+                "media_upload": 1,
+                "delay": 0
+              },
+              {
+                "key": "field_mm_item_bg_image",
+                "label": "Background Image",
+                "name": "item_bg_image",
+                "type": "image",
+                "instructions": "Full-panel background image faded in when this sidebar item is active. Recommended: 1200\u00d7600px JPG or WebP.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": { "width": "", "class": "", "id": "" },
+                "return_format": "url",
+                "preview_size": "medium",
+                "library": "all",
+                "min_width": "",
+                "min_height": "",
+                "min_size": "",
+                "max_width": "",
+                "max_height": "",
+                "max_size": "",
+                "mime_types": ""
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "location": [
+      [
+        {
+          "param": "options_page",
+          "operator": "==",
+          "value": "mega-menu-settings"
+        }
+      ]
+    ],
+    "menu_order": 2,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Controls sidebar items, panel content, and background images for the Insights, Newsroom, and Company tabbed panels.",
+    "show_in_rest": 0
+  },
+
+  {
+    "key": "group_mm_menu_item",
+    "title": "Mega Menu \u2013 Menu Item Panel ID",
+    "fields": [
+      {
+        "key": "field_mm_panel_id",
+        "label": "Panel ID",
+        "name": "panel_id",
+        "type": "select",
+        "instructions": "Select the mega menu panel this nav item should open on hover. Leave blank for plain links that navigate directly.",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": { "width": "", "class": "", "id": "" },
+        "choices": {
+          "products": "Products",
+          "applications": "Applications",
+          "insights": "Insights",
+          "newsroom": "Newsroom",
+          "company": "Company"
+        },
+        "default_value": "",
+        "return_format": "value",
+        "multiple": 0,
+        "allow_null": 1,
+        "ui": 1,
+        "ajax": 0,
+        "placeholder": "\u2014 No Panel (plain link) \u2014"
+      }
+    ],
+    "location": [
+      [
+        {
+          "param": "nav_menu_item",
+          "operator": "==",
+          "value": "all"
+        }
+      ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Adds a Panel ID selector to every WordPress menu item. Used by the custom Walker to output data-menu attributes on nav trigger buttons.",
+    "show_in_rest": 0
+  }
+]

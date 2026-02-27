@@ -28,7 +28,7 @@
 
     /* Typography — rem values respect the user's browser font-size preference */
     --font-nav:  1.125rem;   /* 18px */
-    --font-body: 0.9375rem;  /* 15px */
+    --font-body: 1rem;  /* 15px */
     --font-sm:   0.875rem;   /* 14px */
     --font-xs:   0.75rem;    /* 12px */
 
@@ -51,6 +51,7 @@ body {
     line-height: 1.6;
     color: var(--text-primary);
     background: var(--primary-bg);
+    background-color: gray;
 }
 
 /* ============================================================
@@ -300,7 +301,7 @@ body {
 .mega-content {
     max-width: var(--container-max);
     margin: 0 auto;
-    padding: 12px 0;
+    padding: 18px 0;
     max-height: calc(100dvh - var(--header-height));
     overflow-y: auto;
 }
@@ -325,7 +326,7 @@ body {
     display: block;
     background-color: var(--content-bg);
     min-width: 202px;
-    padding: 12px;
+    padding: 0.75rem 1.25rem;
     padding-right: 0;
     border-radius: var(--radius-xl) 0 0 var(--radius-xl);
 }
@@ -337,7 +338,7 @@ body {
     overflow-y: auto;
     background-color: var(--content-bg);
     border-radius: var(--radius-xl);
-    padding: 12px;
+    padding: 0.75rem 1rem;
     display: flex;
     flex-direction: column;
 }
@@ -370,6 +371,11 @@ body {
 .sub-panel.active {
     display: block;
     flex: 1;
+}
+
+.sub-panel[data-content="overview"] p,
+.sub-panel[data-content="overview"] a {
+    margin-left: 1rem;
 }
 
 .col-2[data-active="true"] ~ .col-3 .sub-panel {
@@ -585,7 +591,7 @@ body {
 .info-card p {
     font-size: var(--font-xs);
     color: var(--text-secondary);
-    line-height: 1.16;
+    line-height: 1.3;
 }
 
 /* Applications grid */
@@ -675,7 +681,7 @@ body {
 
 .content-panel {
     position: relative;
-    padding: 12px;
+    padding: 12px 2rem;
     background-color: var(--content-bg);
     border-radius: var(--radius-xl);
     overflow: hidden;
@@ -880,7 +886,7 @@ body {
 /* Tablet/mobile card grids */
 .tablet-card-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: 0;
     padding: 8px;
 }
@@ -946,7 +952,7 @@ body {
 
 .tablet-info-card h3 {
     font-size: var(--font-sm);
-    font-weight: 500;
+    font-weight: 300;
     color: var(--text-primary);
     transition: color var(--transition-speed) var(--ease);
 }
@@ -1033,7 +1039,7 @@ body {
     }
 
     .mobile-detail-col {
-        padding: 0;
+        padding: 8px 0;
         background-color: var(--content-bg);
         border-radius: var(--radius-xl);
         overflow: hidden;
@@ -1045,7 +1051,7 @@ body {
 
     .mobile-nav-col .menu-btn,
     .mobile-detail-col .menu-btn {
-        padding: 12px 36px 12px 12px;
+        padding: 12px 36px 12px 32px;
         font-size: 1rem;
         border-bottom: none;
         border-radius: var(--radius-xl) 0 0 var(--radius-xl);
@@ -1151,7 +1157,8 @@ body {
     }
 
     .tablet-card-grid--single { grid-template-columns: 1fr 1fr; }
-    .link-list { padding: 0 0 20px 32px; }
+    .acc-header { padding: 0.875rem 2rem; }
+    .link-list a { padding: 10px 24px; }
 }
 
 

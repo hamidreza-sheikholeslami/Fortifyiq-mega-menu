@@ -553,7 +553,7 @@
     // --- Applications View ---
     function renderApplicationsView(container) {
         const apps = [
-            { title: 'Finance and Banking',                icon: 'mm-icon-app-finance' },
+            { title: 'Finance and Banking',                 icon: 'mm-icon-app-finance' },
             { title: 'Industrial Automation',               icon: 'mm-icon-app-industrial-automation' },
             { title: 'Edge Devices',                        icon: 'mm-icon-app-edge-devices' },
             { title: 'Government and Public Sector',        icon: 'mm-icon-app-government' },
@@ -591,25 +591,26 @@
     function renderProductCardsView(container, data) {
         const cardsData = {
             software: [
-                { title: 'PQC Cryptographic Libraries',     desc: 'Provide high-assurance cryptographic protection, engineered for AVA_VAN.5 compliance and designed for high-security certification' },
-                { title: 'AES Cryptographic Libraries',     desc: 'Secures both new and already-deployed devices, including those without hardware countermeasures, and is proven in millions of systems' },
-                { title: 'HMAC SHA2 Cryptographic Library', desc: 'Provides ultra-strong protection against SCA, FIA, and cache attacks' },
-                { title: 'FAQ: Cryptographic Libraries',    desc: 'What are side-channel and fault-injection attacks, and why would your device need protection against them' },
+                { title: 'PQC Cryptographic Libraries',     desc: 'Provide high-assurance cryptographic protection, engineered for AVA_VAN.5 compliance and designed for high-security certification.' },
+                { title: 'AES Cryptographic Libraries',     desc: 'Secures both new and already-deployed devices, including those without hardware countermeasures, and is proven in millions of systems.' },
+                { title: 'HMAC SHA2 Cryptographic Library', desc: 'Provides ultra-strong protection against SCA, FIA, and cache attacks.' },
+                { title: 'FAQ: Cryptographic Libraries',    desc: 'What are side-channel and fault-injection attacks, and why would your device need protection against them? Etc.' },
             ],
             'pqc-main': [
-                { title: 'PQC Hardware Solutions',             desc: 'Provides a comprehensive suite of post-quantum cryptography hardware, including CryptoBoxes, IP cores, and Root-of-Trust modules' },
-                { title: 'PQC Software Libraries',             desc: 'Provide high-assurance cryptographic protection, engineered for AVA_VAN.5 compliance and designed for high-security certification' },
-                { title: 'PQC Hybrid + Classical',             desc: 'CryptoBoxes and Roots of Trust (RoTs) integrate post-quantum and classical cryptography in a unified, high-assurance architecture' },
-                { title: 'FAQ: Our Post Quantum Cryptography', desc: 'Why post-quantum cryptography matters' },
+                { title: 'PQC Hardware Solutions',             desc: 'Provides a comprehensive suite of post-quantum cryptography hardware, including CryptoBoxes, IP cores, and Root-of-Trust modules.' },
+                { title: 'PQC Software Libraries',             desc: 'Provide high-assurance cryptographic protection, engineered for AVA_VAN.5 compliance and designed for high-security certification.' },
+                { title: 'PQC Hybrid + Classical',             desc: 'CryptoBoxes and Roots of Trust (RoTs) integrate post-quantum and classical cryptography in a unified, high-assurance architecture.' },
+                { title: 'FAQ: Our Post Quantum Cryptography', desc: 'Why post-quantum cryptography matters? Etc.' },
+                { title: 'PQC: Myths vs Facts', desc: 'The most popular myths and facts about post-quantum cryptography.' },
             ],
             forti: [
-                { title: 'Fault Injection Studio',             desc: 'Enables engineers to evaluate and strengthen hardware designs against fault injection attacks, e.g., DFA, SIFA, and AFA' },
-                { title: 'Side\u2011Channel Studio',            desc: 'Pre-silicon EDA tool suite designed to identify, analyze, and mitigate side-channel vulnerabilities in hardware designs from RTL' },
-                { title: 'Security Assessment & Verification', desc: 'Mathematically sound and practically validated patented/patent-pending countermeasures, ensuring resistance to the most advanced physical attacks' },
+                { title: 'Fault Injection Studio',             desc: 'Enables engineers to evaluate and strengthen hardware designs against fault injection attacks, e.g., DFA, SIFA, and AFA.' },
+                { title: 'Side\u2011Channel Studio',            desc: 'Pre-silicon EDA tool suite designed to identify, analyze, and mitigate side-channel vulnerabilities in hardware designs from RTL.' },
+                { title: 'Security Assessment & Verification', desc: 'Mathematically sound and practically validated patented/patent-pending countermeasures, ensuring resistance to the most advanced physical attacks.' },
             ],
             security: [
-                { title: 'Security Validation & Cryptographic Assurance',   desc: 'Mathematically sound and practically validated patented/patent-pending countermeasures, ensuring resistance to the most advanced physical attacks' },
-                { title: 'FAQ: Security Validation & Compliance Assurance', desc: 'How does FortifyIQ validate resistance to side-channel and fault-injection attacks' },
+                { title: 'Security Validation & Cryptographic Assurance',   desc: 'Mathematically sound and practically validated patented/patent-pending countermeasures, ensuring resistance to the most advanced physical attacks.' },
+                { title: 'FAQ: Security Validation & Compliance Assurance', desc: 'How does FortifyIQ validate resistance to side-channel and fault-injection attacks? Etc.' },
             ],
         };
 
