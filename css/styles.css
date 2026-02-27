@@ -51,7 +51,7 @@ body {
     line-height: 1.6;
     color: var(--text-primary);
     background: var(--primary-bg);
-    background-color: lightgreen;
+    /* background-color: lightgreen; */
 }
 
 /* ============================================================
