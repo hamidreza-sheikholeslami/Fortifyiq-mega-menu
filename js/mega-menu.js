@@ -375,7 +375,15 @@
             const isSingleView = stack.length <= 1;
             const targetCol    = isSingleView ? els.mobileNavCol : els.mobileDetailCol;
 
-            if (shouldAnimate) {
+            // Only slide-animate content when the target column is already visible.
+            // When the column is entering/leaving the viewport, its own CSS transition
+            // (transform translateX) handles the movement — adding animateSlide on top
+            // causes the content to appear twice.
+            const colAlreadyVisible = isSingleView
+                ? !els.mobileNavCol.classList.contains('hidden')
+                : els.mobileDetailCol.classList.contains('active');
+
+            if (shouldAnimate && colAlreadyVisible) {
                 animateSlide(targetCol, () => renderView(stack.at(-1), targetCol, 'single'));
             } else {
                 renderView(stack.at(-1), targetCol, 'single');
