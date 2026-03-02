@@ -426,6 +426,8 @@ body {
     cursor: pointer;
     transition: all var(--transition-speed) var(--ease);
     border-radius: var(--radius-xl) 0 0 var(--radius-xl);
+    display: flex;
+    gap: 8px;
 }
 
 .mega-panel[data-panel="products"] .col-1 .menu-btn { padding: 12px; }
@@ -1111,6 +1113,10 @@ body {
     /* Square the corner adjacent to the active first/last nav item */
     .mobile-content:has(.mobile-nav-col li:first-child .menu-btn.active) .mobile-detail-col { border-top-left-radius: 0; }
     .mobile-content:has(.mobile-nav-col li:last-child  .menu-btn.active) .mobile-detail-col { border-bottom-left-radius: 0; }
+
+    /* Square the corner adjacent to the active first/last crypto-type item */
+    .mobile-content:has(.mobile-nav-col .crypto-type-item[data-crypto="pqc"].active)   .mobile-detail-col { border-top-left-radius: 0; }
+    .mobile-content:has(.mobile-nav-col .crypto-type-item[data-crypto="roots"].active) .mobile-detail-col { border-bottom-left-radius: 0; }
 
     .mobile-nav-col .menu-btn,
     .mobile-detail-col .menu-btn {
