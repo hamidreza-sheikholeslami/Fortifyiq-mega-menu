@@ -1120,12 +1120,17 @@ body {
 
     .mobile-nav-col .menu-btn,
     .mobile-detail-col .menu-btn {
-        padding: 12px 36px 12px 32px;
+        padding: 12px 36px 12px 12px;
         font-size: 1rem;
         border-bottom: none;
         border-radius: var(--radius-xl) 0 0 var(--radius-xl);
         justify-content: flex-start;
         border-right: solid 2px white;
+    }
+
+    .mobile-detail-col .menu-btn,
+    .mobile-detail-col .crypto-type-link {
+        padding-left: 32px;
     }
 
     /* Suppress mobile › chevron in left nav col */
@@ -1161,9 +1166,8 @@ body {
     .mobile-nav-col .crypto-type-item    { border-right: solid 2px white; }
     .mobile-detail-col .crypto-type-item { border-right-color: transparent; }
 
-    .mobile-nav-col .crypto-type-link,
-    .mobile-detail-col .crypto-type-link {
-        padding: 12px 12px 12px 32px;
+    .mobile-nav-col .crypto-type-link {
+        padding: 12px;
         font-size: 1rem;
     }
     .mobile-nav-col .crypto-type-chevron,
