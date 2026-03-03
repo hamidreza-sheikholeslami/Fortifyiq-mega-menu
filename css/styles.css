@@ -331,6 +331,10 @@ body {
     border-radius: var(--radius-xl) 0 0 var(--radius-xl);
 }
 
+.col-2 .menu-btn {
+    font-weight: 300;
+}
+
 /* — Column 3: content area — */
 .col-3 {
     position: relative;
