@@ -568,8 +568,7 @@
     function renderApplicationsView(container) {
         const apps = [
             { title: 'Finance and Banking',                 icon: 'mm-icon-app-finance',           href: 'https://fortifyiq.com/applications/finance-and-banking/' },
-            { title: 'Industrial Automation',               icon: 'mm-icon-app-industrial-automation', href: 'https://fortifyiq.com/applications/automotive/' },
-            { title: 'Edge Devices',                        icon: 'mm-icon-app-edge-devices',      href: '#' },
+            { title: 'Industrial Automation',               icon: 'mm-icon-app-industrial-automation', href: 'https://fortifyiq.com/applications/industrial-automation-and-control-systems/' },
             { title: 'Government and Public Sector',        icon: 'mm-icon-app-government',        href: 'https://fortifyiq.com/applications/government-and-public-sector/' },
             { title: 'Smart Grid &amp; Energy',             icon: 'mm-icon-app-smart-gird',        href: 'https://fortifyiq.com/applications/smart-grid-energy/' },
             { title: 'Internet of Things (IoT)',            icon: 'mm-icon-app-iot',               href: 'https://fortifyiq.com/applications/internet-of-things/' },
