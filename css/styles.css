@@ -858,11 +858,7 @@ body {
 
 .mobile-breadcrumb {
     padding: 24px 24px 0;
-    font-size: 1rem;
-    color: var(--text-secondary);
     display: none;
-    align-items: center;
-    flex-wrap: wrap;
 }
 
 .mobile-breadcrumb.active { display: flex; }
@@ -877,13 +873,12 @@ body {
     cursor: pointer;
     padding: 6px 8px;
     font-size: 1rem;
-    font-weight: 300;
+    font-weight: 400;
     border-radius: var(--radius-sm);
     transition: background var(--transition-speed) var(--ease);
 }
 
-.breadcrumb-item:last-child { font-weight: 400; }
-.breadcrumb-item:hover      { background: var(--hover-bg); }
+.breadcrumb-item:hover { background: var(--hover-bg); }
 
 .breadcrumb-item .breadcrumb-chevron { flex-shrink: 0; color: var(--text-primary); }
 

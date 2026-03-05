@@ -767,25 +767,25 @@
     // --- Breadcrumb ---
     function updateBreadcrumb() {
         const stack = state.viewStack;
-        const breadcrumbEnd = stack.length - (state.isTablet ? 2 : 1);
+        // Tablet: show parent of right panel (stack.at(-2)), needs depth >= 3
+        // Mobile: show current view label (stack.at(-1)), needs depth >= 2
+        const minDepth = state.isTablet ? 3 : 2;
+        const label = stack.length >= minDepth
+            ? (state.isTablet ? stack.at(-2) : stack.at(-1)).label
+            : null;
 
-        if (breadcrumbEnd <= 0) {
+        if (!label) {
             els.mobileBreadcrumb.classList.remove('active');
             els.mobileBreadcrumb.innerHTML = '';
             return;
         }
 
         els.mobileBreadcrumb.classList.add('active');
-        els.mobileBreadcrumb.innerHTML = Array.from(
-            { length: breadcrumbEnd },
-            (_, i) => `<button class="breadcrumb-item" data-stack-index="${i + 1}"><svg class="breadcrumb-chevron" width="7" height="12" viewBox="0 0 7 12"><path d="M6 1l-5 5 5 5" stroke="currentColor" fill="none" stroke-width="1.5"/></svg><span>${stack[i + 1].label}</span></button>`
-        ).join('');
+        els.mobileBreadcrumb.innerHTML =
+            `<button class="breadcrumb-item"><svg class="breadcrumb-chevron" width="7" height="12" viewBox="0 0 7 12"><path d="M6 1l-5 5 5 5" stroke="currentColor" fill="none" stroke-width="1.5"/></svg><span>${label}</span></button>`;
 
-        els.mobileBreadcrumb.querySelectorAll('.breadcrumb-item').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const idx = parseInt(btn.dataset.stackIndex, 10);
-                navigateToStackIndex(state.isTablet ? idx : idx - 1);
-            });
+        els.mobileBreadcrumb.querySelector('.breadcrumb-item').addEventListener('click', () => {
+            navigateToStackIndex(state.viewStack.length - 2);
         });
     }
 
