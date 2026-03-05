@@ -483,13 +483,64 @@ body {
     background: none;
     border: none;
     border-left: 1px solid rgba(255, 255, 255, 0.08);
-    color: var(--text-secondary);
+    color: var(--text-primary);
     cursor: pointer;
     flex-shrink: 0;
     transition: color var(--transition-speed) var(--ease);
 }
 
 .crypto-type-chevron::after {
+    content: '';
+    display: block;
+    width: 12px;
+    height: 12px;
+    background-color: currentColor;
+    flex-shrink: 0;
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M4 2l4 4-4 4' stroke='black' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-size: contain;
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M4 2l4 4-4 4' stroke='black' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    -webkit-mask-size: contain;
+}
+
+/* — Product category split rows (col-1, mobile/tablet) — */
+.product-cat-item {
+    display: flex;
+    align-items: stretch;
+    border-radius: var(--radius-xl) 0 0 var(--radius-xl);
+    border-right: solid 2px transparent;
+    transition: all var(--transition-speed) var(--ease);
+}
+
+.product-cat-link {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    font-size: var(--font-nav);
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: color var(--transition-speed) var(--ease);
+}
+
+.product-cat-chevron {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 14px;
+    background: none;
+    border: none;
+    border-left: 1px solid rgba(255, 255, 255, 0.08);
+    color: var(--text-primary);
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: color var(--transition-speed) var(--ease);
+}
+
+.product-cat-chevron::after {
     content: '';
     display: block;
     width: 12px;
@@ -1173,6 +1224,34 @@ body {
     .mobile-nav-col .crypto-type-chevron,
     .mobile-detail-col .crypto-type-chevron { padding: 0 20px; }
 
+    /* Tablet product-category split rows */
+    .mobile-nav-col .product-cat-item,
+    .mobile-detail-col .product-cat-item {
+        border-radius: var(--radius-xl) 0 0 var(--radius-xl);
+    }
+    .mobile-nav-col .product-cat-item    { border-right: solid 2px white; }
+    .mobile-detail-col .product-cat-item { border-right-color: transparent; }
+
+    .mobile-nav-col .product-cat-link,
+    .mobile-detail-col .product-cat-link { padding: 12px 12px 12px 32px; font-size: 1rem; }
+    .mobile-nav-col .product-cat-link { padding: 12px; }
+    .mobile-nav-col .product-cat-chevron,
+    .mobile-detail-col .product-cat-chevron { padding: 0 20px; }
+
+    /* Active state — product-category row */
+    .mobile-nav-col .product-cat-item.active,
+    .mobile-detail-col .product-cat-item.active {
+        background: var(--hover-bg-primary);
+        border-right-color: var(--hover-color);
+    }
+    .mobile-nav-col .product-cat-item.active .product-cat-link,
+    .mobile-nav-col .product-cat-item.active .product-cat-chevron,
+    .mobile-detail-col .product-cat-item.active .product-cat-link,
+    .mobile-detail-col .product-cat-item.active .product-cat-chevron {
+        color: var(--hover-color);
+        font-weight: 400;
+    }
+
     .mobile-nav-col .menu-btn:hover,
     .mobile-detail-col .menu-btn:hover {
         background: var(--hover-bg-primary);
@@ -1292,6 +1371,18 @@ body {
     }
     .mobile-detail-col .crypto-type-link  { padding: 12px 12px 12px 4px; font-size: 1rem; }
     .mobile-detail-col .crypto-type-chevron { border-left-color: #EBF1F8; padding: 0 16px; }
+
+    /* Mobile product-category rows: flat, border-based, no radius */
+    .mobile-detail-col .product-cat-item,
+    .mobile-nav-col .product-cat-item {
+        border-radius: 0;
+        border-right: none;
+        border-bottom: 1px solid #EBF1F8;
+    }
+    .mobile-detail-col .product-cat-link,
+    .mobile-nav-col .product-cat-link { padding: 12px 12px 12px 4px; font-size: 1rem; }
+    .mobile-detail-col .product-cat-chevron,
+    .mobile-nav-col .product-cat-chevron { border-left-color: #EBF1F8; padding: 0 16px; }
 
     .tablet-card-grid {
         grid-template-columns: 1fr;

@@ -452,11 +452,11 @@
     function renderProductsSubView(container, position) {
         const items = [
             { id: 'overview',  label: 'Product Overview',                href: 'https://fortifyiq.com/products-overview/' },
-            { id: 'hardware',  label: 'Cryptographic Hardware IP Cores',  hasChildren: true },
-            { id: 'software',  label: 'Cryptographic Software Libraries', hasChildren: true },
-            { id: 'pqc-main', label: 'PQC – Post-Quantum Cryptography',  hasChildren: true },
-            { id: 'forti',     label: 'Forti EDA Validation Studios',     hasChildren: true },
-            { id: 'security',  label: 'Security Assurance',               hasChildren: true },
+            { id: 'hardware',  label: 'Cryptographic Hardware IP Cores',  href: 'https://fortifyiq.com/ip-catalog/',                   hasChildren: true },
+            { id: 'software',  label: 'Cryptographic Software Libraries', href: 'https://fortifyiq.com/software-cryptography/',         hasChildren: true },
+            { id: 'pqc-main', label: 'PQC – Post-Quantum Cryptography',  href: 'https://fortifyiq.com/pqc/',                          hasChildren: true },
+            { id: 'forti',     label: 'Forti EDA Validation Studios',     href: 'https://fortifyiq.com/forti-eda-validation-studios/', hasChildren: true },
+            { id: 'security',  label: 'Security Assurance',               href: 'https://fortifyiq.com/fortifyiq-security-assurance/', hasChildren: true },
         ];
 
         let activeId = null;
@@ -471,23 +471,24 @@
 
         container.innerHTML = `<ul class="menu-list">${
             items.map(item =>
-                item.href
-                    ? `<li><a class="menu-btn" href="${item.href}">${item.label}</a></li>`
-                    : `<li><button class="menu-btn${item.id === activeId ? ' active' : ''}" data-item="${item.id}"${item.hasChildren ? ' data-has-children="true"' : ''}>${item.label}</button></li>`
+                item.hasChildren
+                    ? `<li class="product-cat-item${item.id === activeId ? ' active' : ''}" data-item="${item.id}">` +
+                          `<a class="product-cat-link" href="${item.href}">${item.label}</a>` +
+                          `<button class="product-cat-chevron" data-item="${item.id}" data-label="${item.label}" aria-label="View ${item.label}"></button>` +
+                      `</li>`
+                    : `<li><a class="menu-btn${item.id === activeId ? ' active' : ''}" href="${item.href}">${item.label}</a></li>`
             ).join('')
         }</ul>`;
 
-        const navigable = new Set(['hardware', 'software', 'pqc-main', 'forti', 'security']);
-
-        container.querySelectorAll('.menu-btn').forEach(btn => {
+        container.querySelectorAll('.product-cat-chevron').forEach(btn => {
             btn.addEventListener('click', () => {
                 const itemId = btn.dataset.item;
-                if (!navigable.has(itemId)) return;
+                const label  = btn.dataset.label;
                 state.navDirection = 'forward';
 
                 const viewEntry = itemId === 'hardware'
-                    ? { type: 'crypto-types', label: btn.textContent }
-                    : { type: 'product-cards', label: btn.textContent, data: { categoryId: itemId } };
+                    ? { type: 'crypto-types', label }
+                    : { type: 'product-cards', label, data: { categoryId: itemId } };
 
                 if (position === 'left') {
                     state.viewStack[state.viewStack.length - 1] = viewEntry;
