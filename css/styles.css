@@ -665,6 +665,7 @@ body {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(5, 1fr);
+    grid-auto-flow: column;
 }
 
 .app-card {
@@ -1249,7 +1250,7 @@ body {
         padding: 12px;
     }
 
-    .tablet-card-grid--apps   { grid-template-columns: 1fr 1fr; }
+    .tablet-card-grid--apps   { grid-template-columns: 1fr 1fr; grid-template-rows: repeat(7, auto); grid-auto-flow: column; }
     .tablet-card-grid--single { grid-template-columns: 1fr 1fr; }
     .acc-header { padding: 0.875rem 2rem; }
     .link-list a { padding: 10px 24px; }

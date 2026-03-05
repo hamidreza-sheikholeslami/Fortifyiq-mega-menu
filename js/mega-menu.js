@@ -567,20 +567,20 @@
     // --- Applications View ---
     function renderApplicationsView(container) {
         const apps = [
-            { title: 'Finance and Banking',                 icon: 'mm-icon-app-finance',           href: 'https://fortifyiq.com/applications/finance-and-banking/' },
+            { title: 'Finance and Banking',                 icon: 'mm-icon-app-finance',              href: 'https://fortifyiq.com/applications/finance-and-banking/' },
+            { title: 'Government and Public Sector',        icon: 'mm-icon-app-government',           href: 'https://fortifyiq.com/applications/government-and-public-sector/' },
+            { title: 'Digital Identity &amp; Smart Cards',  icon: 'mm-icon-app-digital-id',           href: 'https://fortifyiq.com/applications/digital-identity-smart-cards/' },
+            { title: 'Telecommunications',                  icon: 'mm-icon-app-telecommunications',   href: 'https://fortifyiq.com/applications/telecommunications/' },
+            { title: 'Automotive',                          icon: 'mm-icon-app-automotive',           href: 'https://fortifyiq.com/applications/automotive/' },
             { title: 'Industrial Automation',               icon: 'mm-icon-app-industrial-automation', href: 'https://fortifyiq.com/applications/industrial-automation-and-control-systems/' },
-            { title: 'Government and Public Sector',        icon: 'mm-icon-app-government',        href: 'https://fortifyiq.com/applications/government-and-public-sector/' },
-            { title: 'Smart Grid &amp; Energy',             icon: 'mm-icon-app-smart-gird',        href: 'https://fortifyiq.com/applications/smart-grid-energy/' },
-            { title: 'Internet of Things (IoT)',            icon: 'mm-icon-app-iot',               href: 'https://fortifyiq.com/applications/internet-of-things/' },
-            { title: 'Digital Identity &amp; Smart Cards',  icon: 'mm-icon-app-digital-id',        href: 'https://fortifyiq.com/applications/digital-identity-smart-cards/' },
-            { title: 'Critical Infrastructure',             icon: 'mm-icon-app-critical-infra',    href: 'https://fortifyiq.com/applications/critical-infrastructure/' },
-            { title: 'Medical Devices and Implants',        icon: 'mm-icon-app-medical',           href: 'https://fortifyiq.com/applications/medical-devices-and-implants/' },
-            { title: 'Telecommunications',                  icon: 'mm-icon-app-telecommunications', href: 'https://fortifyiq.com/applications/telecommunications/' },
-            { title: 'Transportation',                      icon: 'mm-icon-app-transportation',    href: 'https://fortifyiq.com/applications/transportation/' },
-            { title: 'Pay TV &amp; Media',                  icon: 'mm-icon-app-pay-tv',            href: 'https://fortifyiq.com/applications/pay-tv-media/' },
-            { title: 'Automotive',                          icon: 'mm-icon-app-automotive',        href: 'https://fortifyiq.com/applications/automotive/' },
-            { title: 'Data Centers',                        icon: 'mm-icon-app-data-centers',      href: 'https://fortifyiq.com/applications/data-centers/' },
-            { title: 'IP Security &amp; Anti\u2011Cloning', icon: 'mm-icon-app-ip-security',       href: 'https://fortifyiq.com/applications/ip-security-anti-cloning/' },
+            { title: 'Smart Grid &amp; Energy',             icon: 'mm-icon-app-smart-gird',           href: 'https://fortifyiq.com/applications/smart-grid-energy/' },
+            { title: 'Critical Infrastructure',             icon: 'mm-icon-app-critical-infra',       href: 'https://fortifyiq.com/applications/critical-infrastructure/' },
+            { title: 'Transportation',                      icon: 'mm-icon-app-transportation',       href: 'https://fortifyiq.com/applications/transportation/' },
+            { title: 'Data Centers',                        icon: 'mm-icon-app-data-centers',         href: 'https://fortifyiq.com/applications/data-centers/' },
+            { title: 'Internet of Things (IoT)',            icon: 'mm-icon-app-iot',                  href: 'https://fortifyiq.com/applications/internet-of-things/' },
+            { title: 'Medical Devices and Implants',        icon: 'mm-icon-app-medical',              href: 'https://fortifyiq.com/applications/medical-devices-and-implants/' },
+            { title: 'Pay TV &amp; Media',                  icon: 'mm-icon-app-pay-tv',               href: 'https://fortifyiq.com/applications/pay-tv-media/' },
+            { title: 'IP Security &amp; Anti\u2011Cloning', icon: 'mm-icon-app-ip-security',          href: 'https://fortifyiq.com/applications/ip-security-anti-cloning/' },
         ];
 
         container.innerHTML = `<div class="tablet-card-grid tablet-card-grid--apps">${
